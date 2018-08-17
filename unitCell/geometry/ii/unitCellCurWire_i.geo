@@ -1,5 +1,5 @@
-Include "mmgas_component_label.pro";
-Include "mmgas_meshing_options.pro";
+Include "mmgasComponentLabel.pro";
+Include "mmgasMeshingOptions.pro";
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /// MMGAS_STR_WIRE GEOMETRY MODULE
@@ -8,7 +8,7 @@ Include "mmgas_meshing_options.pro";
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /// GENERAL INFORMATION
 //
-// mmegas_square_straight_10c.geo
+// unitCellCurWire_i.geo
 //
 // Description
 //
@@ -514,6 +514,7 @@ lcpbib12 = newl; Line(lcpbib12) = {pc2_4, pc1_4};
         // Transfinite Surface { st_tmp_x1[] };
         // Recombine Surface { st_tmp_x1[] };
 
+/*
 sl_wire_exterior_surface_x1[] = newreg; Surface Loop(sl_wire_exterior_surface_x1) = { -st_s1_x1[], st_x1_1a1[], st_x1_1a2[], st_tmp_x1[] };
 vol_x1_wire = newreg; Volume(vol_x1_wire) = sl_wire_exterior_surface_x1[];
 Physical Volume(physvol_x1_wire) = vol_x1_wire;
@@ -530,6 +531,7 @@ Physical Surface(physsurf_x1_wire) = { -st_s1_x1[], st_x1_1a1[], st_x1_1a2[], st
 // st_x1_surf_loop = newreg; Surface Loop(st_x1_surf_loop) = { st_s1_x1[], sa_1_1_1, sa_1_1_2, sa_1_1_3, sa_1_1_4 , sa_1_2_1, sa_1_2_2, sa_1_2_3, sa_1_2_4, st_tmp_x1[] };
 // vol_x1_wire = newreg; Volume(vol_x1_wire) = st_x1_surf_loop;
 // Physical Volume(physvol_x1_wire) = vol_x1_wire;
+*/
 
 //----------------------------------------------------------
 // Second set of wires
@@ -577,10 +579,12 @@ sb_1_2[] += tmpb_1_2[{2:4}];
 s_1_1b1[] = s_1_1b;
 s_1_1b2[] = tmpb_1_2[0];
 
+/*
 sl_wire_exterior_surface_1b[] = newreg; Surface Loop(sl_wire_exterior_surface_1b) = { s_1_1b1[], sb_1_1[], sb_1_2[], s_1_1b2[] };
 vol_1b_wire = newreg; Volume(vol_1b_wire) = sl_wire_exterior_surface_1b[];
 Physical Volume(physvol_1b_wire) = vol_1b_wire;
 Physical Surface(physsurf_1b_wire) = { s_1_1b1[], sb_1_1[], sb_1_2[], s_1_1b2[] };
+*/
 
 //----------------------------------------------------------
 // First set of wires
@@ -628,10 +632,12 @@ sa_2_2[] += tmpa_2_2[{2:4}];
 s_1_2a1[] = s_1_2a;
 s_1_2a2[] = tmpa_2_2[0];
 
+/*
 sl_wire_exterior_surface_2a[] = newreg; Surface Loop(sl_wire_exterior_surface_2a) = { s_1_2a1[], sa_2_1[], sa_2_2[], s_1_2a2[] };
 vol_2a_wire = newreg; Volume(vol_2a_wire) = sl_wire_exterior_surface_2a[];
 Physical Volume(physvol_2a_wire) = vol_2a_wire;
 Physical Surface(physsurf_2a_wire) = { s_1_2a1[], sa_2_1[], sa_2_2[], s_1_2a2[] };
+*/
 
 //----------------------------------------------------------
 // Second set of wires
@@ -679,10 +685,12 @@ sb_2_2[] += tmpb_2_2[{2:4}];
 s_1_2b1[] = s_1_2b;
 s_1_2b2[] = tmpb_2_2[0];
 
+/*
 sl_wire_exterior_surface_2b[] = newreg; Surface Loop(sl_wire_exterior_surface_2b) = { s_1_2b1[], sb_2_1[], sb_2_2[], s_1_2b2[] };
 vol_2b_wire = newreg; Volume(vol_2b_wire) = sl_wire_exterior_surface_2b[];
 Physical Volume(physvol_2b_wire) = vol_2b_wire;
 Physical Surface(physsurf_2b_wire) = { s_1_2b1[], sb_2_1[], sb_2_2[], s_1_2b2[] };
+*/
 
 Coherence;
 

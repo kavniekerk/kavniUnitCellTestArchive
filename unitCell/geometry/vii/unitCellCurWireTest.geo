@@ -1,5 +1,5 @@
-Include "mmgas_component_label.pro";
-Include "mmgas_meshing_options.pro";
+Include "mmgasComponentLabel.pro";
+Include "mmgasMeshingOptions.pro";
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /// MMGAS_STR_WIRE GEOMETRY MODULE
@@ -8,7 +8,7 @@ Include "mmgas_meshing_options.pro";
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /// GENERAL INFORMATION
 //
-// mmegas_square_straight_10c.geo
+// unitCellCurWireTest.geo
 //
 // Description
 //
@@ -827,8 +827,8 @@ EndFor
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // PILLAR ARCHITECTURE
 
-For m In {0:Number_Units_x}
- For n In {0:Number_Units_y}
+// For m In {0:Number_Units_x}
+//  For n In {0:Number_Units_y}
 
 //----------------------------------------------------------
 // pillar 1f (full pillar)
@@ -836,10 +836,10 @@ For m In {0:Number_Units_x}
 //----------------------------------------------------------
 // Center
 
-pc1_1f~{m}~{n} = newp; Point(pc1_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tlgC,lcDielectricpillar};
-pc2_1f~{m}~{n} = newp; Point(pc2_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tltC,lcDielectricpillar};
-pc3_1f~{m}~{n} = newp; Point(pc3_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tteD1,lcDielectricpillar};
-pc4_1f~{m}~{n} = newp; Point(pc4_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, ttD,lcDielectricpillar};
+// pc1_1f~{m}~{n} = newp; Point(pc1_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tlgC,lcDielectricpillar};
+// pc2_1f~{m}~{n} = newp; Point(pc2_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tltC,lcDielectricpillar};
+// pc3_1f~{m}~{n} = newp; Point(pc3_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tteD1,lcDielectricpillar};
+// pc4_1f~{m}~{n} = newp; Point(pc4_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, ttD,lcDielectricpillar};
 
 //----------------------------------------------------------
 // Dielectric pillar
@@ -847,15 +847,15 @@ pc4_1f~{m}~{n} = newp; Point(pc4_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_
 //----------------------------------------------------------
 // Top
 
-pth1_1f~{m}~{n} = newp; Point(pth1_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a-1*(r0), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, ttD,lcDielectricpillar};
-pth2_1f~{m}~{n} = newp; Point(pth2_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a-1*(r0), ttD,lcDielectricpillar};
-pth3_1f~{m}~{n} = newp; Point(pth3_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a+1*(r0), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, ttD,lcDielectricpillar};
-pth4_1f~{m}~{n} = newp; Point(pth4_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a+1*(r0), ttD,lcDielectricpillar};
+// pth1_1f~{m}~{n} = newp; Point(pth1_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a-1*(r0), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, ttD,lcDielectricpillar};
+// pth2_1f~{m}~{n} = newp; Point(pth2_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a-1*(r0), ttD,lcDielectricpillar};
+// pth3_1f~{m}~{n} = newp; Point(pth3_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a+1*(r0), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, ttD,lcDielectricpillar};
+// pth4_1f~{m}~{n} = newp; Point(pth4_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a+1*(r0), ttD,lcDielectricpillar};
 
-cth1_1f~{m}~{n} = newc; Circle(cth1_1f~{m}~{n}) = {pth1_1f~{m}~{n}, pc4_1f~{m}~{n}, pth2_1f~{m}~{n}};
-cth2_1f~{m}~{n} = newc; Circle(cth2_1f~{m}~{n}) = {pth2_1f~{m}~{n}, pc4_1f~{m}~{n}, pth3_1f~{m}~{n}};
-cth3_1f~{m}~{n} = newc; Circle(cth3_1f~{m}~{n}) = {pth3_1f~{m}~{n}, pc4_1f~{m}~{n}, pth4_1f~{m}~{n}};
-cth4_1f~{m}~{n} = newc; Circle(cth4_1f~{m}~{n}) = {pth4_1f~{m}~{n}, pc4_1f~{m}~{n}, pth1_1f~{m}~{n}};
+// cth1_1f~{m}~{n} = newc; Circle(cth1_1f~{m}~{n}) = {pth1_1f~{m}~{n}, pc4_1f~{m}~{n}, pth2_1f~{m}~{n}};
+// cth2_1f~{m}~{n} = newc; Circle(cth2_1f~{m}~{n}) = {pth2_1f~{m}~{n}, pc4_1f~{m}~{n}, pth3_1f~{m}~{n}};
+// cth3_1f~{m}~{n} = newc; Circle(cth3_1f~{m}~{n}) = {pth3_1f~{m}~{n}, pc4_1f~{m}~{n}, pth4_1f~{m}~{n}};
+// cth4_1f~{m}~{n} = newc; Circle(cth4_1f~{m}~{n}) = {pth4_1f~{m}~{n}, pc4_1f~{m}~{n}, pth1_1f~{m}~{n}};
 
 //----------------------------------------------------------
 // Bottom
@@ -871,10 +871,10 @@ cth4_1f~{m}~{n} = newc; Circle(cth4_1f~{m}~{n}) = {pth4_1f~{m}~{n}, pc4_1f~{m}~{
 //----------------------------------------------------------
 // Top
 
-ptue1_1f~{m}~{n} = newp; Point(ptue1_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a-1*(r0+r1), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tteD1,lcEtchingpillar};
-ptue2_1f~{m}~{n} = newp; Point(ptue2_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a-1*(r0+r1), tteD1,lcEtchingpillar};
-ptue3_1f~{m}~{n} = newp; Point(ptue3_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a+1*(r0+r1), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tteD1,lcEtchingpillar};
-ptue4_1f~{m}~{n} = newp; Point(ptue4_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a+1*(r0+r1), tteD1,lcEtchingpillar};
+// ptue1_1f~{m}~{n} = newp; Point(ptue1_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a-1*(r0+r1), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tteD1,lcEtchingpillar};
+// ptue2_1f~{m}~{n} = newp; Point(ptue2_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a-1*(r0+r1), tteD1,lcEtchingpillar};
+// ptue3_1f~{m}~{n} = newp; Point(ptue3_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a+1*(r0+r1), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tteD1,lcEtchingpillar};
+// ptue4_1f~{m}~{n} = newp; Point(ptue4_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a+1*(r0+r1), tteD1,lcEtchingpillar};
 
 //----------------------------------------------------------
 // Middle Top
@@ -887,18 +887,18 @@ ptue4_1f~{m}~{n} = newp; Point(ptue4_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*
 //----------------------------------------------------------
 // Circular boundary
 
-ctue1_1f~{m}~{n} = newc; Circle(ctue1_1f~{m}~{n}) = {ptue1_1f~{m}~{n}, pc3_1f~{m}~{n}, ptue2_1f~{m}~{n}};
-ctue2_1f~{m}~{n} = newc; Circle(ctue2_1f~{m}~{n}) = {ptue2_1f~{m}~{n}, pc3_1f~{m}~{n}, ptue3_1f~{m}~{n}};
-ctue3_1f~{m}~{n} = newc; Circle(ctue3_1f~{m}~{n}) = {ptue3_1f~{m}~{n}, pc3_1f~{m}~{n}, ptue4_1f~{m}~{n}};
-ctue4_1f~{m}~{n} = newc; Circle(ctue4_1f~{m}~{n}) = {ptue4_1f~{m}~{n}, pc3_1f~{m}~{n}, ptue1_1f~{m}~{n}};
+// ctue1_1f~{m}~{n} = newc; Circle(ctue1_1f~{m}~{n}) = {ptue1_1f~{m}~{n}, pc3_1f~{m}~{n}, ptue2_1f~{m}~{n}};
+// ctue2_1f~{m}~{n} = newc; Circle(ctue2_1f~{m}~{n}) = {ptue2_1f~{m}~{n}, pc3_1f~{m}~{n}, ptue3_1f~{m}~{n}};
+// ctue3_1f~{m}~{n} = newc; Circle(ctue3_1f~{m}~{n}) = {ptue3_1f~{m}~{n}, pc3_1f~{m}~{n}, ptue4_1f~{m}~{n}};
+// ctue4_1f~{m}~{n} = newc; Circle(ctue4_1f~{m}~{n}) = {ptue4_1f~{m}~{n}, pc3_1f~{m}~{n}, ptue1_1f~{m}~{n}};
 
-lue1_1f~{m}~{n} = newl; Line(lue1_1f~{m}~{n}) = {ptue1_1f~{m}~{n}, pth1_1f~{m}~{n}};
+// lue1_1f~{m}~{n} = newl; Line(lue1_1f~{m}~{n}) = {ptue1_1f~{m}~{n}, pth1_1f~{m}~{n}};
 // Transfinite Line { lue1_1f~{m}~{n} } = lue1_1f~{m}~{n};
-lue2_1f~{m}~{n} = newl; Line(lue2_1f~{m}~{n}) = {ptue2_1f~{m}~{n}, pth2_1f~{m}~{n}};
+// lue2_1f~{m}~{n} = newl; Line(lue2_1f~{m}~{n}) = {ptue2_1f~{m}~{n}, pth2_1f~{m}~{n}};
 // Transfinite Line { lue2_1f~{m}~{n} } = lue2_1f~{m}~{n};
-lue3_1f~{m}~{n} = newl; Line(lue3_1f~{m}~{n}) = {ptue3_1f~{m}~{n}, pth3_1f~{m}~{n}};
+// lue3_1f~{m}~{n} = newl; Line(lue3_1f~{m}~{n}) = {ptue3_1f~{m}~{n}, pth3_1f~{m}~{n}};
 // Transfinite Line { lue3_1f~{m}~{n} } = lue3_1f~{m}~{n};
-lue4_1f~{m}~{n} = newl; Line(lue4_1f~{m}~{n}) = {ptue4_1f~{m}~{n}, pth4_1f~{m}~{n}};
+// lue4_1f~{m}~{n} = newl; Line(lue4_1f~{m}~{n}) = {ptue4_1f~{m}~{n}, pth4_1f~{m}~{n}};
 // Transfinite Line { lue4_1f~{m}~{n} } = lue4_1f~{m}~{n};
 
 //----------------------------------------------------------
@@ -907,51 +907,51 @@ lue4_1f~{m}~{n} = newl; Line(lue4_1f~{m}~{n}) = {ptue4_1f~{m}~{n}, pth4_1f~{m}~{
 //----------------------------------------------------------
 // Top
 
-ptle1_1f~{m}~{n} = newp; Point(ptle1_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a-1*(r0+r1), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tltC,lcEtchingpillar}; // +r1
-ptle2_1f~{m}~{n} = newp; Point(ptle2_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a-1*(r0+r1), tltC,lcEtchingpillar}; // +r1
-ptle3_1f~{m}~{n} = newp; Point(ptle3_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a+1*(r0+r1), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tltC,lcEtchingpillar}; // +r1
-ptle4_1f~{m}~{n} = newp; Point(ptle4_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a+1*(r0+r1), tltC,lcEtchingpillar}; // +r1
+// ptle1_1f~{m}~{n} = newp; Point(ptle1_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a-1*(r0+r1), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tltC,lcEtchingpillar}; // +r1
+// ptle2_1f~{m}~{n} = newp; Point(ptle2_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a-1*(r0+r1), tltC,lcEtchingpillar}; // +r1
+// ptle3_1f~{m}~{n} = newp; Point(ptle3_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a+1*(r0+r1), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tltC,lcEtchingpillar}; // +r1
+// ptle4_1f~{m}~{n} = newp; Point(ptle4_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a+1*(r0+r1), tltC,lcEtchingpillar}; // +r1
 
 //----------------------------------------------------------
 // Bottom
 
-pble1_1f~{m}~{n} = newp; Point(pble1_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a-1*(r0+r1), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tlgC,lcEtchingpillar}; // +r1
-pble2_1f~{m}~{n} = newp; Point(pble2_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a-1*(r0+r1), tlgC,lcEtchingpillar}; // +r1
-pble3_1f~{m}~{n} = newp; Point(pble3_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a+1*(r0+r1), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tlgC,lcEtchingpillar}; // +r1
-pble4_1f~{m}~{n} = newp; Point(pble4_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a+1*(r0+r1), tlgC,lcEtchingpillar}; // +r1
+// pble1_1f~{m}~{n} = newp; Point(pble1_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a-1*(r0+r1), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tlgC,lcEtchingpillar}; // +r1
+// pble2_1f~{m}~{n} = newp; Point(pble2_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a-1*(r0+r1), tlgC,lcEtchingpillar}; // +r1
+// pble3_1f~{m}~{n} = newp; Point(pble3_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a+1*(r0+r1), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tlgC,lcEtchingpillar}; // +r1
+// pble4_1f~{m}~{n} = newp; Point(pble4_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a+1*(r0+r1), tlgC,lcEtchingpillar}; // +r1
 
 //----------------------------------------------------------
 // Circular boundaries
 
-ctle1_1f~{m}~{n} = newc; Circle(ctle1_1f~{m}~{n}) = {ptle1_1f~{m}~{n}, pc2_1f~{m}~{n}, ptle2_1f~{m}~{n}};
-ctle2_1f~{m}~{n} = newc; Circle(ctle2_1f~{m}~{n}) = {ptle2_1f~{m}~{n}, pc2_1f~{m}~{n}, ptle3_1f~{m}~{n}};
-ctle3_1f~{m}~{n} = newc; Circle(ctle3_1f~{m}~{n}) = {ptle3_1f~{m}~{n}, pc2_1f~{m}~{n}, ptle4_1f~{m}~{n}};
-ctle4_1f~{m}~{n} = newc; Circle(ctle4_1f~{m}~{n}) = {ptle4_1f~{m}~{n}, pc2_1f~{m}~{n}, ptle1_1f~{m}~{n}};
+// ctle1_1f~{m}~{n} = newc; Circle(ctle1_1f~{m}~{n}) = {ptle1_1f~{m}~{n}, pc2_1f~{m}~{n}, ptle2_1f~{m}~{n}};
+// ctle2_1f~{m}~{n} = newc; Circle(ctle2_1f~{m}~{n}) = {ptle2_1f~{m}~{n}, pc2_1f~{m}~{n}, ptle3_1f~{m}~{n}};
+// ctle3_1f~{m}~{n} = newc; Circle(ctle3_1f~{m}~{n}) = {ptle3_1f~{m}~{n}, pc2_1f~{m}~{n}, ptle4_1f~{m}~{n}};
+// ctle4_1f~{m}~{n} = newc; Circle(ctle4_1f~{m}~{n}) = {ptle4_1f~{m}~{n}, pc2_1f~{m}~{n}, ptle1_1f~{m}~{n}};
 
-cble1_1f~{m}~{n} = newc; Circle(cble1_1f~{m}~{n}) = {pble1_1f~{m}~{n}, pc1_1f~{m}~{n}, pble2_1f~{m}~{n}};
-cble2_1f~{m}~{n} = newc; Circle(cble2_1f~{m}~{n}) = {pble2_1f~{m}~{n}, pc1_1f~{m}~{n}, pble3_1f~{m}~{n}};
-cble3_1f~{m}~{n} = newc; Circle(cble3_1f~{m}~{n}) = {pble3_1f~{m}~{n}, pc1_1f~{m}~{n}, pble4_1f~{m}~{n}};
-cble4_1f~{m}~{n} = newc; Circle(cble4_1f~{m}~{n}) = {pble4_1f~{m}~{n}, pc1_1f~{m}~{n}, pble1_1f~{m}~{n}};
+// cble1_1f~{m}~{n} = newc; Circle(cble1_1f~{m}~{n}) = {pble1_1f~{m}~{n}, pc1_1f~{m}~{n}, pble2_1f~{m}~{n}};
+// cble2_1f~{m}~{n} = newc; Circle(cble2_1f~{m}~{n}) = {pble2_1f~{m}~{n}, pc1_1f~{m}~{n}, pble3_1f~{m}~{n}};
+// cble3_1f~{m}~{n} = newc; Circle(cble3_1f~{m}~{n}) = {pble3_1f~{m}~{n}, pc1_1f~{m}~{n}, pble4_1f~{m}~{n}};
+// cble4_1f~{m}~{n} = newc; Circle(cble4_1f~{m}~{n}) = {pble4_1f~{m}~{n}, pc1_1f~{m}~{n}, pble1_1f~{m}~{n}};
 
-lle1_1f~{m}~{n} = newl; Line(lle1_1f~{m}~{n}) = {ptle1_1f~{m}~{n}, pble1_1f~{m}~{n}};
+// lle1_1f~{m}~{n} = newl; Line(lle1_1f~{m}~{n}) = {ptle1_1f~{m}~{n}, pble1_1f~{m}~{n}};
 // Transfinite Line { lle1_1f~{m}~{n} } = lle1_1f~{m}~{n};
-lle2_1f~{m}~{n} = newl; Line(lle2_1f~{m}~{n}) = {ptle2_1f~{m}~{n}, pble2_1f~{m}~{n}};
+// lle2_1f~{m}~{n} = newl; Line(lle2_1f~{m}~{n}) = {ptle2_1f~{m}~{n}, pble2_1f~{m}~{n}};
 // Transfinite Line { lle2_1f~{m}~{n} } = lle2_1f~{m}~{n};
-lle3_1f~{m}~{n} = newl; Line(lle3_1f~{m}~{n}) = {ptle3_1f~{m}~{n}, pble3_1f~{m}~{n}};
+// lle3_1f~{m}~{n} = newl; Line(lle3_1f~{m}~{n}) = {ptle3_1f~{m}~{n}, pble3_1f~{m}~{n}};
 // Transfinite Line { lle3_1f~{m}~{n} } = lle3_1f~{m}~{n};
-lle4_1f~{m}~{n} = newl; Line(lle4_1f~{m}~{n}) = {ptle4_1f~{m}~{n}, pble4_1f~{m}~{n}};
+// lle4_1f~{m}~{n} = newl; Line(lle4_1f~{m}~{n}) = {ptle4_1f~{m}~{n}, pble4_1f~{m}~{n}};
 // Transfinite Line { lle4_1f~{m}~{n} } = lle4_1f~{m}~{n};
 
 //----------------------------------------------------------
 // Lines connecting top and bottom
 
-lconn5_1f~{m}~{n} = newl; Line(lconn5_1f~{m}~{n}) = {ptle1_1f~{m}~{n}, ptue1_1f~{m}~{n}}; // pth1_1f~{m}~{n}
+// lconn5_1f~{m}~{n} = newl; Line(lconn5_1f~{m}~{n}) = {ptle1_1f~{m}~{n}, ptue1_1f~{m}~{n}}; // pth1_1f~{m}~{n}
 // Transfinite Line { lconn5_1f~{m}~{n} } = lconn5_1f~{m}~{n};
-lconn6_1f~{m}~{n} = newl; Line(lconn6_1f~{m}~{n}) = {ptle2_1f~{m}~{n}, ptue2_1f~{m}~{n}}; // pth2_1f~{m}~{n} 
+// lconn6_1f~{m}~{n} = newl; Line(lconn6_1f~{m}~{n}) = {ptle2_1f~{m}~{n}, ptue2_1f~{m}~{n}}; // pth2_1f~{m}~{n} 
 // Transfinite Line { lconn6_1f~{m}~{n} } = lconn6_1f~{m}~{n};
-lconn7_1f~{m}~{n} = newl; Line(lconn7_1f~{m}~{n}) = {ptle3_1f~{m}~{n}, ptue3_1f~{m}~{n}}; // pth3_1f~{m}~{n}
+// lconn7_1f~{m}~{n} = newl; Line(lconn7_1f~{m}~{n}) = {ptle3_1f~{m}~{n}, ptue3_1f~{m}~{n}}; // pth3_1f~{m}~{n}
 // Transfinite Line { lconn7_1f~{m}~{n} } = lconn7_1f~{m}~{n};
-lconn8_1f~{m}~{n} = newl; Line(lconn8_1f~{m}~{n}) = {ptle4_1f~{m}~{n}, ptue4_1f~{m}~{n}}; // pth4_1f~{m}~{n}
+// lconn8_1f~{m}~{n} = newl; Line(lconn8_1f~{m}~{n}) = {ptle4_1f~{m}~{n}, ptue4_1f~{m}~{n}}; // pth4_1f~{m}~{n}
 // Transfinite Line { lconn8_1f~{m}~{n} } = lconn8_1f~{m}~{n};
 
 //----------------------------------------------------------
@@ -975,82 +975,82 @@ lconn8_1f~{m}~{n} = newl; Line(lconn8_1f~{m}~{n}) = {ptle4_1f~{m}~{n}, ptue4_1f~
 //----------------------------------------------------------
 // Surfaces to which voltages will be applied
 
-llcp_low_rim_1a~{m}~{n} = newreg; Line Loop(llcp_low_rim_1a~{m}~{n}) = { lle1_1f~{m}~{n}, cble1_1f~{m}~{n}, -lle2_1f~{m}~{n}, -ctle1_1f~{m}~{n} };
-llcp_low_rim_1b~{m}~{n} = newreg; Line Loop(llcp_low_rim_1b~{m}~{n}) = { lle2_1f~{m}~{n}, cble2_1f~{m}~{n}, -lle3_1f~{m}~{n}, -ctle2_1f~{m}~{n} };
-llcp_low_rim_1c~{m}~{n} = newreg; Line Loop(llcp_low_rim_1c~{m}~{n}) = { lle3_1f~{m}~{n}, cble3_1f~{m}~{n}, -lle4_1f~{m}~{n}, -ctle3_1f~{m}~{n} };
-llcp_low_rim_1d~{m}~{n} = newreg; Line Loop(llcp_low_rim_1d~{m}~{n}) = { lle4_1f~{m}~{n}, cble4_1f~{m}~{n}, -lle1_1f~{m}~{n}, -ctle4_1f~{m}~{n} };
+// llcp_low_rim_1a~{m}~{n} = newreg; Line Loop(llcp_low_rim_1a~{m}~{n}) = { lle1_1f~{m}~{n}, cble1_1f~{m}~{n}, -lle2_1f~{m}~{n}, -ctle1_1f~{m}~{n} };
+// llcp_low_rim_1b~{m}~{n} = newreg; Line Loop(llcp_low_rim_1b~{m}~{n}) = { lle2_1f~{m}~{n}, cble2_1f~{m}~{n}, -lle3_1f~{m}~{n}, -ctle2_1f~{m}~{n} };
+// llcp_low_rim_1c~{m}~{n} = newreg; Line Loop(llcp_low_rim_1c~{m}~{n}) = { lle3_1f~{m}~{n}, cble3_1f~{m}~{n}, -lle4_1f~{m}~{n}, -ctle3_1f~{m}~{n} };
+// llcp_low_rim_1d~{m}~{n} = newreg; Line Loop(llcp_low_rim_1d~{m}~{n}) = { lle4_1f~{m}~{n}, cble4_1f~{m}~{n}, -lle1_1f~{m}~{n}, -ctle4_1f~{m}~{n} };
 
 //----------------------------------------------------------
 // Surfaces to which voltages will be applied
 
-ps_lower_cp1 = newreg; Surface(ps_lower_cp1) = { llcp_low_rim_1a~{m}~{n} };
-surf_lower_cp1[] += ps_lower_cp1;
-ps_lower_cp2 = newreg; Surface(ps_lower_cp2) = { llcp_low_rim_1b~{m}~{n} };
-surf_lower_cp2[] += ps_lower_cp2;
-ps_lower_cp3 = newreg; Surface(ps_lower_cp3) = { llcp_low_rim_1c~{m}~{n} };
-surf_lower_cp3[] += ps_lower_cp3;
-ps_lower_cp4 = newreg; Surface(ps_lower_cp4) = { llcp_low_rim_1d~{m}~{n} };
-surf_lower_cp4[] += ps_lower_cp4;
+// ps_lower_cp1 = newreg; Surface(ps_lower_cp1) = { llcp_low_rim_1a~{m}~{n} };
+// surf_lower_cp1[] += ps_lower_cp1;
+// ps_lower_cp2 = newreg; Surface(ps_lower_cp2) = { llcp_low_rim_1b~{m}~{n} };
+// surf_lower_cp2[] += ps_lower_cp2;
+// ps_lower_cp3 = newreg; Surface(ps_lower_cp3) = { llcp_low_rim_1c~{m}~{n} };
+// surf_lower_cp3[] += ps_lower_cp3;
+// ps_lower_cp4 = newreg; Surface(ps_lower_cp4) = { llcp_low_rim_1d~{m}~{n} };
+// surf_lower_cp4[] += ps_lower_cp4;
 
 //----------------------------------------------------------
 // Gas & dielectric surfaces
 
-ll_cyl_dielectric1b~{m}~{n} = newreg; Line Loop(ll_cyl_dielectric1b~{m}~{n}) = { lconn5_1f~{m}~{n}, ctue1_1f~{m}~{n}, -lconn6_1f~{m}~{n}, -ctle1_1f~{m}~{n} }; // cth1_1f~{m}~{n},
-ps_cyl_dielectric1 = newreg; Surface(ps_cyl_dielectric1) = { ll_cyl_dielectric1b~{m}~{n} };
-surf_cyl_dielectric1[] += ps_cyl_dielectric1;
-ll_cyl_dielectric2b~{m}~{n} = newreg; Line Loop(ll_cyl_dielectric2b~{m}~{n}) = { lconn6_1f~{m}~{n}, ctue2_1f~{m}~{n}, -lconn7_1f~{m}~{n}, -ctle2_1f~{m}~{n} }; // cth2_1f~{m}~{n},
-ps_cyl_dielectric2 = newreg; Surface(ps_cyl_dielectric2) = { ll_cyl_dielectric2b~{m}~{n} };
-surf_cyl_dielectric2[] += ps_cyl_dielectric2;
-ll_cyl_dielectric3b~{m}~{n} = newreg; Line Loop(ll_cyl_dielectric3b~{m}~{n}) = { lconn7_1f~{m}~{n}, ctue3_1f~{m}~{n}, -lconn8_1f~{m}~{n}, -ctle3_1f~{m}~{n} }; // cth3_1f~{m}~{n},
-ps_cyl_dielectric3 = newreg; Surface(ps_cyl_dielectric3) = { ll_cyl_dielectric3b~{m}~{n} };
-surf_cyl_dielectric3[] += ps_cyl_dielectric3;
-ll_cyl_dielectric4b~{m}~{n} = newreg; Line Loop(ll_cyl_dielectric4b~{m}~{n}) = { lconn8_1f~{m}~{n}, ctue4_1f~{m}~{n}, -lconn5_1f~{m}~{n}, -ctle4_1f~{m}~{n} }; // cth4_1f~{m}~{n},
-ps_cyl_dielectric4 = newreg; Surface(ps_cyl_dielectric4) = { ll_cyl_dielectric4b~{m}~{n} };
-surf_cyl_dielectric4[] += ps_cyl_dielectric4;
+// ll_cyl_dielectric1b~{m}~{n} = newreg; Line Loop(ll_cyl_dielectric1b~{m}~{n}) = { lconn5_1f~{m}~{n}, ctue1_1f~{m}~{n}, -lconn6_1f~{m}~{n}, -ctle1_1f~{m}~{n} }; // cth1_1f~{m}~{n},
+// ps_cyl_dielectric1 = newreg; Surface(ps_cyl_dielectric1) = { ll_cyl_dielectric1b~{m}~{n} };
+// surf_cyl_dielectric1[] += ps_cyl_dielectric1;
+// ll_cyl_dielectric2b~{m}~{n} = newreg; Line Loop(ll_cyl_dielectric2b~{m}~{n}) = { lconn6_1f~{m}~{n}, ctue2_1f~{m}~{n}, -lconn7_1f~{m}~{n}, -ctle2_1f~{m}~{n} }; // cth2_1f~{m}~{n},
+// ps_cyl_dielectric2 = newreg; Surface(ps_cyl_dielectric2) = { ll_cyl_dielectric2b~{m}~{n} };
+// surf_cyl_dielectric2[] += ps_cyl_dielectric2;
+// ll_cyl_dielectric3b~{m}~{n} = newreg; Line Loop(ll_cyl_dielectric3b~{m}~{n}) = { lconn7_1f~{m}~{n}, ctue3_1f~{m}~{n}, -lconn8_1f~{m}~{n}, -ctle3_1f~{m}~{n} }; // cth3_1f~{m}~{n},
+// ps_cyl_dielectric3 = newreg; Surface(ps_cyl_dielectric3) = { ll_cyl_dielectric3b~{m}~{n} };
+// surf_cyl_dielectric3[] += ps_cyl_dielectric3;
+// ll_cyl_dielectric4b~{m}~{n} = newreg; Line Loop(ll_cyl_dielectric4b~{m}~{n}) = { lconn8_1f~{m}~{n}, ctue4_1f~{m}~{n}, -lconn5_1f~{m}~{n}, -ctle4_1f~{m}~{n} }; // cth4_1f~{m}~{n},
+// ps_cyl_dielectric4 = newreg; Surface(ps_cyl_dielectric4) = { ll_cyl_dielectric4b~{m}~{n} };
+// surf_cyl_dielectric4[] += ps_cyl_dielectric4;
 
-ll_top_gas2~{m}~{n} = newreg; Line Loop( ll_top_gas2~{m}~{n} ) = { cth1_1f~{m}~{n}, cth2_1f~{m}~{n}, cth3_1f~{m}~{n}, cth4_1f~{m}~{n} };
-ps_top_gas1 = news; Plane Surface(news) = { ll_top_gas2~{m}~{n} };
-surf_top_gas1[] += ps_top_gas1;
+// ll_top_gas2~{m}~{n} = newreg; Line Loop( ll_top_gas2~{m}~{n} ) = { cth1_1f~{m}~{n}, cth2_1f~{m}~{n}, cth3_1f~{m}~{n}, cth4_1f~{m}~{n} };
+// ps_top_gas1 = news; Plane Surface(news) = { ll_top_gas2~{m}~{n} };
+// surf_top_gas1[] += ps_top_gas1;
 // Transfinite Surface { surf_top_gas1[] };
 // Recombine Surface { surf_top_gas1[] };
 
-ll_top_gas3~{m}~{n} = newreg; Line Loop( ll_top_gas3~{m}~{n} ) = { lue1_1f~{m}~{n}, cth1_1f~{m}~{n}, -lue2_1f~{m}~{n}, -ctue1_1f~{m}~{n} };
-ps_top_gas2 = news; Surface(news) = { ll_top_gas3~{m}~{n} };
-surf_top_gas2[] += ps_top_gas2;
+// ll_top_gas3~{m}~{n} = newreg; Line Loop( ll_top_gas3~{m}~{n} ) = { lue1_1f~{m}~{n}, cth1_1f~{m}~{n}, -lue2_1f~{m}~{n}, -ctue1_1f~{m}~{n} };
+// ps_top_gas2 = news; Surface(news) = { ll_top_gas3~{m}~{n} };
+// surf_top_gas2[] += ps_top_gas2;
 // Transfinite Surface { surf_top_gas2[] };
 // Recombine Surface { surf_top_gas2[] };
 
-ll_top_gas4~{m}~{n} = newreg; Line Loop( ll_top_gas4~{m}~{n} ) = { lue2_1f~{m}~{n}, cth2_1f~{m}~{n}, -lue3_1f~{m}~{n}, -ctue2_1f~{m}~{n}  };
-ps_top_gas3 = news; Surface(news) = { ll_top_gas4~{m}~{n} };
-surf_top_gas3[] += ps_top_gas3;
+// ll_top_gas4~{m}~{n} = newreg; Line Loop( ll_top_gas4~{m}~{n} ) = { lue2_1f~{m}~{n}, cth2_1f~{m}~{n}, -lue3_1f~{m}~{n}, -ctue2_1f~{m}~{n}  };
+// ps_top_gas3 = news; Surface(news) = { ll_top_gas4~{m}~{n} };
+// surf_top_gas3[] += ps_top_gas3;
 // Transfinite Surface { surf_top_gas3[] };
 // Recombine Surface { surf_top_gas3[] };
 
-ll_top_gas5~{m}~{n} = newreg; Line Loop( ll_top_gas5~{m}~{n} ) = { lue3_1f~{m}~{n}, cth3_1f~{m}~{n}, -lue4_1f~{m}~{n}, -ctue3_1f~{m}~{n} };
-ps_top_gas4 = news; Surface(news) = { ll_top_gas5~{m}~{n} };
-surf_top_gas4[] += ps_top_gas4;
+// ll_top_gas5~{m}~{n} = newreg; Line Loop( ll_top_gas5~{m}~{n} ) = { lue3_1f~{m}~{n}, cth3_1f~{m}~{n}, -lue4_1f~{m}~{n}, -ctue3_1f~{m}~{n} };
+// ps_top_gas4 = news; Surface(news) = { ll_top_gas5~{m}~{n} };
+// surf_top_gas4[] += ps_top_gas4;
 // Transfinite Surface { surf_top_gas4[] };
 // Recombine Surface { surf_top_gas4[] };
 
-ll_top_gas6~{m}~{n} = newreg; Line Loop( ll_top_gas6~{m}~{n} ) = { lue4_1f~{m}~{n}, cth4_1f~{m}~{n}, -lue1_1f~{m}~{n}, -ctue4_1f~{m}~{n} };
-ps_top_gas5 = news; Surface(news) = { ll_top_gas6~{m}~{n} };
-surf_top_gas5[] += ps_top_gas5;
+// ll_top_gas6~{m}~{n} = newreg; Line Loop( ll_top_gas6~{m}~{n} ) = { lue4_1f~{m}~{n}, cth4_1f~{m}~{n}, -lue1_1f~{m}~{n}, -ctue4_1f~{m}~{n} };
+// ps_top_gas5 = news; Surface(news) = { ll_top_gas6~{m}~{n} };
+// surf_top_gas5[] += ps_top_gas5;
 // Transfinite Surface { surf_top_gas5[] };
 // Recombine Surface { surf_top_gas5[] };
 
-ll_top_cp1a1 = newreg; Line Loop( ll_top_cp1a1 ) = { ctle1_1f~{m}~{n}, ctle2_1f~{m}~{n}, ctle3_1f~{m}~{n}, ctle4_1f~{m}~{n} };
-ll_top_cp2a[] += { ll_top_cp1a1 };
+// ll_top_cp1a1 = newreg; Line Loop( ll_top_cp1a1 ) = { ctle1_1f~{m}~{n}, ctle2_1f~{m}~{n}, ctle3_1f~{m}~{n}, ctle4_1f~{m}~{n} };
+// ll_top_cp2a[] += { ll_top_cp1a1 };
 
-ll_bottom_cp1a1 = newreg; Line Loop( ll_bottom_cp1a1 ) = { cble1_1f~{m}~{n}, cble2_1f~{m}~{n}, cble3_1f~{m}~{n}, cble4_1f~{m}~{n} };
-ll_bottom_cp2a[] += { ll_bottom_cp1a1 };
+// ll_bottom_cp1a1 = newreg; Line Loop( ll_bottom_cp1a1 ) = { cble1_1f~{m}~{n}, cble2_1f~{m}~{n}, cble3_1f~{m}~{n}, cble4_1f~{m}~{n} };
+// ll_bottom_cp2a[] += { ll_bottom_cp1a1 };
 
-  Delete { Point { pc1_1f~{m}~{n} }; }
-  Delete { Point { pc2_1f~{m}~{n} }; }
-  Delete { Point { pc3_1f~{m}~{n} }; }
-  Delete { Point { pc4_1f~{m}~{n} }; }
+//   Delete { Point { pc1_1f~{m}~{n} }; }
+//   Delete { Point { pc2_1f~{m}~{n} }; }
+//   Delete { Point { pc3_1f~{m}~{n} }; }
+//   Delete { Point { pc4_1f~{m}~{n} }; }
 
- EndFor
-EndFor
+// EndFor
+// EndFor
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // EXTERNAL ELECTRODES
@@ -1269,19 +1269,19 @@ ps_bsurf7 = newreg; Plane Surface( ps_bsurf7 ) = { ll_bsurf7 };
 
 ll_top_cp1a2 = newreg; Line Loop(ll_top_cp1a2) = {lcpbub1a, lcpbub2a, lcpbub3a, lcpbub4a}; // lcpbub1b, lcpbub2b, lcpbub3b, lcpbub4b
 
-ps_top_cp2a = news; Plane Surface(news) = {ll_top_cp1a2, ll_top_cp2a};
+ps_top_cp2a = news; Plane Surface(news) = {ll_top_cp1a2}; // ll_top_cp2a
 surf_top_cp[] += {ps_top_cp2a};
 // Transfinite Surface { surf_top_cp[] };
 // Recombine Surface { surf_top_cp[] };
 
-ps_bottom_dielectric1a1 = news; Plane Surface(news) = {ll_bottom_cp2a};
-surf_bottom_dielectric[] = {ps_bottom_dielectric1a1};
+// ps_bottom_dielectric1a1 = news; Plane Surface(news) = {ll_bottom_cp2a};
+// surf_bottom_dielectric[] = {ps_bottom_dielectric1a1};
 // Transfinite Surface { surf_bottom_dielectric[] };
 // Recombine Surface { surf_bottom_dielectric[] };
 
 ll_bottom_cp1a2 = newreg; Line Loop(ll_bottom_cp1a2) = {lcpblb5a, lcpblb6a, lcpblb7a, lcpblb8a}; // lcpblb5b, lcpblb6b, lcpblb7b, lcpblb8b
 
-ps_bottom_cp2a = news; Plane Surface(news) = {ll_bottom_cp1a2, ll_bottom_cp2a};
+ps_bottom_cp2a = news; Plane Surface(news) = {ll_bottom_cp1a2}; // ll_bottom_cp2a
 surf_bottom_cp[] += {ps_bottom_cp2a};
 // Transfinite Surface { surf_bottom_cp[] };
 // Recombine Surface { surf_bottom_cp[] };
@@ -1295,8 +1295,8 @@ surf_bottom_cp[] += {ps_bottom_cp2a};
 //----------------------------------------------------------
 // Wire Gas Interior Surface Loop - interior wire gas surface loop
 
-sl_wire_gas_total_surface = newreg; Surface Loop(sl_wire_gas_total_surface) = { ps_bsurf7, psbdh_1_1_bsurf1t, psbdh_1_1_bsurf1b, psbdh_1_2_bsurf3t, psbdh_1_2_bsurf3b, psbdh_2_1_bsurf4t, psbdh_2_1_bsurf4b, psbdh_2_2_bsurf6t, psbdh_2_2_bsurf6b, -surf_top_gas1[], -surf_top_gas2[], -surf_top_gas3[], -surf_top_gas4[], -surf_top_gas5[], -surf_cyl_dielectric1[], -surf_cyl_dielectric2[], -surf_cyl_dielectric3[], -surf_cyl_dielectric4[], -surf_top_cp[], -sa_1_1[0], -sa_1_1[1], -sa_1_2[0], -sa_1_2[1], -sb_1_1[0], -sb_1_1[1], -sb_1_2[0], -sb_1_2[1], -sa_2_1[0], -sa_2_1[1], -sa_2_2[0], -sa_2_2[1], -sb_2_1[0], -sb_2_1[1], -sb_2_2[0], -sb_2_2[1] };
-// 
+sl_wire_gas_total_surface = newreg; Surface Loop(sl_wire_gas_total_surface) = { ps_bsurf7, psbdh_1_1_bsurf1t, psbdh_1_1_bsurf1b, psbdh_1_2_bsurf3t, psbdh_1_2_bsurf3b, psbdh_2_1_bsurf4t, psbdh_2_1_bsurf4b, psbdh_2_2_bsurf6t, psbdh_2_2_bsurf6b, -surf_top_cp[], -sa_1_1[0], -sa_1_1[1], -sa_1_2[0], -sa_1_2[1], -sb_1_1[0], -sb_1_1[1], -sb_1_2[0], -sb_1_2[1], -sa_2_1[0], -sa_2_1[1], -sa_2_2[0], -sa_2_2[1], -sb_2_1[0], -sb_2_1[1], -sb_2_2[0], -sb_2_2[1] };
+// -surf_top_gas1[], -surf_top_gas2[], -surf_top_gas3[], -surf_top_gas4[], -surf_top_gas5[], -surf_cyl_dielectric1[], -surf_cyl_dielectric2[], -surf_cyl_dielectric3[], -surf_cyl_dielectric4[],
 // pscp_up_border1, pscp_up_border2, pscp_up_border3, pscp_up_border4,
 // ps_side_gas1a, ps_side_gas2a, ps_side_gas3a, ps_side_gas4a,
 total_sl_wire_gas_total_surface[] += sl_wire_gas_total_surface;
@@ -1309,8 +1309,9 @@ total_sl_wire_gas_total_surface[] += sl_wire_gas_total_surface;
 //----------------------------------------------------------
 // Dielectric Surface Loop - dielectric surface loop
 
-sl_dielectric = newreg; Surface Loop(sl_dielectric) = { surf_top_gas1[], surf_top_gas2[], surf_top_gas3[], surf_top_gas4[], surf_top_gas5[], surf_cyl_dielectric1[], surf_cyl_dielectric2[], surf_cyl_dielectric3[], surf_cyl_dielectric4[], -surf_lower_cp1[], -surf_lower_cp2[], -surf_lower_cp3[], -surf_lower_cp4[], surf_bottom_dielectric[] };
-total_sl_dielectric[] += sl_dielectric;
+// sl_dielectric = newreg; Surface Loop(sl_dielectric) = { surf_top_gas1[], surf_top_gas2[], surf_top_gas3[], surf_top_gas4[], surf_top_gas5[], surf_cyl_dielectric1[], surf_cyl_dielectric2[], surf_cyl_dielectric3[], surf_cyl_dielectric4[], -surf_lower_cp1[], 
+// -surf_lower_cp2[], -surf_lower_cp3[], -surf_lower_cp4[], surf_bottom_dielectric[] };
+// total_sl_dielectric[] += sl_dielectric;
 
 //----------------------------------------------------------
 // Wire Volume Surface Loop - wire electrode
@@ -1322,7 +1323,7 @@ total_sl_dielectric[] += sl_dielectric;
 //----------------------------------------------------------
 // Lower Electrode Surface Loop - lower electrode surface loop
 
-sl_lower_cp = newreg; Surface Loop(sl_lower_cp) = { surf_top_cp[], surf_bottom_cp[], surf_lower_cp1[], surf_lower_cp2[], surf_lower_cp3[], surf_lower_cp4[], pscp_low_border1, pscp_low_border2, pscp_low_border3, pscp_low_border4 };
+sl_lower_cp = newreg; Surface Loop(sl_lower_cp) = { surf_top_cp[], surf_bottom_cp[], pscp_low_border1, pscp_low_border2, pscp_low_border3, pscp_low_border4 }; // surf_lower_cp1[], surf_lower_cp2[], surf_lower_cp3[], surf_lower_cp4[],
 total_sl_lower_cp[] += sl_lower_cp;
 
 //------------------------------------------------------------------------------------------
@@ -1345,7 +1346,7 @@ vol_gas = newreg; Volume(vol_gas) = { total_sl_wire_gas_total_surface[] }; //  s
 //------------------------------------------------------------------------------------------
 /// COMPONENT VOLUMES
 
-vol_dielectric = newreg; Volume(vol_dielectric) = total_sl_dielectric[];
+// vol_dielectric = newreg; Volume(vol_dielectric) = total_sl_dielectric[];
 vol_lower_cp = newreg; Volume(vol_lower_cp) = total_sl_lower_cp[];
 
 //------------------------------------------------------------------------------------------
@@ -1391,12 +1392,13 @@ physsurf_bdh_2_2 = newreg; Physical Surface(physsurf_bd2h2) = { psbdh_2_2_bsurf6
 // Physical surfaces - dielectric surface
 
 // Physical Surface(physsurf_dielectric) = total_sl_dielectric[];
-Physical Surface(physsurf_dielectric) = { surf_top_gas1[], surf_top_gas2[], surf_top_gas3[], surf_top_gas4[], surf_top_gas5[], surf_cyl_dielectric1[], surf_cyl_dielectric2[], surf_cyl_dielectric3[], surf_cyl_dielectric4[], -surf_lower_cp1[], -surf_lower_cp2[], -surf_lower_cp3[], -surf_lower_cp4[], surf_bottom_dielectric[] };
+// Physical Surface(physsurf_dielectric) = { surf_top_gas1[], surf_top_gas2[], surf_top_gas3[], surf_top_gas4[], surf_top_gas5[], surf_cyl_dielectric1[], surf_cyl_dielectric2[], surf_cyl_dielectric3[], surf_cyl_dielectric4[], -surf_lower_cp1[], 
+// -surf_lower_cp2[], -surf_lower_cp3[], -surf_lower_cp4[], surf_bottom_dielectric[] };
 
 //----------------------------------------------------------
 // Physical surfaces - lower electrode surface
 
-Physical Surface(physsurf_lower_cp) = { surf_top_cp[], surf_bottom_cp[], surf_lower_cp1[], surf_lower_cp2[], surf_lower_cp3[], surf_lower_cp4[], pscp_low_border1, pscp_low_border2, pscp_low_border3, pscp_low_border4 };
+Physical Surface(physsurf_lower_cp) = { surf_top_cp[], surf_bottom_cp[], pscp_low_border1, pscp_low_border2, pscp_low_border3, pscp_low_border4 }; // surf_lower_cp1[], surf_lower_cp2[], surf_lower_cp3[], surf_lower_cp4[], 
 
 //----------------------------------------------------------
 // Physical surfaces - upper electrode surface
@@ -1425,7 +1427,7 @@ Physical Volume(physvol_gas) = { vol_gas };
 //----------------------------------------------------------
 // Physical Volumes - Component Volumes
 
-Physical Volume(physvol_dielectric) = { vol_dielectric };
+// Physical Volume(physvol_dielectric) = { vol_dielectric };
 Physical Volume(physvol_lower_cp) = { vol_lower_cp };
 
 //----------------------------------------------------------

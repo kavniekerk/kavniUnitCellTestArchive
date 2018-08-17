@@ -1,10 +1,13 @@
+Include "mmgasComponentLabel.pro";
+Include "mmgasMeshingOptions.pro";
+
 // *********************************************************************************
-// gemcell_member_14.geo
+// unitCellStrWireOriginal.geo
 //
 // Description:
-// Geometry file for a GEM cell.
-// This cell can be repeated any number of times within Garfield 
-// to construct an arbitrarily large GEM.
+// Geometry file for a MM cell.
+// This cell can be repeated any number of times within Garfield
+// to construct an arbitrarily large MicroMegas.
 //
 // *********************************************************************************
 

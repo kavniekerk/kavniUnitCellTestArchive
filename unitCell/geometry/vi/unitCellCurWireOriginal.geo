@@ -1,12 +1,15 @@
+Include "mmgasComponentLabel.pro";
+Include "mmgasMeshingOptions.pro";
+
 // *********************************************************************************
-// gemcell_member_14.geo
+// unitCellCurWireOriginal.geo
 //
 // Description:
-// Geometry file for a GEM cell.
+// Geometry file for a MM cell.
 // This cell can be repeated any number of times within Garfield 
-// to construct an arbitrarily large GEM.
+// to construct an arbitrarily large MicroMegas.
 //
-// *********************************************************************************
+// ********************************************************************************* 
 
 // General.ExpertMode = 1; // Don't complain for hybrid structured/unstructured mesh
 // Mesh.Algorithm = 6; // Use Frontal 2D algorithm
@@ -54,7 +57,7 @@ n = 0;
   lcExtElectrodeBdry = 0.0001;
   LcWiremesh = 0.0001;                      
 
-// *********************************************************************************
+// *********************************************************************
 
 // circle
 
@@ -63,7 +66,7 @@ n = 0;
 
 p0_1a = newp; Point(p0_1a) = {p+p,p+p,-r_w+mesh_level*mm-h_f, LcWiremesh * mm};            // centre circle
 p1a_1_1 = newp; Point(p1a_1_1) = {p+p,p+p,-2*r_w+mesh_level*mm-h_f, LcWiremesh * mm};      // bottom circle
-// p2_1a = newp; Point(p2_1a) = {p+p,p+p+r_w,-r_w+mesh_level*mm-h_f, LcWiremesh * mm};       // right circle
+p2_1a = newp; Point(p2_1a) = {p+p,p+p+r_w,-r_w+mesh_level*mm-h_f, LcWiremesh * mm};        // right circle
 p1a_3_1 = newp; Point(p1a_3_1) = {p+p,p+p,0+mesh_level*mm-h_f, LcWiremesh * mm};           // top circle
 p4_1a = newp; Point(p4_1a) = {p+p,p+p-r_w,-r_w+mesh_level*mm-h_f, LcWiremesh * mm};        // left circle
 
@@ -79,7 +82,8 @@ sa_1_1[] = {};
 tmpa_1_1[] = {};
 tmpa_1_1[] = {s_1_1a};
 
-tmpa_1_1[] = Extrude {-a/2, 0, 0} { Surface{ s_1_1a }; Recombine;
+tmpa_1_1[] = Extrude {{0,0,0},{0,1,0},{p+p+h_f,p+p+h_f,R-r_w-h_f}, alpha} {
+  Surface{tmpa_1_1[0]}; Layers { 10 }; Recombine;
 };
 
 sa_1_1[] += tmpa_1_1[{2:4}];
@@ -89,7 +93,8 @@ sa_1_1[] += tmpa_1_1[{2:4}];
 sa_1_2[] = {};
 tmpa_1_2[] = {tmpa_1_1[0]};
 
-tmpa_1_2[] = Extrude {-a/2, 0, 0} { Surface{ tmpa_1_2[0] }; Recombine;
+tmpa_1_2[] = Extrude {{0,0,0},{0,-1,0},{-p+p+h_f,-p+p+h_f,-R+r_w+h_f}, alpha} {
+  Surface{tmpa_1_2[0]}; Layers { 10 }; Recombine;
 };
 
 sa_1_2[] += tmpa_1_2[{2:4}];
@@ -100,8 +105,8 @@ sa_1_2[] += tmpa_1_2[{2:4}];
 p0_1b = newp; Point(p0_1b) = {-p+p,-p+p,-r_w+mesh_level*mm-h_f, LcWiremesh * mm};
 p1b_1_1 = newp; Point(p1b_1_1) = {-p+p,-p+p,-2*r_w+mesh_level*mm-h_f, LcWiremesh * mm};
 p2_1b = newp; Point(p2_1b) = {-p+p,r_w - p+p,-r_w+mesh_level*mm-h_f, LcWiremesh * mm};
-p1b_3_1 = newp; Point(p1b_3_1) = {-p+p,-p+p,0+mesh_level*mm-h_f, LcWiremesh * mm};
-// p4_1b = newp; Point(p4_1b) = {-p+p,-r_w - p+p,-r_w+mesh_level*mm-h_f, LcWiremesh * mm};
+p1b_3_1 = newp; Point(p1b_3_1) = {-p+p,-p+p, 0+mesh_level*mm-h_f, LcWiremesh * mm};
+p4_1b = newp; Point(p4_1b) = {-p+p,-r_w - p+p,-r_w+mesh_level*mm-h_f, LcWiremesh * mm};
 
 l1_1b = newl; Circle(l1_1b) = {p1b_1_1, p0_1b, p2_1b};
 l2_1b = newl; Circle(l2_1b) = {p2_1b, p0_1b, p1b_3_1};
@@ -114,7 +119,8 @@ s_1_1b = news; Plane Surface(s_1_1b) = {ll1_1b};
 sb_1_1[] = {};
 tmpb_1_1[] = {s_1_1b};
 
-tmpb_1_1[] = Extrude {a/2, 0, 0} { Surface{ s_1_1b }; Recombine;
+tmpb_1_1[] = Extrude {{0,0,0},{0,-1,0},{-p+p-h_f,-p+p-h_f,R-r_w-h_f}, alpha} {
+  Surface{tmpb_1_1[0]}; Layers { 10 }; Recombine;
 };
 
 sb_1_1[] += tmpb_1_1[{2:4}];
@@ -124,7 +130,8 @@ sb_1_1[] += tmpb_1_1[{2:4}];
 sb_1_2[] = {};
 tmpb_1_2[] = {tmpb_1_1[0]};
 
-tmpb_1_2[] = Extrude {a/2, 0, 0} { Surface{ tmpb_1_2[0] }; Recombine;
+tmpb_1_2[] = Extrude {{0,0,0},{0,1,0},{p+p-h_f,p+p-h_f,-R+r_w+h_f}, alpha} {
+  Surface{tmpb_1_2[0]}; Layers { 10 }; Recombine;
 };
 
 sb_1_2[] += tmpb_1_2[{2:4}];
@@ -133,8 +140,8 @@ sb_1_2[] += tmpb_1_2[{2:4}];
 // Wire 2a1
 
 p0_2a = newp; Point(p0_2a) = {p+p,p+p,r_w+mesh_level*mm+h_f, LcWiremesh * mm};
-p2a_1_1 = newp; Point(p2a_1_1) = {p+p,p+p,2*r_w+mesh_level*mm+h_f, LcWiremesh * mm};
-// p2_2a = newp; Point(p2_2a) = {p+p+r_w,p+p,r_w+mesh_level*mm+h_f, LcWiremesh * mm};
+p2a_1_1 = newp; Point(p2a_1_1) = {p+p,p+p,r_w+r_w+mesh_level*mm+h_f, LcWiremesh * mm};
+p2_2a = newp; Point(p2_2a) = {p+p+r_w,p+p,r_w+mesh_level*mm+h_f, LcWiremesh * mm};
 p2a_3_1 = newp; Point(p2a_3_1) = {p+p,p+p,0+mesh_level*mm+h_f, LcWiremesh * mm};
 p4_2a = newp; Point(p4_2a) = {p+p-r_w,p+p,r_w+mesh_level*mm+h_f, LcWiremesh * mm};
 
@@ -149,7 +156,8 @@ s_1_2a = news; Plane Surface(s_1_2a) = {ll1_2a};
 sa_2_1[] = {};
 tmpa_2_1[] = {s_1_2a};
 
-tmpa_2_1[] = Extrude {0, -a/2, 0} { Surface{ s_1_2a }; Recombine;
+tmpa_2_1[] = Extrude {{0,0,0},{1,0,0},{p+p+h_f,p+p+h_f,-R+r_w+h_f}, alpha} {
+  Surface{tmpa_2_1[0]}; Layers { 10 }; Recombine;
 };
 
 sa_2_1[] += tmpa_2_1[{2:4}];
@@ -159,7 +167,8 @@ sa_2_1[] += tmpa_2_1[{2:4}];
 sa_2_2[] = {};
 tmpa_2_2[] = {tmpa_2_1[0]};
 
-tmpa_2_2[] = Extrude {0, -a/2, 0} { Surface{ tmpa_2_2[0] }; Recombine;
+tmpa_2_2[] = Extrude {{0,0,0},{-1,0,0},{-p+p+h_f,-p+p+h_f,R-r_w-h_f}, alpha} {
+  Surface{tmpa_2_2[0]}; Layers { 10 }; Recombine;
 };
 
 sa_2_2[] += tmpa_2_2[{2:4}];
@@ -171,7 +180,7 @@ p0_2b = newp; Point(p0_2b) = {-p+p,-p+p,r_w+mesh_level*mm+h_f, LcWiremesh * mm};
 p2b_1_1 = newp; Point(p2b_1_1) = {-p+p,-p+p,2*r_w+mesh_level*mm+h_f, LcWiremesh * mm};
 p2_2b = newp; Point(p2_2b) = {-p+p+r_w,-p+p,r_w+mesh_level*mm+h_f, LcWiremesh * mm};
 p2b_3_1 = newp; Point(p2b_3_1) = {-p+p,-p+p,0+mesh_level*mm+h_f, LcWiremesh * mm};
-// p4_2b = newp; Point(p4_2b) = {-p+p-r_w,-p+p,r_w+mesh_level*mm+h_f, LcWiremesh * mm};
+p4_2b = newp; Point(p4_2b) = {-p+p-r_w,-p+p,r_w+mesh_level*mm+h_f, LcWiremesh * mm};
 
 l1_2b = newl; Circle(l1_2b) = {p2b_1_1, p0_2b, p2_2b};
 l2_2b = newl; Circle(l2_2b) = {p2_2b, p0_2b, p1b_3_1};
@@ -184,7 +193,8 @@ s_1_2b = news; Plane Surface(s_1_2b) = {ll1_2b};
 sb_2_1[] = {};
 tmpb_2_1[] = {s_1_2b};
 
-tmpb_2_1[] = Extrude {0, a/2, 0} { Surface{ s_1_2b }; Recombine;
+tmpb_2_1[] = Extrude {{0,0,0},{-1,0,0},{-p+p-h_f,-p+p-h_f,-R+r_w+h_f}, alpha} {
+  Surface{tmpb_2_1[0]}; Layers { 10 }; Recombine; 
 };
 
 sb_2_1[] += tmpb_2_1[{2:4}];
@@ -194,26 +204,27 @@ sb_2_1[] += tmpb_2_1[{2:4}];
 sb_2_2[] = {};
 tmpb_2_2[] = {tmpb_2_1[0]};
 
-tmpb_2_2[] = Extrude {0, a/2, 0} { Surface{ tmpb_2_2[] }; Recombine;
+tmpb_2_2[] = Extrude {{0,0,0},{1,0,0},{p+p-h_f,p+p-h_f,R-r_w-h_f}, alpha} {
+  Surface{tmpb_2_2[0]}; Layers { 10 }; Recombine;
 };
 
 sb_2_2[] += tmpb_2_2[{2:4}];
 
 Coherence;
 
-// *******************************************
+// *******************************
 // Comparative IF Statement
-// *******************************************
+// *******************************
 
 For q In {1:2}
   For r In {1:2}
     For s In {1:2}
 
-// *******************************************
+// *******************************
 // Face physsurf_bdh_1_1 (Corner 1 - Corner 2)
-// *******************************************
+// *******************************
 
-  If(q == 1 && r == 1) 
+  If(q == 1&& r == 1) 
 
   ll_bdhbt~{q}~{r}~{s}[] = {};
   ll_bdhbb~{q}~{r}~{s}[] = {};
@@ -267,11 +278,11 @@ For q In {1:2}
 
   EndIf
 
-// *******************************************
+// *******************************
 // Face physsurf_bdh_1_2 (Corner 2 - Corner 3)
-// *******************************************
+// *******************************
 
-  If(q == 1 && r == 2)
+  If(q == 1&& r == 2)
 
   ll_bdhat~{q}~{r}~{s}[] = {};
   ll_bdhab~{q}~{r}~{s}[] = {}; 
@@ -325,11 +336,11 @@ For q In {1:2}
 
   EndIf
 
-// *******************************************
+// *******************************
 // Face physsurf_bdh_2_1 (Corner 3 - Corner 4)
-// *******************************************
+// *******************************
 
-  If(q == 2 && r == 1)
+  If(q == 2&& r == 1)
 
   ll_bdhat~{q}~{r}~{s}[] = {};
   ll_bdhab~{q}~{r}~{s}[] = {}; 
@@ -383,11 +394,11 @@ For q In {1:2}
 
   EndIf
 
-// *******************************************
+// *******************************
 // Face physsurf_bdh_2_2 (Corner 4 - Corner 1)
-// *******************************************
+// *******************************
 
-  If(q == 2 && r == 2) 
+  If(q == 2&& r == 2) 
 
   ll_bdhbt~{q}~{r}~{s}[] = {};
   ll_bdhbb~{q}~{r}~{s}[] = {};
@@ -444,37 +455,37 @@ For q In {1:2}
  EndFor
 EndFor
 
-// SHELL 
+// SHELL
 
 // --------------------------------------------------------------------------
 
-// *******************************************
+// *******************************
 // Corner 1
-// *******************************************
+// *******************************
 pc1_1 = newp; Point(pc1_1) = {geo_f_x*0+geo_f_x*m*a, geo_f_y*0+geo_f_y*n*a, tD/2,lcCopperPlateBdry};
 pc2_1 = newp; Point(pc2_1) = {geo_f_x*0+geo_f_x*m*a, geo_f_y*0+geo_f_y*n*a, -1*tD/2,lcCopperPlateBdry};
 pc3_1 = newp; Point(pc3_1) = {geo_f_x*0+geo_f_x*m*a, geo_f_y*0+geo_f_y*n*a, (2*tC+tD)/2,lcCopperPlateBdry};
 pc4_1 = newp; Point(pc4_1) = {geo_f_x*0+geo_f_x*m*a, geo_f_y*0+geo_f_y*n*a, -1*(2*tC+tD)/2,lcCopperPlateBdry};
 
-// *******************************************
+// *******************************
 // Corner 2
-// *******************************************
+// *******************************
 pc1_2 = newp; Point(pc1_2) = {geo_f_x*a+geo_f_x*m*a, geo_f_y*0+geo_f_y*n*a, tD/2,lcCopperPlateBdry};
 pc2_2 = newp; Point(pc2_2) = {geo_f_x*a+geo_f_x*m*a, geo_f_y*0+geo_f_y*n*a, -1*tD/2,lcCopperPlateBdry};
 pc3_2 = newp; Point(pc3_2) = {geo_f_x*a+geo_f_x*m*a, geo_f_y*0+geo_f_y*n*a, (2*tC+tD)/2,lcCopperPlateBdry};
 pc4_2 = newp; Point(pc4_2) = {geo_f_x*a+geo_f_x*m*a, geo_f_y*0+geo_f_y*n*a, -1*(2*tC+tD)/2,lcCopperPlateBdry};
 
-// *******************************************
+// *******************************
 // Corner 3
-// *******************************************
+// *******************************
 pc1_3 = newp; Point(pc1_3) = {geo_f_x*a+geo_f_x*m*a, geo_f_y*a+geo_f_y*n*a, tD/2,lcCopperPlateBdry};
 pc2_3 = newp; Point(pc2_3) = {geo_f_x*a+geo_f_x*m*a, geo_f_y*a+geo_f_y*n*a, -1*tD/2,lcCopperPlateBdry};
 pc3_3 = newp; Point(pc3_3) = {geo_f_x*a+geo_f_x*m*a, geo_f_y*a+geo_f_y*n*a, (2*tC+tD)/2,lcCopperPlateBdry};
 pc4_3 = newp; Point(pc4_3) = {geo_f_x*a+geo_f_x*m*a, geo_f_y*a+geo_f_y*n*a, -1*(2*tC+tD)/2,lcCopperPlateBdry};
 
-// *******************************************
+// *******************************
 // Corner 4
-// *******************************************
+// *******************************
 pc1_4 = newp; Point(pc1_4) = {geo_f_x*0+geo_f_x*m*a, geo_f_y*a+geo_f_y*n*a, tD/2,lcCopperPlateBdry};
 pc2_4 = newp; Point(pc2_4) = {geo_f_x*0+geo_f_x*m*a, geo_f_y*a+geo_f_y*n*a, -1*tD/2,lcCopperPlateBdry};
 pc3_4 = newp; Point(pc3_4) = {geo_f_x*0+geo_f_x*m*a, geo_f_y*a+geo_f_y*n*a, (2*tC+tD)/2,lcCopperPlateBdry};
@@ -482,9 +493,9 @@ pc4_4 = newp; Point(pc4_4) = {geo_f_x*0+geo_f_x*m*a, geo_f_y*a+geo_f_y*n*a, -1*(
 
 // --------------------------------------------------------------------------
 
-// *******************************************************************
+// *******************************************************
 // Copper planes
-// *******************************************************************
+// *******************************************************
 
 // Points between two half pillars on upper LEM
 ptmc_1 = newp; Point(ptmc_1) = {geo_f_x*a/2+geo_f_x*m*a, geo_f_y*0+geo_f_y*n*a, (2*tC+tD)/2, lcCopperPlateBdry};
@@ -615,9 +626,9 @@ lmid4_1 = newl; Line(lmid4_1) = {ptmc_4, ptmd_4};
 lmid4_2 = newl; Line(lmid4_2) = {ptmd_4, pbmd_4};
 lmid4_3 = newl; Line(lmid4_3) = {pbmd_4, pbmc_4};
 
-// **********************************************************
+// **********************************************
 // External Electrodes
-// **********************************************************
+// **********************************************
 
 // Top electrode
 pexet1 = newp; Point(pexet1) = {geo_f_x*0+geo_f_x*m*a, geo_f_y*0+geo_f_y*n*a, (2*tC+tD)/2+lE,lcExtElectrodeBdry};
@@ -635,9 +646,9 @@ lexet4 = newl; Line(lexet4) = {pexet4, pexet5};
 lexet5 = newl; Line(lexet5) = {pexet5, pexet6};
 lexet6 = newl; Line(lexet6) = {pexet6, pexet1};
 
-// *************************************************************
+// *************************************************
 // Define surfaces
-// *************************************************************
+// *************************************************
 
 // Copper plate surfaces
 
@@ -702,61 +713,61 @@ Coherence;
 
 // Bounding and intersecting surfaces
 
-// *******************************************
+// *******************************
 // Face physsurf_bdh_1_1
-// *******************************************
+// *******************************
 
 // Face physsurf_bdh_1_1
 
-l1bdh_1_1_bsurft1 = newl; Line(l1bdh_1_1_bsurft1) = {pexet3, pbdhat_1_2_2[1]};
+l1bdh_1_1_bsurft1 = newl; Line(l1bdh_1_1_bsurft1) = {pexet3, pbdhbt_1_1_2[1]};
 l2bdh_1_1_bsurft1 = newl; Line(l2bdh_1_1_bsurft1) = {pexet1, p2b_1_1};
-l1bdh_1_1_bsurfb1 = newl; Line(l1bdh_1_1_bsurfb1) = {pc3_2, pbdhbb_1_1_2[1]};
+l1bdh_1_1_bsurfb1 = newl; Line(l1bdh_1_1_bsurfb1) = {pc3_2, pbdhab_1_2_2[1]};
 l2bdh_1_1_bsurfb1 = newl; Line(l2bdh_1_1_bsurfb1) = {pc3_1, p1b_1_1};
 
-llbdh_1_1_bsurf1t = newreg; Line Loop(llbdh_1_1_bsurf1t) = {lexet1, lexet2, l1bdh_1_1_bsurft1, -ll_bdhac1_1_2_2[0], -ll_bdhac0_1_2_2[0], -ll_bdhbt_1_1_2[0], -ll_bdhbt_1_1_1[0], -l2_2b, -l1_2b, -l2bdh_1_1_bsurft1};
-llbdh_1_1_bsurf1b = newreg; Line Loop(llbdh_1_1_bsurf1b) = {lcptub1a, lcptub1b, l1bdh_1_1_bsurfb1, -ll_bdhbb_1_1_2[0], -ll_bdhbb_1_1_1[0], -l2bdh_1_1_bsurfb1};
+llbdh_1_1_bsurf1t = newreg; Line Loop(llbdh_1_1_bsurf1t) = {lexet1, lexet2, l1bdh_1_1_bsurft1,  -l2_2b, -l1_2b, -ll_bdhbt_1_1_1[0], -ll_bdhbt_1_1_2[0], -l2bdh_1_1_bsurft1};
+llbdh_1_1_bsurf1b = newreg; Line Loop(llbdh_1_1_bsurf1b) = {lcptub1a, lcptub1b, l1bdh_1_1_bsurfb1, ll_bdhac0_1_2_2[0], ll_bdhac1_1_2_2[0], -ll_bdhbb_1_1_1[0], -ll_bdhbb_1_1_2[0], -l2bdh_1_1_bsurfb1};
 
 psbdh_1_1_bsurf1t = newreg; Plane Surface(psbdh_1_1_bsurf1t) = {llbdh_1_1_bsurf1t};
 psbdh_1_1_bsurf1b = newreg; Plane Surface(psbdh_1_1_bsurf1b) = {llbdh_1_1_bsurf1b};
 
-// *******************************************
+// *******************************
 // Face physsurf_bdh_1_2
-// *******************************************
+// *******************************
 
 // Face physsurf_bdh_1_2 (Corner 2 - Corner 3)
 
 l1bdh_1_2_bsurft1 = newl; Line(l1bdh_1_2_bsurft1) = {pexet4, p2a_1_1};
 l1bdh_1_2_bsurfb1 = newl; Line(l1bdh_1_2_bsurfb1) = {pc3_3, p1a_1_1};
 
-llbdh_1_2_bsurf3t = newreg; Line Loop(llbdh_1_2_bsurf3t) = {lexet3, l1bdh_1_2_bsurft1, ll_bdhat_1_2_1[0], ll_bdhat_1_2_2[0], -l1bdh_1_1_bsurft1};
-llbdh_1_2_bsurf3b = newreg; Line Loop(llbdh_1_2_bsurf3b) = {-lcptub2b, -lcptub2a, l1bdh_1_1_bsurfb1, ll_bdhbc0_1_1_2[0], ll_bdhbc1_1_1_2[0], -ll_bdhab_1_2_2[0], -ll_bdhab_1_2_1[0], l3_1a, l4_1a, -l1bdh_1_2_bsurfb1};
+llbdh_1_2_bsurf3t = newreg; Line Loop(llbdh_1_2_bsurf3t) = {lexet3, l1bdh_1_2_bsurft1, ll_bdhat_1_2_2[0], ll_bdhat_1_2_1[0], ll_bdhbc0_1_1_2[0], ll_bdhbc1_1_1_2[0], -l1bdh_1_1_bsurft1};
+llbdh_1_2_bsurf3b = newreg; Line Loop(llbdh_1_2_bsurf3b) = {lcptub2a, lcptub2b, l1bdh_1_2_bsurfb1, -l4_1a, -l3_1a, ll_bdhab_1_2_2[0], ll_bdhab_1_2_1[0], -l1bdh_1_1_bsurfb1};
 
 psbdh_1_2_bsurf3t = newreg; Plane Surface(psbdh_1_2_bsurf3t) = {llbdh_1_2_bsurf3t};
 psbdh_1_2_bsurf3b = newreg; Plane Surface(psbdh_1_2_bsurf3b) = {llbdh_1_2_bsurf3b};
 
-// *******************************************
+// *******************************
 // Face physsurf_bdh_2_1
-// *******************************************
+// *******************************
 
 // Face physsurf_bdh_2_1
 
-l1bdh_2_1_bsurft4 = newl; Line(l1bdh_2_1_bsurft4) = {pexet6, pbdhbt_2_2_2[1]};
-l1bdh_2_1_bsurfb4 = newl; Line(l1bdh_2_1_bsurfb4) = {pc3_4, pbdha1_2_1_2[0]};
+l1bdh_2_1_bsurft4 = newl; Line(l1bdh_2_1_bsurft4) = {pexet6, pbdhat_2_1_2[1]};
+l1bdh_2_1_bsurfb4 = newl; Line(l1bdh_2_1_bsurfb4) = {pc3_4, pbdhbb_2_2_2[1]};
 
-llbdh_2_1_bsurf4t = newreg; Line Loop(llbdh_2_1_bsurf4t) = {lexet4, lexet5, l1bdh_2_1_bsurft4, ll_bdhbc0_2_2_2[0], ll_bdhbc1_2_2_2[0], -ll_bdhat_2_1_2[0], -ll_bdhat_2_1_1[0], l3_2a, l4_2a, -l1bdh_1_2_bsurft1};
-llbdh_2_1_bsurf4b = newreg; Line Loop(llbdh_2_1_bsurf4b) = {lcptub3a, lcptub3b, l1bdh_2_1_bsurfb4, -ll_bdhab_2_1_2[0], -ll_bdhab_2_1_1[0], -l1bdh_1_2_bsurfb1};
+llbdh_2_1_bsurf4t = newreg; Line Loop(llbdh_2_1_bsurf4t) = {lexet4, lexet5, l1bdh_2_1_bsurft4, -ll_bdhat_2_1_1[0], -ll_bdhat_2_1_2[0], l3_2a, l4_2a, -l1bdh_1_2_bsurft1};
+llbdh_2_1_bsurf4b = newreg; Line Loop(llbdh_2_1_bsurf4b) = {lcptub3a, lcptub3b, l1bdh_2_1_bsurfb4, -ll_bdhbc1_2_2_2[0], -ll_bdhbc0_2_2_2[0], -ll_bdhab_2_1_1[0], -ll_bdhab_2_1_2[0], -l1bdh_1_2_bsurfb1}; 
 
 psbdh_2_1_bsurf4t = newreg; Plane Surface(psbdh_2_1_bsurf4t) = {llbdh_2_1_bsurf4t};
 psbdh_2_1_bsurf4b = newreg; Plane Surface(psbdh_2_1_bsurf4b) = {llbdh_2_1_bsurf4b};
 
-// *******************************************
+// *******************************
 // Face physsurf_bdh_2_2
-// *******************************************
+// *******************************
 
 // Face physsurf_bdh_2_2
 
-llbdh_2_2_bsurf6t = newreg; Line Loop(llbdh_2_2_bsurf6t) = {lexet6, l2bdh_1_1_bsurft1, ll_bdhbt_2_2_2[0], ll_bdhbt_2_2_1[0], -l1bdh_2_1_bsurft4};
-llbdh_2_2_bsurf6b = newreg; Line Loop(llbdh_2_2_bsurf6b) = {lcptub4a, lcptub4b, l2bdh_1_1_bsurfb1, l1_1b, l2_1b, ll_bdhbb_2_2_1[0], ll_bdhbb_2_2_2[0], ll_bdhac0_2_1_2[0], ll_bdhac1_2_1_2[0], -l1bdh_2_1_bsurfb4};
+llbdh_2_2_bsurf6t = newreg; Line Loop(llbdh_2_2_bsurf6t) = {lexet6, l2bdh_1_1_bsurft1, ll_bdhbt_2_2_2[0], ll_bdhbt_2_2_1[0], -ll_bdhac1_2_1_2[0], -ll_bdhac0_2_1_2[0], -l1bdh_2_1_bsurft4};
+llbdh_2_2_bsurf6b = newreg; Line Loop(llbdh_2_2_bsurf6b) = {lcptub4a, lcptub4b, l2bdh_1_1_bsurfb1, l1_1b, l2_1b, ll_bdhbb_2_2_2[0], ll_bdhbb_2_2_1[0], -l1bdh_2_1_bsurfb4};
 
 psbdh_2_2_bsurf6t = newreg; Plane Surface(psbdh_2_2_bsurf6t) = {llbdh_2_2_bsurf6t};
 psbdh_2_2_bsurf6b = newreg; Plane Surface(psbdh_2_2_bsurf6b) = {llbdh_2_2_bsurf6b};
@@ -767,7 +778,7 @@ ll_bsurf7 = newreg; Line Loop(ll_bsurf7) = {lexet1, lexet2, lexet3, lexet4, lexe
 ps_bsurf7 = newreg; Plane Surface(ps_bsurf7) = {ll_bsurf7};
 
 // Volumes
-sl_gas = newreg; Surface Loop(sl_gas) = {ps_side_gas1a, ps_side_gas2a, ps_side_gas3a, ps_side_gas4a, ps_side_gas1b, ps_side_gas2b, ps_side_gas3b, ps_side_gas4b, psbdh_1_1_bsurf1t, psbdh_1_1_bsurf1b, psbdh_1_2_bsurf3t, psbdh_1_2_bsurf3b, psbdh_2_1_bsurf4t, psbdh_2_1_bsurf4b, psbdh_2_2_bsurf6t, psbdh_2_2_bsurf6b, ps_bsurf7, pscp_up_border1, pscp_up_border2, pscp_up_border3, pscp_up_border4, ps_bottom_gas, -sa_1_1[0], -sa_1_1[1], -sa_1_2[0], -sa_1_2[1], -sb_1_1[0], -sb_1_1[1], -sb_1_2[0], -sb_1_2[1], -sa_2_1[0], -sa_2_1[1], -sa_2_2[0], -sa_2_2[1], -sb_2_1[0], -sb_2_1[1], -sb_2_2[0], -sb_2_2[1]};
+sl_gas = newreg; Surface Loop(sl_gas) = {ps_side_gas1a, ps_side_gas2a, ps_side_gas3a, ps_side_gas4a, ps_side_gas1b, ps_side_gas2b, ps_side_gas3b, ps_side_gas4b, psbdh_1_1_bsurf1t, psbdh_1_1_bsurf1b, psbdh_1_2_bsurf3t, psbdh_1_2_bsurf3b, psbdh_2_1_bsurf4t, psbdh_2_1_bsurf4b, psbdh_2_2_bsurf6t, psbdh_2_2_bsurf6b, ps_bsurf7, pscp_up_border1, pscp_up_border2, pscp_up_border3, pscp_up_border4, ps_bottom_gas, sa_1_1[0], sa_1_1[1], sa_1_2[0], sa_1_2[1], sb_1_1[0], sb_1_1[1], sb_1_2[0], sb_1_2[1], sa_2_1[0], sa_2_1[1], sa_2_2[0], sa_2_2[1], sb_2_1[0], sb_2_1[1], sb_2_2[0], sb_2_2[1]};
 vol_gas = newreg; Volume(vol_gas) = {sl_gas};
 
 sl_lower_cp = newreg; Surface Loop(sl_lower_cp) = {pscp_face2, pscp_low_border1, pscp_low_border2, pscp_low_border3, pscp_low_border4, ps_bottom_gas};
@@ -791,7 +802,7 @@ physvol_wire = newreg; Physical Volume(physvol_wire) = {vol_wire};
 
 // Gas physical surface
 // Bounding surface 1
-physsurf_gas = newreg; Physical Surface(physsurf_gas) = {ps_side_gas1a, ps_side_gas2a, ps_side_gas3a, ps_side_gas4a, ps_side_gas1b, ps_side_gas2b, ps_side_gas3b, ps_side_gas4b, psbdh_1_1_bsurf1t, psbdh_1_1_bsurf1b, psbdh_1_2_bsurf3t, psbdh_1_2_bsurf3b, psbdh_2_1_bsurf4t, psbdh_2_1_bsurf4b, psbdh_2_2_bsurf6t, psbdh_2_2_bsurf6b, ps_bsurf7, pscp_up_border1, pscp_up_border2, pscp_up_border3, pscp_up_border4, ps_bottom_gas, -sa_1_1[0], -sa_1_1[1], -sa_1_2[0], -sa_1_2[1], -sb_1_1[0], -sb_1_1[1], -sb_1_2[0], -sb_1_2[1], -sa_2_1[0], -sa_2_1[1], -sa_2_2[0], -sa_2_2[1], -sb_2_1[0], -sb_2_1[1], -sb_2_2[0], -sb_2_2[1]};
+physsurf_gas = newreg; Physical Surface(physsurf_gas) = {ps_side_gas1a, ps_side_gas2a, ps_side_gas3a, ps_side_gas4a, ps_side_gas1b, ps_side_gas2b, ps_side_gas3b, ps_side_gas4b, psbdh_1_1_bsurf1t, psbdh_1_1_bsurf1b, psbdh_1_2_bsurf3t, psbdh_1_2_bsurf3b, psbdh_2_1_bsurf4t, psbdh_2_1_bsurf4b, psbdh_2_2_bsurf6t, psbdh_2_2_bsurf6b, ps_bsurf7, pscp_up_border1, pscp_up_border2, pscp_up_border3, pscp_up_border4, ps_bottom_gas, sa_1_1[0], sa_1_1[1], sa_1_2[0], sa_1_2[1], sb_1_1[0], sb_1_1[1], sb_1_2[0], sb_1_2[1], sa_2_1[0], sa_2_1[1], sa_2_2[0], sa_2_2[1], sb_2_1[0], sb_2_1[1], sb_2_2[0], sb_2_2[1]};
 
 // Recombine Surface{physsurf_gas};
 
@@ -824,3 +835,635 @@ physsurf_bdh_2_1 = newreg; Physical Surface(physsurf_bdh_2_1) = {pscp_up_border3
 
 // Bounding surface 8
 physsurf_bdh_2_2 = newreg; Physical Surface(physsurf_bdh_2_2) = {pscp_up_border4, ps_side_gas4a, ps_side_gas4b, psbdh_2_2_bsurf6t, psbdh_2_2_bsurf6b};
+
+// Meshing parameters
+
+// Mesh Module
+
+// unstructured mesh - model should not self intersect
+// attempt to set the Mesh.RandomFactor * size(triangle)/size(model) so that it approaches machine accuracy. Increase Mesh.RandomFactor
+
+// utilize different 2D & 3D meshing algorithms, or try to alter the characteristic lengths so that the mesh elements geometry better match the surface and volume elements in your geometry
+
+// Optimize mesh quality !!!
+
+// non-recombined 3D extruded wire volume elements fail - swapping algorithm is bad, try to change surface mesh a bit, recombine your mesh to produce/generate prisms/hexahedra instead of tetrahedra
+
+// Recombine surfaces
+
+// elliptic mesh generator
+// utilize Mesh.Smoothing = 10;
+
+// curved surfaces - gmsh can generate 1st order and 2nd order elements. click on second order in the mesh menu, after mesh is completed. To always generate 2nd second elements, select 'generate second order elements' in the mesh option panel. command line use '-order 2'
+// explore the mesh by utilizing 'clipping planes,' /Tools/Clipping Planes/ 
+
+// /Tools/Statistics/ - They measure the quality of the tetrahedra in a mesh:
+
+// Gamma ~ inscribed_radius / circumscribed_radius
+// Eta ~ volume^(2/3) / sum_edge_length^2
+// Rho ~ min_edge_length / max_edge_length
+
+// The graphs plot the the number of elements vs. the quality measure
+
+
+// generate fine mesh for curvilinear result to conplex curves
+// utilize second order and 
+
+// do not combine tets, when recombining quads
+
+Recombine Surface "*";
+// Mesh.RecombineAll = 1;
+
+Mesh.Algorithm = 1; // meshing 2D with MeshAdapt - for complex curved surfaces
+// 2D mesh algorithm (1=MeshAdapt, 5=Delaunay, 6=Frontal)
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.Algorithm3D = 4; // meshing 3D with Frontal - robustness, quality
+// 3D mesh algorithm (1=Delaunay, 4=Frontal)
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.AngleSmoothNormals = 20;
+// Threshold angle below which normals are not smoothed
+// Default value: 30
+// Saved in: General.OptionsFileName
+
+Mesh.AllowSwapAngle = 5;
+// Treshold angle (in degrees) between faces normals under which we allow an edge swap
+// Default value: 10
+// Saved in: General.OptionsFileName
+
+Mesh.BdfFieldFormat = 0;
+// Field format for Nastran BDF files (0=free, 1=small, 2=large)
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.Binary = 0;
+// Write mesh files in binary format (if possible)
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.CharacteristicLengthExtendFromBoundary = 1;
+// Extend characteristic lengths from the boundaries inside the surface/volume
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.CharacteristicLengthFactor = 1;
+// Factor applied to all characteristic lengths
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.CharacteristicLengthMin = 0;
+// Minimum characteristic length
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.CharacteristicLengthMax = 1e+22;
+// Maximum characteristic length
+// Default value: 1e+22
+// Saved in: General.OptionsFileName
+
+Mesh.CharacteristicLengthFromCurvature = 1;
+// Compute characteristic lengths from curvature
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.CharacteristicLengthFromPoints = 1;
+// Compute characteristic lengths from values given at geometry points
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.Clip = 0;
+// Enable clipping planes? (Plane[i]=2^i, i=0,...,5)
+// Default value: 0
+// Saved in: -
+
+Mesh.ColorCarousel = 1;
+// Mesh coloring (0=by element type, 1=by elementary entity, 2=by physical entity, 3=by partition)
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.CpuTime = 0;
+// CPU time (in seconds) for the generation of the current mesh (read-only)
+// Default value: 0
+// Saved in: -
+
+Mesh.DrawSkinOnly = 0;
+// Draw only the skin of 3D meshes?
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.Dual = 0;
+// Display the dual mesh obtained by barycentric subdivision
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.ElementOrder = 2;
+// Element order (1=linear elements, N (<6) = elements of higher order)
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.Explode = 1;
+// Element shrinking factor (between 0 and 1)
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.Format = 1;
+// Mesh output format (1=msh, 2=unv, 19=vrml, 27=stl, 30=mesh, 31=bdf, 32=cgns, 33=med)
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.Hexahedra = 1;
+// Display mesh hexahedra?
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+// Mesh.LabelsFrequency = 100;
+// Labels display frequency?
+// Default value: 100
+// Saved in: General.OptionsFileName
+
+Mesh.LabelType = 0;
+// Type of element label (0=element number, 1=elementary entity number, 2=physical entity number, 3=partition number, 4=coordinates)
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.LcIntegrationPrecision = 1e-09;
+// Accuracy of evaluation of the LC field for 1D mesh generation
+// Default value: 1e-09
+// Saved in: General.OptionsFileName
+
+Mesh.Light = 1;
+// Enable lighting for the mesh
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.LightLines = 1;
+// Enable lighting for mesh lines (element edges)
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.LightTwoSide = 1;
+// Light both sides of surfaces (leads to slower rendering)
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.Lines = 0;
+// Display mesh lines (1D elements)?
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.LineNumbers = 0;
+// Display mesh line numbers?
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.LineWidth = 1;
+// Display width of mesh lines (in pixels)
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.MeshOnlyVisible = 0;
+// Mesh only visible entities (experimental: use with caution!)
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.MinimumCirclePoints = 7;
+// Minimum number of points used to mesh a circle
+// Default value: 7
+// Saved in: General.OptionsFileName
+
+Mesh.MinimumCurvePoints = 3;
+// Minimum number of points used to mesh a (non-straight) curve
+// Default value: 3
+// Saved in: General.OptionsFileName
+
+Mesh.MshFileVersion = 2.1;
+// Version of the MSH file format to use
+// Default value: 2.1
+// Saved in: General.OptionsFileName
+
+Mesh.NbHexahedra = 0;
+// Number of hexahedra in the current mesh (read-only)
+// Default value: 0
+// Saved in: -
+
+Mesh.NbNodes = 0;
+// Number of nodes in the current mesh (read-only)
+// Default value: 0
+// Saved in: -
+
+Mesh.NbPartitions = 4;
+// Number of partitions
+// Default value: 4
+// Saved in: General.OptionsFileName
+
+Mesh.NbPrisms = 0;
+// Number of prisms in the current mesh (read-only)
+// Default value: 0
+// Saved in: -
+
+Mesh.NbPyramids = 0;
+// Number of pyramids in the current mesh (read-only)
+// Default value: 0
+// Saved in: -
+
+Mesh.NbQuadrangles = 0;
+// Number of quadrangles in the current mesh (read-only)
+// Default value: 0
+// Saved in: -
+
+Mesh.NbTetrahedra = 0;
+// Number of tetrahedra in the current mesh (read-only)
+// Default value: 0
+// Saved in: -
+
+Mesh.NbTriangles = 0;
+// Number of triangles in the current mesh (read-only)
+// Default value: 0
+// Saved in: -
+
+Mesh.Normals = 0;
+// Display size of normal vectors (in pixels)
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.NumSubEdges = 2;
+// Number of edge subdivisions when displaying high order elements
+// Default value: 2
+// Saved in: General.OptionsFileName
+
+Mesh.Optimize = 0;
+// Optimize the mesh to improve the quality of tetrahedral elements
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.OptimizeNetgen = 0;
+// Optimize the mesh using Netgen to improve the quality of tetrahedral elements
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.Partitioner = 2;
+// Partitioner software (1=Chacho, 2=METIS)
+// Default value: 2
+// Saved in: General.OptionsFileName
+
+Mesh.Points = 0;
+// Display mesh vertices (nodes)?
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.PointNumbers = 0;
+// Display mesh node numbers?
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.PointSize = 4;
+// Display size of mesh vertices (in pixels)
+// Default value: 4
+// Saved in: General.OptionsFileName
+
+Mesh.PointType = 0;
+// Display mesh vertices as solid color dots (0) or 3D spheres (1)
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.Prisms = 1;
+// Display mesh prisms?
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.Pyramids = 1;
+// Display mesh pyramids?
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.Quadrangles = 1;
+// Display mesh quadrangles?
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.QualityInf = 0;
+// Only display elements whose quality measure is greater than QualityInf
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.QualitySup = 0;
+// Only display elements whose quality measure is smaller than QualitySup
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.QualityType = 2;
+// Type of quality measure (0=gamma~vol/sum_face/max_edge, 1=eta~vol^(2/3)/sum_edge^2, 2=rho~min_edge/max_edge)
+// Default value: 2
+// Saved in: General.OptionsFileName
+
+Mesh.RadiusInf = 0;
+// Only display elements whose longest edge is greater than RadiusInf
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.RadiusSup = 0;
+// Only display elements whose longest edge is smaller than RadiusSup
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.RandomFactor = 1e-05;
+// Random factor used in the 2D meshing algorithm (should be increased if RandomFactor * size(triangle)/size(model) approaches machine accuracy)
+// Default value: 1e-09
+// Saved in: General.OptionsFileName
+
+Mesh.RefineSteps = 10;
+// Number of refinement steps in the MeshAdapt-based 2D algorithms
+// Default value: 10
+// Saved in: General.OptionsFileName
+
+// Mesh.ReverseAllNormals = 0;
+// Reverse all the mesh normals (for display)
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.SaveAll = 0;
+// Ignore Physical definitions and save all elements
+// Default value: 0
+// Saved in: -
+
+Mesh.SaveElementTagType = 1;
+// Type of the element tag saved in mesh formats that don't support saving physical or partition ids (1=elementary, 2=physical, 3=partition)
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.SaveParametric = 0;
+// Save parametric coordinates of nodes
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.SaveGroupsOfNodes = 0;
+// Save groups of nodes for each physical line and surface (UNV mesh format only)
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.ScalingFactor = 1;
+// Global scaling factor applied to the saved mesh
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.SecondOrderExperimental = 0;
+// Use experimental code to generate second order mesh
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.SecondOrderIncomplete = 1;
+// Create incomplete second order elements? (8-node quads, 20-node hexas, etc.)
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.SecondOrderLinear = 0;
+// Should second order vertices simply be created by linear interpolation?
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.Smoothing = 5;
+// Number of smoothing steps applied to the final mesh
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+// Mesh.SmoothInternalEdges = 0;
+// Number of smoothing steps of internal edges for high order meshes
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.SmoothNormals = 0;
+// Smooth the mesh normals?
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.SubdivisionAlgorithm = 0;
+// Mesh subdivision algorithm (0=none, 1=all quadrangles, 2=all hexahedra)
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.SurfaceEdges = 1;
+// Display edges of surface mesh?
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.SurfaceFaces = 0;
+// Display faces of surface mesh?
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.SurfaceNumbers = 0;
+// Display surface mesh element numbers?
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.Tangents = 0;
+// Display size of tangent vectors (in pixels)
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.Tetrahedra = 1;
+// Display mesh tetrahedra?
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.ToleranceEdgeLength = 0;
+// Skip a model edge in mesh generation if its length is less than user's defined tolerance
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.Triangles = 1;
+// Display mesh triangles?
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.VolumeEdges = 1;
+// Display edges of volume mesh?
+// Default value: 1
+// Saved in: General.OptionsFileName
+
+Mesh.VolumeFaces = 0;
+// Display faces of volume mesh?
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.VolumeNumbers = 0;
+// Display volume mesh element numbers?
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.Voronoi = 0;
+// Display the voronoi diagram
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.ZoneDefinition = 0;
+// Method for defining a zone (0=single zone, 1=by partition, 2=by physical)
+// Default value: 0
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Points = {0,0,255};
+// Mesh node color
+// Default value: {0,0,255}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.PointsSup = {255,0,255};
+// Second order mesh node color
+// Default value: {255,0,255}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Lines = {0,0,0};
+// Mesh line color
+// Default value: {0,0,0}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Triangles = {160,150,255};
+// Mesh triangle color (if Mesh.ColorCarousel=0)
+// Default value: {160,150,255}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Quadrangles = {130,120,225};
+// Mesh quadrangle color (if Mesh.ColorCarousel=0)
+// Default value: {130,120,225}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Tetrahedra = {160,150,255};
+// Mesh tetrahedron color (if Mesh.ColorCarousel=0)
+// Default value: {160,150,255}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Hexahedra = {130,120,225};
+// Mesh hexahedron color (if Mesh.ColorCarousel=0)
+// Default value: {130,120,225}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Prisms = {232,210,23};
+// Mesh prism color (if Mesh.ColorCarousel=0)
+// Default value: {232,210,23}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Pyramids = {217,113,38};
+// Mesh pyramid color (if Mesh.ColorCarousel=0)
+// Default value: {217,113,38}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Tangents = {255,255,0};
+// Tangent mesh vector color
+// Default value: {255,255,0}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Normals = {255,0,0};
+// Normal mesh vector color
+// Default value: {255,0,0}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Zero = {255,120,0};
+// Color 0 in color carousel
+// Default value: {255,120,0}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.One = {255,160,0};
+// Color 1 in color carousel
+// Default value: {255,160,0}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Two = {255,200,0};
+// Color 2 in color carousel
+// Default value: {255,200,0}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Three = {255,240,0};
+// Color 3 in color carousel
+// Default value: {255,240,0}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Four = {228,255,0};
+// Color 4 in color carousel
+// Default value: {228,255,0}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Five = {188,255,0};
+// Color 5 in color carousel
+// Default value: {188,255,0}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Six = {148,255,0};
+// Color 6 in color carousel
+// Default value: {148,255,0}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Seven = {148,255,0};
+// Color 7 in color carousel
+// Default value: {108,255,0}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Eight = {68,255,0};
+// Color 8 in color carousel
+// Default value: {68,255,0}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Nine = {0,255,52};
+// Color 9 in color carousel
+// Default value: {0,255,52}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Ten = {0,255,132};
+// Color 10 in color carousel
+// Default value: {0,255,132}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Eleven = {0,255,192};
+// Color 11 in color carousel
+// Default value: {0,255,192}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Twelve = {0,216,255};
+// Color 12 in color carousel
+// Default value: {0,216,255}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Thirteen = {0,176,255};
+// Color 13 in color carousel
+// Default value: {0,176,255}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Fourteen = {0,116,255};
+// Color 14 in color carousel
+// Default value: {0,116,255}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Fifteen = {0,76,255};
+// Color 15 in color carousel
+// Default value: {0,76,255}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Sixteen = {24,0,255};
+// Color 16 in color carousel
+// Default value: {24,0,255}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Seventeen = {84,0,255};
+// Color 17 in color carousel
+// Default value: {84,0,255}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Eighteen = {104,0,255};
+// Color 18 in color carousel
+// Default value: {104,0,255}
+// Saved in: General.OptionsFileName
+
+Mesh.Color.Nineteen = {184,0,255};
+// Color 19 in color carousel
+// Default value: {184,0,255}
+// Saved in: General.OptionsFileName
+
+//+
+Field[1] = BoundaryLayer;
+//+
+Field[1].AnisoMax = 10;
+//+
+Field[1].AnisoMax = 100;
+//+
+Background Field = 1;
