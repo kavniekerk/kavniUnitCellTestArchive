@@ -1,4 +1,4 @@
-Include "mmgasComponentLabel.pro";
+// Include "mmgasComponentLabel.pro";
 // Include "mmgasMeshingOptions.pro";
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -390,8 +390,10 @@ lcpbib12 = newl; Line(lcpbib12) = {pc2_4, pc1_4};
 // Transfinite Line { lcpult4 } = lcpult4;
 */
 
+
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Wire Mesh
+
 
 //----------------------------------------------------------
 // First set of wires
@@ -403,11 +405,11 @@ lcpbib12 = newl; Line(lcpbib12) = {pc2_4, pc1_4};
 /////// Face 1a - half wire (y - z) extrude in x direction - Corner 3 to Corner 4
 // Wire 1a1
 
-p0_1a = newp; Point(p0_1a)        = {p+sp_fac1,p+sp_fac1,-r_w+mesh_level*mm, lcWireMesh * mm};                        // centre circle
-p1a_1_1 = newp; Point(p1a_1_1)    = {p+sp_fac1,p+sp_fac1,-2*r_w+mesh_level*mm, lcWireMesh * mm};                          // bottom circle
-// p2_1a = newp; Point(p2_1a)     = {p+sp_fac1,p+sp_fac1+r_w,-r_w+mesh_level*mm, lcWireMesh * mm};                    // right circle
-p1a_3_1 = newp; Point(p1a_3_1)    = {p+sp_fac1,p+sp_fac1,0+mesh_level*mm, lcWireMesh * mm};                      // top circle
-p4_1a = newp; Point(p4_1a)        = {p+sp_fac1,p+sp_fac1-r_w,-r_w+mesh_level*mm, lcWireMesh * mm};                    // left circle
+p0_1a = newp; Point(p0_1a)        = {p+sp_fac1,p+sp_fac1,-r_w+mesh_level*mm, lcWireMesh * mm};                                             // centre circle
+p1a_1_1 = newp; Point(p1a_1_1)    = {p+sp_fac1,p+sp_fac1,-2*r_w+mesh_level*mm, lcWireMesh * mm};                                           // bottom circle
+// p2_1a = newp; Point(p2_1a)     = {p+sp_fac1,p+sp_fac1+r_w,-r_w+mesh_level*mm, lcWireMesh * mm};                                         // right circle
+p1a_3_1 = newp; Point(p1a_3_1)    = {p+sp_fac1,p+sp_fac1,0+mesh_level*mm, lcWireMesh * mm};                                                // top circle
+p4_1a = newp; Point(p4_1a)        = {p+sp_fac1,p+sp_fac1-r_w,-r_w+mesh_level*mm, lcWireMesh * mm};                                         // left circle
 
 l2_1as = newl; Line(l2_1as)       = {p1a_1_1, p1a_3_1};
 l3_1a = newl; Circle(l3_1a)       = {p1a_3_1, p0_1a, p4_1a};
@@ -417,9 +419,8 @@ ll1_1a = newll; Line Loop(ll1_1a) = {l3_1a, l4_1a, l2_1as};
 
 s_1_1a = news; Plane Surface(s_1_1a) = {ll1_1a};
 
-sa_1_1[] = {};
-tmpa_1_1a[] = {};
-tmpa_1_1a[] = {s_1_1a};
+tmpa_1_1[] = {};
+tmpa_1_1[] = {s_1_1a};
 
 /*
 tmpa_1_1b[] = Extrude {-x2_sp_wind_fac,0,0} {
@@ -430,19 +431,18 @@ sa_1_1[] = tmpa_1_1b[{2:4}];
 */
 
 tmpa_1_1[] = Extrude {{x2_sp_wind_fac2,0,0},{0,1,0},{p+1*sp_fac1,p+1*sp_fac1,Rtn-r_w}, alpha} {
-  Surface{tmpa_1_1a[0]};
+  Surface{tmpa_1_1[0]};
 };
 
 sa_1_1[] = tmpa_1_1[{2:4}];
 
-
 // Wire 1a2
 
 sa_1_2[] = {};
-tmpa_1_2a[] = {tmpa_1_1[0]};
+tmpa_1_2[] = {tmpa_1_1[0]};
 
 tmpa_1_2[] = Extrude {{x2_sp_wind_fac2,0,0},{0,-1,0},{-p+1*sp_fac1,p+1*sp_fac1,-Rtp+r_w}, alpha} {
-  Surface{tmpa_1_2a[0]};
+  Surface{tmpa_1_2[0]};
 };
 
 sa_1_2[] = tmpa_1_2[{2:4}];
@@ -463,77 +463,7 @@ sl_wire_exterior_surface_1a[] = newreg; Surface Loop(sl_wire_exterior_surface_1a
 vol_1a_wire = newreg; Volume(vol_1a_wire) = sl_wire_exterior_surface_1a[];
 
 physvol_1a_wire = newreg; Physical Volume(physvol_1a_wire) = vol_1a_wire;
-physsurf_1a_wire = newreg; Physical Surface(physsurf_1a_wire) = { s_1_1a1, sa_1_1[], sa_1_2[], s_1_1a2 }; // sa_1_1b[], sa_1_2c[]
-
-
-//----------------------------------------------------------
-// Second set of wires
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////// Face 1b - half wire (y - z) extrude in x direction - Corner 1 to Corner 2
-// Wire 1b1
-
-p0_1b = newp; Point(p0_1b)      = {-p+sp_fac1,-p+sp_fac1,-r_w+mesh_level*mm, lcWireMesh * mm};                                            // centre circle
-p1b_1_1 = newp; Point(p1b_1_1)  = {-p+sp_fac1,-p+sp_fac1,-2*r_w+mesh_level*mm, lcWireMesh * mm};                                              // bottom circle
-p2_1b = newp; Point(p2_1b)      = {-p+sp_fac1,-p+sp_fac1+r_w,-r_w+mesh_level*mm, lcWireMesh * mm};                                        // right circle
-p1b_3_1 = newp; Point(p1b_3_1)  = {-p+sp_fac1,-p+sp_fac1,0+mesh_level*mm, lcWireMesh * mm};                                          // top circle
-// p4_1b = newp; Point(p4_1b)   = {-p+sp_fac1,-p+sp_fac1-r_w,-r_w+mesh_level*mm, lcWireMesh * mm};                                        // left circle
-
-l1_1b = newl; Circle(l1_1b)     = {p1b_1_1, p0_1b, p2_1b};
-l2_1b = newl; Circle(l2_1b)     = {p2_1b, p0_1b, p1b_3_1};
-l2_1bs = newl; Line(l2_1bs)     = {p1b_1_1, p1b_3_1};
-
-ll1_1b = newll; Line Loop(ll1_1b) = {l1_1b, l2_1b, -l2_1bs};
-
-s_1_1b = news; Plane Surface(s_1_1b) = {ll1_1b};
-
-sb_1_1[] = {};
-tmpb_1_1[] = {s_1_1b};
-
-/*
-tmpb_1_1b[] = Extrude {x1_sp_wind_fac,0,0} {
-  Surface{tmpb_1_1a[0]};
-};
-
-sb_1_1[] = tmpb_1_1b[{2:4}];
-*/
-
-tmpb_1_1[] = Extrude {{x1_sp_wind_fac2,0,0},{0,-1,0},{-p+1*sp_fac1,-p,Rtn-r_w}, alpha} {
-  Surface{tmpb_1_1[0]};
-};
-
-sb_1_1[] = tmpb_1_1[{2:4}];
-
-
-// Wire 1b2
-
-sb_1_2[] = {};
-tmpb_1_2[] = {tmpb_1_1[0]};
-
-
-tmpb_1_2[] = Extrude {{x1_sp_wind_fac2,0,0},{0,1,0},{p+sp_fac1,-p,-Rtp+r_w}, alpha} {
-  Surface{tmpb_1_2[0]};
-};
-
-sb_1_2[] = tmpb_1_2[{2:4}];
-
-/*
-tmpb_1_2c[] = Extrude {x1_sp_wind_fac,0,0} {
-  Surface{tmpb_1_2a[0]};
-};
-
-sb_1_2[] = tmpb_1_2c[{2:4}];
-*/
-
-s_1_1b1[] = s_1_1b;
-s_1_1b2[] = tmpb_1_2[0];
-
-sl_wire_exterior_surface_1b[] = newreg; Surface Loop(sl_wire_exterior_surface_1b) = { s_1_1b1[0], sb_1_1[0], sb_1_1[1], sb_1_1[2], sb_1_2[0], sb_1_2[1], sb_1_2[2], s_1_1b2[0] }; // sb_1_1[0], sb_1_1b[1], sb_1_1b[2], sb_1_2c[0], sb_1_2c[1], sb_1_2c[2],
-// vol_1b_wire = newreg; Compound Volume(vol_1b_wire) = { tmpb_1_1[1], tmpb_1_2[1] }; // tmpb_1_1b[1], tmpb_1_2c[1]
-vol_1b_wire = newreg; Volume(vol_1b_wire) = sl_wire_exterior_surface_1b[];
-
-physvol_1b_wire = newreg; Physical Volume(physvol_1b_wire) = vol_1b_wire;
-physsurf_1b_wire = newreg; Physical Surface(physsurf_1b_wire) = { s_1_1b1[], sb_1_1[], sb_1_2[], s_1_1b2[] }; // sb_1_1b[], sb_1_2c[], 
+physsurf_1a_wire = newreg; Physical Surface(physsurf_1a_wire) = { s_1_1a1[], sa_1_1[], sa_1_2[], s_1_1a2[] }; // sa_1_1b[], sa_1_2c[]
 
 
 //----------------------------------------------------------
@@ -546,11 +476,11 @@ physsurf_1b_wire = newreg; Physical Surface(physsurf_1b_wire) = { s_1_1b1[], sb_
 /////// Face 2a - half wire (x - z) extrude in y direction - Corner 3 to Corner 2
 // Wire 2a1
 
-p0_2a = newp; Point(p0_2a)      = {p+sp_fac1,p+sp_fac1,r_w+mesh_level*mm, lcWireMesh * mm};                         // centre circle
-p2a_1_1 = newp; Point(p2a_1_1)  = {p+sp_fac1,p+sp_fac1,0+mesh_level*mm, lcWireMesh * mm};                       // bottom circle
-// p2_2a = newp; Point(p2_2a)   = {p+sp_fac1+r_w,p+sp_fac1,r_w+mesh_level*mm, lcWireMesh * mm};                     // right circle
-p2a_3_1 = newp; Point(p2a_3_1)  = {p+sp_fac1,p+sp_fac1,2*r_w+mesh_level*mm, lcWireMesh * mm};                            // top circle
-p4_2a = newp; Point(p4_2a)      = {p+sp_fac1-r_w,p+sp_fac1,r_w+mesh_level*mm, lcWireMesh * mm};                     // left circle
+p0_2a = newp; Point(p0_2a)      = {p+sp_fac1,p+sp_fac1,r_w+mesh_level*mm, lcWireMesh * mm};                                                // centre circle
+p2a_1_1 = newp; Point(p2a_1_1)  = {p+sp_fac1,p+sp_fac1,0+mesh_level*mm, lcWireMesh * mm};                                                  // bottom circle
+// p2_2a = newp; Point(p2_2a)   = {p+sp_fac1+r_w,p+sp_fac1,r_w+mesh_level*mm, lcWireMesh * mm};                                            // right circle
+p2a_3_1 = newp; Point(p2a_3_1)  = {p+sp_fac1,p+sp_fac1,2*r_w+mesh_level*mm, lcWireMesh * mm};                                              // top circle
+p4_2a = newp; Point(p4_2a)      = {p+sp_fac1-r_w,p+sp_fac1,r_w+mesh_level*mm, lcWireMesh * mm};                                            // left circle
 
 l2_2as = newl; Line(l2_2as)     = {p2a_1_1, p2a_3_1};
 l3_2a = newl; Circle(l3_2a)     = {p2a_3_1, p0_2a, p4_2a};
@@ -610,83 +540,8 @@ physvol_2a_wire = newreg; Physical Volume(physvol_2a_wire) = vol_2a_wire;
 physsurf_2a_wire = newreg; Physical Surface(physsurf_2a_wire) = { s_1_2a1[], sa_2_1[], sa_2_2[], s_1_2a2[] }; // sa_2_1b[], sa_2_2c[]
 
 
-//----------------------------------------------------------
-// Second set of wires
-
-//----------------------------------------------------------
-// y-direction
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////// Face 2b - half wire (x - z) extrude in y direction - Corner 1 to Corner 4
-// Wire 2b1
-
-p0_2b = newp; Point(p0_2b)      = {-p+sp_fac1,-p+sp_fac1,r_w+mesh_level*mm, lcWireMesh * mm};                                               // centre circle
-p2b_1_1 = newp; Point(p2b_1_1)  = {-p+sp_fac1,-p+sp_fac1,0+mesh_level*mm, lcWireMesh * mm};                                         // bottom circle
-p2_2b = newp; Point(p2_2b)      = {-p+sp_fac1+r_w,-p+sp_fac1,r_w+mesh_level*mm, lcWireMesh * mm};                                           // right circle
-p2b_3_1 = newp; Point(p2b_3_1)  = {-p+sp_fac1,-p+sp_fac1,2*r_w+mesh_level*mm, lcWireMesh * mm};                                              // top circle
-// p4_2b = newp; Point(p4_2b)   = {-p+sp_fac1-r_w,-p+sp_fac1,r_w+mesh_level*mm, lcWireMesh * mm};                                        // left circle
-
-l1_2b = newl; Circle(l1_2b)     = {p2b_1_1, p0_2b, p2_2b};
-l2_2b = newl; Circle(l2_2b)     = {p2_2b, p0_2b, p2b_3_1};
-l2_2bs = newl; Line(l2_2bs)     = {p2b_1_1, p2b_3_1};
-
-ll1_2b = newll; Line Loop(ll1_2b) = {l1_2b, l2_2b, -l2_2bs};
-
-s_1_2b = news; Plane Surface(s_1_2b) = {ll1_2b};
-
-sb_2_1[] = {};
-tmpb_2_1[] = {s_1_2b};
-
 /*
-tmpb_2_1b[] = Extrude {0,y2_sp_wind_fac,0} {
-  Surface{tmpb_2_1a[0]};
-};
 
-sb_2_1[] = tmpb_2_1b[{2:4}];
-*/
-
-tmpb_2_1[] = Extrude {{0,y2_sp_wind_fac2,0},{1,0,0},{-p,-p+1*sp_fac1,Rtp-r_w}, alpha} {
-  Surface{tmpb_2_1[0]};
-};
-
-sb_2_1[] = tmpb_2_1[{2:4}];
-
-// Wire 2b2
-
-sb_2_2[] = {};
-tmpb_2_2[] = {tmpb_2_1[0]};
-
-tmpb_2_2[] = Extrude {{0,y2_sp_wind_fac2,0},{-1,0,0},{-p,p+1*sp_fac1,-Rtn+r_w}, alpha} {
-  Surface{tmpb_2_2[0]};
-};
-
-sb_2_2[] = tmpb_2_2[{2:4}];
-
-/*
-tmpb_2_2c[] = Extrude {0,y2_sp_wind_fac,0} {
-  Surface{tmpb_2_2b[0]};
-};
-
-sb_2_2[] = tmpb_2_2c[{2:4}];
-*/
-
-s_1_2b1[] = s_1_2b;
-s_1_2b2[] = tmpb_2_2[0];
-
-sl_wire_exterior_surface_2b[] = newreg; Surface Loop(sl_wire_exterior_surface_2b) = { s_1_2b1[0], sb_2_1[], sb_2_2[], s_1_2b2[0] }; // sb_2_1b[], sb_2_2c[]
-// vol_2b_wire1 = newreg; Volume(vol_2b_wire1) = { tmpb_2_1[] }; // tmpb_2_1b[1], tmpb_2_2c[1]
-// vol_2b_wire2 = newreg; Volume(vol_2b_wire2) = { tmpb_2_2[] }; // tmpb_2_1b[1], tmpb_2_2c[1]
-vol_2b_wire = newreg; Volume(vol_2b_wire) = sl_wire_exterior_surface_2b[];
-
-physvol_2b_wire = newreg; Physical Volume(physvol_2b_wire) = vol_2b_wire;
-// physvol_2b_wire1 = newreg; Physical Volume(physvol_2b_wire1) = vol_2b_wire1;
-// physvol_2b_wire2 = newreg; Physical Volume(physvol_2b_wire2) = vol_2b_wire2;
-physsurf_2b_wire = newreg; Physical Surface(physsurf_2b_wire) = { s_1_2b1[], sb_2_1[], sb_2_2[], s_1_2b2[] }; // sb_2_1b[], sb_2_2c[]
-
-// Coherence;
-
-
-/*
 //----------------------------------------------------------
 // Comparative IF Statement
 
@@ -924,239 +779,11 @@ For q In {1:2}
   EndFor
  EndFor
 EndFor
+
 */
 
 /*
-//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// PILLAR ARCHITECTURE
 
-// For m In {0:Number_Units_x}
-//  For n In {0:Number_Units_y}
-
-//----------------------------------------------------------
-// pillar 1f (full pillar)
-
-//----------------------------------------------------------
-// Center
-
-// pc1_1f~{m}~{n} = newp; Point(pc1_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tlgC,lcDielectricpillar};
-// pc2_1f~{m}~{n} = newp; Point(pc2_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tltC,lcDielectricpillar};
-// pc3_1f~{m}~{n} = newp; Point(pc3_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tteD1,lcDielectricpillar};
-// pc4_1f~{m}~{n} = newp; Point(pc4_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, ttD,lcDielectricpillar};
-
-//----------------------------------------------------------
-// Dielectric pillar
-
-//----------------------------------------------------------
-// Top
-
-// pth1_1f~{m}~{n} = newp; Point(pth1_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a-1*(r0), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, ttD,lcDielectricpillar};
-// pth2_1f~{m}~{n} = newp; Point(pth2_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a-1*(r0), ttD,lcDielectricpillar};
-// pth3_1f~{m}~{n} = newp; Point(pth3_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a+1*(r0), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, ttD,lcDielectricpillar};
-// pth4_1f~{m}~{n} = newp; Point(pth4_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a+1*(r0), ttD,lcDielectricpillar};
-
-// cth1_1f~{m}~{n} = newc; Circle(cth1_1f~{m}~{n}) = {pth1_1f~{m}~{n}, pc4_1f~{m}~{n}, pth2_1f~{m}~{n}};
-// cth2_1f~{m}~{n} = newc; Circle(cth2_1f~{m}~{n}) = {pth2_1f~{m}~{n}, pc4_1f~{m}~{n}, pth3_1f~{m}~{n}};
-// cth3_1f~{m}~{n} = newc; Circle(cth3_1f~{m}~{n}) = {pth3_1f~{m}~{n}, pc4_1f~{m}~{n}, pth4_1f~{m}~{n}};
-// cth4_1f~{m}~{n} = newc; Circle(cth4_1f~{m}~{n}) = {pth4_1f~{m}~{n}, pc4_1f~{m}~{n}, pth1_1f~{m}~{n}};
-
-//----------------------------------------------------------
-// Bottom
-
-// pbh1_1f~{m}~{n} = newp; Point(pbh1_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a-1*(r0), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tlgC,lcDielectricpillar};
-// pbh2_1f~{m}~{n} = newp; Point(pbh2_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a-1*(r0), tlgC,lcDielectricpillar};
-// pbh3_1f~{m}~{n} = newp; Point(pbh3_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a+1*(r0), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tlgC,lcDielectricpillar};
-// pbh4_1f~{m}~{n} = newp; Point(pbh4_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a+1*(r0), tlgC,lcDielectricpillar};
-
-//----------------------------------------------------------
-// Upper Etching
-
-//----------------------------------------------------------
-// Top
-
-// ptue1_1f~{m}~{n} = newp; Point(ptue1_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a-1*(r0+r1), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tteD1,lcEtchingpillar};
-// ptue2_1f~{m}~{n} = newp; Point(ptue2_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a-1*(r0+r1), tteD1,lcEtchingpillar};
-// ptue3_1f~{m}~{n} = newp; Point(ptue3_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a+1*(r0+r1), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tteD1,lcEtchingpillar};
-// ptue4_1f~{m}~{n} = newp; Point(ptue4_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a+1*(r0+r1), tteD1,lcEtchingpillar};
-
-//----------------------------------------------------------
-// Middle Top
-
-// pttue1_1f~{m}~{n} = newp; Point(pttue1_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a-1*(r0+0.5*r1), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tteD2,lcEtchingpillar};
-// pttue2_1f~{m}~{n} = newp; Point(pttue2_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a,pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a-1*(r0+0.5*r1), tteD2,lcEtchingpillar};
-// pttue3_1f~{m}~{n} = newp; Point(pttue3_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a+1*(r0+0.5*r1), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tteD2,lcEtchingpillar};
-// pttue4_1f~{m}~{n} = newp; Point(pttue4_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a,pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a+1*(r0+0.5*r1), tteD2,lcEtchingpillar};
-
-//----------------------------------------------------------
-// Circular boundary
-
-// ctue1_1f~{m}~{n} = newc; Circle(ctue1_1f~{m}~{n}) = {ptue1_1f~{m}~{n}, pc3_1f~{m}~{n}, ptue2_1f~{m}~{n}};
-// ctue2_1f~{m}~{n} = newc; Circle(ctue2_1f~{m}~{n}) = {ptue2_1f~{m}~{n}, pc3_1f~{m}~{n}, ptue3_1f~{m}~{n}};
-// ctue3_1f~{m}~{n} = newc; Circle(ctue3_1f~{m}~{n}) = {ptue3_1f~{m}~{n}, pc3_1f~{m}~{n}, ptue4_1f~{m}~{n}};
-// ctue4_1f~{m}~{n} = newc; Circle(ctue4_1f~{m}~{n}) = {ptue4_1f~{m}~{n}, pc3_1f~{m}~{n}, ptue1_1f~{m}~{n}};
-
-// lue1_1f~{m}~{n} = newl; Line(lue1_1f~{m}~{n}) = {ptue1_1f~{m}~{n}, pth1_1f~{m}~{n}};
-// Transfinite Line { lue1_1f~{m}~{n} } = lue1_1f~{m}~{n};
-// lue2_1f~{m}~{n} = newl; Line(lue2_1f~{m}~{n}) = {ptue2_1f~{m}~{n}, pth2_1f~{m}~{n}};
-// Transfinite Line { lue2_1f~{m}~{n} } = lue2_1f~{m}~{n};
-// lue3_1f~{m}~{n} = newl; Line(lue3_1f~{m}~{n}) = {ptue3_1f~{m}~{n}, pth3_1f~{m}~{n}};
-// Transfinite Line { lue3_1f~{m}~{n} } = lue3_1f~{m}~{n};
-// lue4_1f~{m}~{n} = newl; Line(lue4_1f~{m}~{n}) = {ptue4_1f~{m}~{n}, pth4_1f~{m}~{n}};
-// Transfinite Line { lue4_1f~{m}~{n} } = lue4_1f~{m}~{n};
-
-//----------------------------------------------------------
-// Lower Etching
-
-//----------------------------------------------------------
-// Top
-
-// ptle1_1f~{m}~{n} = newp; Point(ptle1_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a-1*(r0+r1), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tltC,lcEtchingpillar}; // +r1
-// ptle2_1f~{m}~{n} = newp; Point(ptle2_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a-1*(r0+r1), tltC,lcEtchingpillar}; // +r1
-// ptle3_1f~{m}~{n} = newp; Point(ptle3_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a+1*(r0+r1), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tltC,lcEtchingpillar}; // +r1
-// ptle4_1f~{m}~{n} = newp; Point(ptle4_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a+1*(r0+r1), tltC,lcEtchingpillar}; // +r1
-
-//----------------------------------------------------------
-// Bottom
-
-// pble1_1f~{m}~{n} = newp; Point(pble1_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a-1*(r0+r1), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tlgC,lcEtchingpillar}; // +r1
-// pble2_1f~{m}~{n} = newp; Point(pble2_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a-1*(r0+r1), tlgC,lcEtchingpillar}; // +r1
-// pble3_1f~{m}~{n} = newp; Point(pble3_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a+1*(r0+r1), pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a, tlgC,lcEtchingpillar}; // +r1
-// pble4_1f~{m}~{n} = newp; Point(pble4_1f~{m}~{n}) = {pil_c_x+geo_f_x*a/2+pil_f_x*geo_f_x*m*a, pil_c_y+geo_f_y*a/2+pil_f_y*geo_f_y*n*a+1*(r0+r1), tlgC,lcEtchingpillar}; // +r1
-
-//----------------------------------------------------------
-// Circular boundaries
-
-// ctle1_1f~{m}~{n} = newc; Circle(ctle1_1f~{m}~{n}) = {ptle1_1f~{m}~{n}, pc2_1f~{m}~{n}, ptle2_1f~{m}~{n}};
-// ctle2_1f~{m}~{n} = newc; Circle(ctle2_1f~{m}~{n}) = {ptle2_1f~{m}~{n}, pc2_1f~{m}~{n}, ptle3_1f~{m}~{n}};
-// ctle3_1f~{m}~{n} = newc; Circle(ctle3_1f~{m}~{n}) = {ptle3_1f~{m}~{n}, pc2_1f~{m}~{n}, ptle4_1f~{m}~{n}};
-// ctle4_1f~{m}~{n} = newc; Circle(ctle4_1f~{m}~{n}) = {ptle4_1f~{m}~{n}, pc2_1f~{m}~{n}, ptle1_1f~{m}~{n}};
-
-// cble1_1f~{m}~{n} = newc; Circle(cble1_1f~{m}~{n}) = {pble1_1f~{m}~{n}, pc1_1f~{m}~{n}, pble2_1f~{m}~{n}};
-// cble2_1f~{m}~{n} = newc; Circle(cble2_1f~{m}~{n}) = {pble2_1f~{m}~{n}, pc1_1f~{m}~{n}, pble3_1f~{m}~{n}};
-// cble3_1f~{m}~{n} = newc; Circle(cble3_1f~{m}~{n}) = {pble3_1f~{m}~{n}, pc1_1f~{m}~{n}, pble4_1f~{m}~{n}};
-// cble4_1f~{m}~{n} = newc; Circle(cble4_1f~{m}~{n}) = {pble4_1f~{m}~{n}, pc1_1f~{m}~{n}, pble1_1f~{m}~{n}};
-
-// lle1_1f~{m}~{n} = newl; Line(lle1_1f~{m}~{n}) = {ptle1_1f~{m}~{n}, pble1_1f~{m}~{n}};
-// Transfinite Line { lle1_1f~{m}~{n} } = lle1_1f~{m}~{n};
-// lle2_1f~{m}~{n} = newl; Line(lle2_1f~{m}~{n}) = {ptle2_1f~{m}~{n}, pble2_1f~{m}~{n}};
-// Transfinite Line { lle2_1f~{m}~{n} } = lle2_1f~{m}~{n};
-// lle3_1f~{m}~{n} = newl; Line(lle3_1f~{m}~{n}) = {ptle3_1f~{m}~{n}, pble3_1f~{m}~{n}};
-// Transfinite Line { lle3_1f~{m}~{n} } = lle3_1f~{m}~{n};
-// lle4_1f~{m}~{n} = newl; Line(lle4_1f~{m}~{n}) = {ptle4_1f~{m}~{n}, pble4_1f~{m}~{n}};
-// Transfinite Line { lle4_1f~{m}~{n} } = lle4_1f~{m}~{n};
-
-//----------------------------------------------------------
-// Lines connecting top and bottom
-
-// lconn5_1f~{m}~{n} = newl; Line(lconn5_1f~{m}~{n}) = {ptle1_1f~{m}~{n}, ptue1_1f~{m}~{n}}; // pth1_1f~{m}~{n}
-// Transfinite Line { lconn5_1f~{m}~{n} } = lconn5_1f~{m}~{n};
-// lconn6_1f~{m}~{n} = newl; Line(lconn6_1f~{m}~{n}) = {ptle2_1f~{m}~{n}, ptue2_1f~{m}~{n}}; // pth2_1f~{m}~{n} 
-// Transfinite Line { lconn6_1f~{m}~{n} } = lconn6_1f~{m}~{n};
-// lconn7_1f~{m}~{n} = newl; Line(lconn7_1f~{m}~{n}) = {ptle3_1f~{m}~{n}, ptue3_1f~{m}~{n}}; // pth3_1f~{m}~{n}
-// Transfinite Line { lconn7_1f~{m}~{n} } = lconn7_1f~{m}~{n};
-// lconn8_1f~{m}~{n} = newl; Line(lconn8_1f~{m}~{n}) = {ptle4_1f~{m}~{n}, ptue4_1f~{m}~{n}}; // pth4_1f~{m}~{n}
-// Transfinite Line { lconn8_1f~{m}~{n} } = lconn8_1f~{m}~{n};
-
-//----------------------------------------------------------
-// Copper planes
-
-//----------------------------------------------------------
-// Connect the upper and lower points with lines to form the plate
-
-// lcpbib17~{m}~{n} = newl; Line(lcpbib17~{m}~{n}) = {ptle1_1f~{m}~{n}, pble1_1f~{m}~{n}};
-// Transfinite Line { lcpbib17~{m}~{n} } = lcpbib17~{m}~{n};
-// lcpbib18~{m}~{n} = newl; Line(lcpbib18~{m}~{n}) = {ptle2_1f~{m}~{n}, pble2_1f~{m}~{n}};
-// Transfinite Line { lcpbib18~{m}~{n} } = lcpbib18~{m}~{n};
-// lcpbib19~{m}~{n} = newl; Line(lcpbib19~{m}~{n}) = {ptle3_1f~{m}~{n}, pble3_1f~{m}~{n}};
-// Transfinite Line { lcpbib19~{m}~{n} } = lcpbib19~{m}~{n};
-// lcpbib20~{m}~{n} = newl; Line(lcpbib20~{m}~{n}) = {ptle4_1f~{m}~{n}, pble4_1f~{m}~{n}};
-// Transfinite Line { lcpbib20~{m}~{n} } = lcpbib20~{m}~{n};
-
-//----------------------------------------------------------
-// Define surfaces
-
-//----------------------------------------------------------
-// Surfaces to which voltages will be applied
-
-// llcp_low_rim_1a~{m}~{n} = newreg; Line Loop(llcp_low_rim_1a~{m}~{n}) = { lle1_1f~{m}~{n}, cble1_1f~{m}~{n}, -lle2_1f~{m}~{n}, -ctle1_1f~{m}~{n} };
-// llcp_low_rim_1b~{m}~{n} = newreg; Line Loop(llcp_low_rim_1b~{m}~{n}) = { lle2_1f~{m}~{n}, cble2_1f~{m}~{n}, -lle3_1f~{m}~{n}, -ctle2_1f~{m}~{n} };
-// llcp_low_rim_1c~{m}~{n} = newreg; Line Loop(llcp_low_rim_1c~{m}~{n}) = { lle3_1f~{m}~{n}, cble3_1f~{m}~{n}, -lle4_1f~{m}~{n}, -ctle3_1f~{m}~{n} };
-// llcp_low_rim_1d~{m}~{n} = newreg; Line Loop(llcp_low_rim_1d~{m}~{n}) = { lle4_1f~{m}~{n}, cble4_1f~{m}~{n}, -lle1_1f~{m}~{n}, -ctle4_1f~{m}~{n} };
-
-//----------------------------------------------------------
-// Surfaces to which voltages will be applied
-
-// ps_lower_cp1 = newreg; Surface(ps_lower_cp1) = { llcp_low_rim_1a~{m}~{n} };
-// surf_lower_cp1[] += ps_lower_cp1;
-// ps_lower_cp2 = newreg; Surface(ps_lower_cp2) = { llcp_low_rim_1b~{m}~{n} };
-// surf_lower_cp2[] += ps_lower_cp2;
-// ps_lower_cp3 = newreg; Surface(ps_lower_cp3) = { llcp_low_rim_1c~{m}~{n} };
-// surf_lower_cp3[] += ps_lower_cp3;
-// ps_lower_cp4 = newreg; Surface(ps_lower_cp4) = { llcp_low_rim_1d~{m}~{n} };
-// surf_lower_cp4[] += ps_lower_cp4;
-
-//----------------------------------------------------------
-// Gas & dielectric surfaces
-
-// ll_cyl_dielectric1b~{m}~{n} = newreg; Line Loop(ll_cyl_dielectric1b~{m}~{n}) = { lconn5_1f~{m}~{n}, ctue1_1f~{m}~{n}, -lconn6_1f~{m}~{n}, -ctle1_1f~{m}~{n} }; // cth1_1f~{m}~{n},
-// ps_cyl_dielectric1 = newreg; Surface(ps_cyl_dielectric1) = { ll_cyl_dielectric1b~{m}~{n} };
-// surf_cyl_dielectric1[] += ps_cyl_dielectric1;
-// ll_cyl_dielectric2b~{m}~{n} = newreg; Line Loop(ll_cyl_dielectric2b~{m}~{n}) = { lconn6_1f~{m}~{n}, ctue2_1f~{m}~{n}, -lconn7_1f~{m}~{n}, -ctle2_1f~{m}~{n} }; // cth2_1f~{m}~{n},
-// ps_cyl_dielectric2 = newreg; Surface(ps_cyl_dielectric2) = { ll_cyl_dielectric2b~{m}~{n} };
-// surf_cyl_dielectric2[] += ps_cyl_dielectric2;
-// ll_cyl_dielectric3b~{m}~{n} = newreg; Line Loop(ll_cyl_dielectric3b~{m}~{n}) = { lconn7_1f~{m}~{n}, ctue3_1f~{m}~{n}, -lconn8_1f~{m}~{n}, -ctle3_1f~{m}~{n} }; // cth3_1f~{m}~{n},
-// ps_cyl_dielectric3 = newreg; Surface(ps_cyl_dielectric3) = { ll_cyl_dielectric3b~{m}~{n} };
-// surf_cyl_dielectric3[] += ps_cyl_dielectric3;
-// ll_cyl_dielectric4b~{m}~{n} = newreg; Line Loop(ll_cyl_dielectric4b~{m}~{n}) = { lconn8_1f~{m}~{n}, ctue4_1f~{m}~{n}, -lconn5_1f~{m}~{n}, -ctle4_1f~{m}~{n} }; // cth4_1f~{m}~{n},
-// ps_cyl_dielectric4 = newreg; Surface(ps_cyl_dielectric4) = { ll_cyl_dielectric4b~{m}~{n} };
-// surf_cyl_dielectric4[] += ps_cyl_dielectric4;
-
-// ll_top_gas2~{m}~{n} = newreg; Line Loop( ll_top_gas2~{m}~{n} ) = { cth1_1f~{m}~{n}, cth2_1f~{m}~{n}, cth3_1f~{m}~{n}, cth4_1f~{m}~{n} };
-// ps_top_gas1 = news; Plane Surface(news) = { ll_top_gas2~{m}~{n} };
-// surf_top_gas1[] += ps_top_gas1;
-// Transfinite Surface { surf_top_gas1[] };
-// Recombine Surface { surf_top_gas1[] };
-
-// ll_top_gas3~{m}~{n} = newreg; Line Loop( ll_top_gas3~{m}~{n} ) = { lue1_1f~{m}~{n}, cth1_1f~{m}~{n}, -lue2_1f~{m}~{n}, -ctue1_1f~{m}~{n} };
-// ps_top_gas2 = news; Surface(news) = { ll_top_gas3~{m}~{n} };
-// surf_top_gas2[] += ps_top_gas2;
-// Transfinite Surface { surf_top_gas2[] };
-// Recombine Surface { surf_top_gas2[] };
-
-// ll_top_gas4~{m}~{n} = newreg; Line Loop( ll_top_gas4~{m}~{n} ) = { lue2_1f~{m}~{n}, cth2_1f~{m}~{n}, -lue3_1f~{m}~{n}, -ctue2_1f~{m}~{n}  };
-// ps_top_gas3 = news; Surface(news) = { ll_top_gas4~{m}~{n} };
-// surf_top_gas3[] += ps_top_gas3;
-// Transfinite Surface { surf_top_gas3[] };
-// Recombine Surface { surf_top_gas3[] };
-
-// ll_top_gas5~{m}~{n} = newreg; Line Loop( ll_top_gas5~{m}~{n} ) = { lue3_1f~{m}~{n}, cth3_1f~{m}~{n}, -lue4_1f~{m}~{n}, -ctue3_1f~{m}~{n} };
-// ps_top_gas4 = news; Surface(news) = { ll_top_gas5~{m}~{n} };
-// surf_top_gas4[] += ps_top_gas4;
-// Transfinite Surface { surf_top_gas4[] };
-// Recombine Surface { surf_top_gas4[] };
-
-// ll_top_gas6~{m}~{n} = newreg; Line Loop( ll_top_gas6~{m}~{n} ) = { lue4_1f~{m}~{n}, cth4_1f~{m}~{n}, -lue1_1f~{m}~{n}, -ctue4_1f~{m}~{n} };
-// ps_top_gas5 = news; Surface(news) = { ll_top_gas6~{m}~{n} };
-// surf_top_gas5[] += ps_top_gas5;
-// Transfinite Surface { surf_top_gas5[] };
-// Recombine Surface { surf_top_gas5[] };
-
-// ll_top_cp1a1 = newreg; Line Loop( ll_top_cp1a1 ) = { ctle1_1f~{m}~{n}, ctle2_1f~{m}~{n}, ctle3_1f~{m}~{n}, ctle4_1f~{m}~{n} };
-// ll_top_cp2a[] += { ll_top_cp1a1 };
-
-// ll_bottom_cp1a1 = newreg; Line Loop( ll_bottom_cp1a1 ) = { cble1_1f~{m}~{n}, cble2_1f~{m}~{n}, cble3_1f~{m}~{n}, cble4_1f~{m}~{n} };
-// ll_bottom_cp2a[] += { ll_bottom_cp1a1 };
-
-//   Delete { Point { pc1_1f~{m}~{n} }; }
-//   Delete { Point { pc2_1f~{m}~{n} }; }
-//   Delete { Point { pc3_1f~{m}~{n} }; }
-//   Delete { Point { pc4_1f~{m}~{n} }; }
-
-// EndFor
-// EndFor
-*/
-
-/*
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // EXTERNAL ELECTRODES
 
@@ -1314,11 +941,16 @@ pscp_low_border4 = newreg; Plane Surface(pscp_low_border4) = {llcp_low_border4};
 // ll_side_gas4b = newreg; Line Loop(ll_side_gas4b) = {lcptlb8b, lcorner1, -lcpblb8b, lcorner4}; // -lmid4_2
 // ps_side_gas4b = newreg; Plane Surface(ps_side_gas4b) = {ll_side_gas4b};
 
+*/
+
+/*
+
 //----------------------------------------------------------
 // Bounding and intersecting surfaces
 
 //----------------------------------------------------------
 // Face physsurf_bdh_1_1 (Corner 1 - Corner 2)
+
 
 l1bdh_1_1_bsurft1 = newl; Line(l1bdh_1_1_bsurft1) = {pexet3, pbdhbt_1_1_2[1]};
 l2bdh_1_1_bsurft1 = newl; Line(l2bdh_1_1_bsurft1) = {pexet1, p2b_1_1};
@@ -1389,6 +1021,7 @@ ps_bottom_cp2a = news; Plane Surface(news) = {ll_bottom_cp1a2}; // ll_bottom_cp2
 surf_bottom_cp[] += {ps_bottom_cp2a};
 // Transfinite Surface { surf_bottom_cp[] };
 // Recombine Surface { surf_bottom_cp[] };
+
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //// FINAL DEFINITIONS (SURFACES / VOLUMES)
@@ -1532,12 +1165,13 @@ physvol_gas = newreg; Physical Volume(physvol_gas) = { vol_gas };
 // physvol_dielectric = newreg; Physical Volume(physvol_dielectric) = { vol_dielectric };
 physvol_lower_cp = newreg; Physical Volume(physvol_lower_cp) = { vol_lower_cp };
 
+
 //----------------------------------------------------------
 // FEATURE / ELEMENT REMOVAL
 
 // Delete { Volume { vol_gas }; }
 
 // Coherence;
-Geometry.AutoCoherence = 1;
+// Geometry.AutoCoherence = 1;
 */
 

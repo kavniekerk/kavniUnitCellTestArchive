@@ -1472,8 +1472,8 @@ physvol_lower_cp = newreg; Physical Volume(physvol_lower_cp) = { vol_lower_cp };
 
 // Delete { Volume { vol_gas }; }
 
-Coherence;
-Geometry.AutoCoherence = 1;
+// Coherence;
+// Geometry.AutoCoherence = 1;
 
 
 
