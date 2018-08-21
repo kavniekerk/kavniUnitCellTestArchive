@@ -128,7 +128,6 @@ lcExtElectrodeBdry = 0.005;                             // characterization of e
 lcWireMesh = 0.00075;                                   // characterization of wire electrode
 
 
-/*
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /// GEOMETRY MODULE
 
@@ -388,11 +387,19 @@ lcpbib12 = newl; Line(lcpbib12) = {pc2_4, pc1_4};
 // Transfinite Line { lcpult3 } = lcpult3;
 // lcpult4 = newl; Line(lcpult4) = {pc4_4,pc4_1};
 // Transfinite Line { lcpult4 } = lcpult4;
-*/
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Wire Mesh
+
+// sb~{r}~{s}[2]
+// tmpb~{r}~{s}[t]
+// sa~{r}~{s}[2]
+// tmpa~{r}~{s}[t]
+// sa~{r}~{s}[2]
+// tmpa~{r}~{s}[t]
+// sb~{r}~{s}[2]
+// tmpb~{r}~{s}[t]
 
 
 //----------------------------------------------------------
@@ -434,6 +441,7 @@ tmpa_1_1[] = Extrude {{x2_sp_wind_fac2,0,0},{0,1,0},{p+1*sp_fac1,p+1*sp_fac1,Rtn
   Surface{tmpa_1_1[0]};
 };
 
+sa_1_1[] = {};
 sa_1_1[] = tmpa_1_1[{2:4}];
 
 // Wire 1a2
@@ -445,6 +453,7 @@ tmpa_1_2[] = Extrude {{x2_sp_wind_fac2,0,0},{0,-1,0},{-p+1*sp_fac1,p+1*sp_fac1,-
   Surface{tmpa_1_2[0]};
 };
 
+sa_1_2[] = {};
 sa_1_2[] = tmpa_1_2[{2:4}];
 
 /*
@@ -464,6 +473,76 @@ vol_1a_wire = newreg; Volume(vol_1a_wire) = sl_wire_exterior_surface_1a[];
 
 physvol_1a_wire = newreg; Physical Volume(physvol_1a_wire) = vol_1a_wire;
 physsurf_1a_wire = newreg; Physical Surface(physsurf_1a_wire) = { s_1_1a1[], sa_1_1[], sa_1_2[], s_1_1a2[] }; // sa_1_1b[], sa_1_2c[]
+
+
+//----------------------------------------------------------
+// Second set of wires
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////// Face 1b - half wire (y - z) extrude in x direction - Corner 1 to Corner 2
+// Wire 1b1
+
+p0_1b = newp; Point(p0_1b)      = {-p+sp_fac1,-p+sp_fac1,-r_w+mesh_level*mm, lcWireMesh * mm};                                            // centre circle
+p1b_1_1 = newp; Point(p1b_1_1)  = {-p+sp_fac1,-p+sp_fac1,-2*r_w+mesh_level*mm, lcWireMesh * mm};                                              // bottom circle
+p2_1b = newp; Point(p2_1b)      = {-p+sp_fac1,-p+sp_fac1+r_w,-r_w+mesh_level*mm, lcWireMesh * mm};                                        // right circle
+p1b_3_1 = newp; Point(p1b_3_1)  = {-p+sp_fac1,-p+sp_fac1,0+mesh_level*mm, lcWireMesh * mm};                                          // top circle
+// p4_1b = newp; Point(p4_1b)   = {-p+sp_fac1,-p+sp_fac1-r_w,-r_w+mesh_level*mm, lcWireMesh * mm};                                        // left circle
+
+l1_1b = newl; Circle(l1_1b)     = {p1b_1_1, p0_1b, p2_1b};
+l2_1b = newl; Circle(l2_1b)     = {p2_1b, p0_1b, p1b_3_1};
+l2_1bs = newl; Line(l2_1bs)     = {p1b_1_1, p1b_3_1};
+
+ll1_1b = newll; Line Loop(ll1_1b) = {l1_1b, l2_1b, -l2_1bs};
+
+s_1_1b = news; Plane Surface(s_1_1b) = {ll1_1b};
+
+tmpb_1_1[] = {s_1_1b};
+
+/*
+tmpb_1_1b[] = Extrude {x1_sp_wind_fac,0,0} {
+  Surface{tmpb_1_1a[0]};
+};
+
+sb_1_1[] = tmpb_1_1b[{2:4}];
+*/
+
+tmpb_1_1[] = Extrude {{x1_sp_wind_fac2,0,0},{0,-1,0},{-p+1*sp_fac1,-p,Rtn-r_w}, alpha} {
+  Surface{tmpb_1_1[0]};
+};
+
+sb_1_1[] = {};
+sb_1_1[] = tmpb_1_1[{2:4}];
+
+// Wire 1b2
+
+sb_1_2[] = {};
+tmpb_1_2[] = {tmpb_1_1[0]};
+
+
+tmpb_1_2[] = Extrude {{x1_sp_wind_fac2,0,0},{0,1,0},{p+sp_fac1,p,-Rtp+r_w}, alpha} {
+  Surface{tmpb_1_2[0]};
+};
+
+sb_1_2[] = {};
+sb_1_2[] = tmpb_1_2[{2:4}];
+
+/*
+tmpb_1_2c[] = Extrude {x1_sp_wind_fac,0,0} {
+  Surface{tmpb_1_2a[0]};
+};
+
+sb_1_2[] = tmpb_1_2c[{2:4}];
+*/
+
+s_1_1b1[] = s_1_1b;
+s_1_1b2[] = tmpb_1_2[0];
+
+sl_wire_exterior_surface_1b[] = newreg; Surface Loop(sl_wire_exterior_surface_1b) = { s_1_1b1[0], sb_1_1[0], sb_1_1[1], sb_1_1[2], sb_1_2[0], sb_1_2[1], sb_1_2[2], s_1_1b2[0] }; // sb_1_1[0], sb_1_1b[1], sb_1_1b[2], sb_1_2c[0], sb_1_2c[1], sb_1_2c[2],
+// vol_1b_wire = newreg; Compound Volume(vol_1b_wire) = { tmpb_1_1[1], tmpb_1_2[1] }; // tmpb_1_1b[1], tmpb_1_2c[1]
+vol_1b_wire = newreg; Volume(vol_1b_wire) = sl_wire_exterior_surface_1b[];
+
+physvol_1b_wire = newreg; Physical Volume(physvol_1b_wire) = vol_1b_wire;
+physsurf_1b_wire = newreg; Physical Surface(physsurf_1b_wire) = { s_1_1b1[], sb_1_1[], sb_1_2[], s_1_1b2[] }; // sb_1_1b[], sb_1_2c[], 
 
 
 //----------------------------------------------------------
@@ -490,7 +569,6 @@ ll1_2a = newll; Line Loop(ll1_2a) = {l3_2a, l4_2a, l2_2as};
 
 s_1_2a = news; Plane Surface(s_1_2a) = {ll1_2a};
 
-sa_2_1[] = {};
 tmpa_2_1[] = {s_1_2a};
 
 /*
@@ -505,6 +583,7 @@ tmpa_2_1[] = Extrude {{0,y1_sp_wind_fac2,0},{1,0,0},{p+1*sp_fac1,p+1*sp_fac1,-Rt
   Surface{tmpa_2_1[0]};
 };
 
+sa_2_1[] = {};
 sa_2_1[] = tmpa_2_1[{2:4}];
 
 // Wire 2a2
@@ -516,6 +595,7 @@ tmpa_2_2[] = Extrude {{0,y1_sp_wind_fac2,0},{-1,0,0},{p+sp_fac1,-p+sp_fac1,Rtn-r
   Surface{tmpa_2_2[0]};
 };
 
+sa_2_2[] = {};
 sa_2_2[] = tmpa_2_2[{2:4}];
 
 /*
@@ -540,10 +620,244 @@ physvol_2a_wire = newreg; Physical Volume(physvol_2a_wire) = vol_2a_wire;
 physsurf_2a_wire = newreg; Physical Surface(physsurf_2a_wire) = { s_1_2a1[], sa_2_1[], sa_2_2[], s_1_2a2[] }; // sa_2_1b[], sa_2_2c[]
 
 
+//----------------------------------------------------------
+// Second set of wires
+
+//----------------------------------------------------------
+// y-direction
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////// Face 2b - half wire (x - z) extrude in y direction - Corner 1 to Corner 4
+// Wire 2b1
+
+p0_2b = newp; Point(p0_2b)      = {-p+sp_fac1,-p+sp_fac1,r_w+mesh_level*mm, lcWireMesh * mm};                                              // centre circle
+p2b_1_1 = newp; Point(p2b_1_1)  = {-p+sp_fac1,-p+sp_fac1,0+mesh_level*mm, lcWireMesh * mm};                                                // bottom circle
+p2_2b = newp; Point(p2_2b)      = {-p+sp_fac1+r_w,-p+sp_fac1,r_w+mesh_level*mm, lcWireMesh * mm};                                          // right circle
+p2b_3_1 = newp; Point(p2b_3_1)  = {-p+sp_fac1,-p+sp_fac1,2*r_w+mesh_level*mm, lcWireMesh * mm};                                            // top circle
+// p4_2b = newp; Point(p4_2b)   = {-p+sp_fac1-r_w,-p+sp_fac1,r_w+mesh_level*mm, lcWireMesh * mm};                                          // left circle
+
+l1_2b = newl; Circle(l1_2b)     = {p2b_1_1, p0_2b, p2_2b};
+l2_2b = newl; Circle(l2_2b)     = {p2_2b, p0_2b, p2b_3_1};
+l2_2bs = newl; Line(l2_2bs)     = {p2b_1_1, p2b_3_1};
+
+ll1_2b = newll; Line Loop(ll1_2b) = {l1_2b, l2_2b, -l2_2bs};
+
+s_1_2b = news; Plane Surface(s_1_2b) = {ll1_2b};
+
+tmpb_2_1[] = {s_1_2b};
+
 /*
+tmpb_2_1b[] = Extrude {0,y2_sp_wind_fac,0} {
+  Surface{tmpb_2_1a[0]};
+};
+
+sb_2_1[] = tmpb_2_1b[{2:4}];
+*/
+
+tmpb_2_1[] = Extrude {{0,y2_sp_wind_fac2,0},{-1,0,0},{-p,-p+1*sp_fac1,-Rtp+r_w}, alpha} {
+  Surface{tmpb_2_1[0]};
+};
+
+sb_2_1[] = {};
+sb_2_1[] = tmpb_2_1[{2:4}];
+
+// Wire 2b2
+
+sb_2_2[] = {};
+tmpb_2_2[] = {tmpb_2_1[0]};
+
+tmpb_2_2[] = Extrude {{0,y2_sp_wind_fac2,0},{1,0,0},{p,p+1*sp_fac1,Rtn-r_w}, alpha} {
+  Surface{tmpb_2_2[0]};
+};
+
+sb_2_2[] = {};
+sb_2_2[] = tmpb_2_2[{2:4}];
+
+/*
+tmpb_2_2c[] = Extrude {0,y2_sp_wind_fac,0} {
+  Surface{tmpb_2_2b[0]};
+};
+
+sb_2_2[] = tmpb_2_2c[{2:4}];
+*/
+
+s_1_2b1[] = s_1_2b;
+s_1_2b2[] = tmpb_2_2[0];
+
+sl_wire_exterior_surface_2b[] = newreg; Surface Loop(sl_wire_exterior_surface_2b) = { s_1_2b1[0], sb_2_1[], sb_2_2[], s_1_2b2[0] }; // sb_2_1b[], sb_2_2c[]
+// vol_2b_wire1 = newreg; Volume(vol_2b_wire1) = { tmpb_2_1[] }; // tmpb_2_1b[1], tmpb_2_2c[1]
+// vol_2b_wire2 = newreg; Volume(vol_2b_wire2) = { tmpb_2_2[] }; // tmpb_2_1b[1], tmpb_2_2c[1]
+vol_2b_wire = newreg; Volume(vol_2b_wire) = sl_wire_exterior_surface_2b[];
+
+physvol_2b_wire = newreg; Physical Volume(physvol_2b_wire) = vol_2b_wire;
+// physvol_2b_wire1 = newreg; Physical Volume(physvol_2b_wire1) = vol_2b_wire1;
+// physvol_2b_wire2 = newreg; Physical Volume(physvol_2b_wire2) = vol_2b_wire2;
+physsurf_2b_wire = newreg; Physical Surface(physsurf_2b_wire) = { s_1_2b1[], sb_2_1[], sb_2_2[], s_1_2b2[] }; // sb_2_1b[], sb_2_2c[]
+
+// Coherence;
+
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// EXTERNAL ELECTRODES
+
+//----------------------------------------------------------
+// Top electrode
+
+pexet1 = newp; Point(pexet1) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
+// pexet2 = newp; Point(pexet2) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
+pexet3 = newp; Point(pexet3) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
+pexet4 = newp; Point(pexet4) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
+// pexet5 = newp; Point(pexet5) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
+pexet6 = newp; Point(pexet6) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
+
+//----------------------------------------------------------
+// Top electrode lines
+
+lexet1 = newl; Line(lexet1) = {pexet1, pexet3};
+// Transfinite Line { lexet1 } = lexet1;
+// lexet2 = newl; Line(lexet2) = {pexet2, pexet3};
+// Transfinite Line { lexet2 } = lexet2;
+lexet3 = newl; Line(lexet3) = {pexet3, pexet4};
+// Transfinite Line { lexet3 } = lexet3;
+lexet4 = newl; Line(lexet4) = {pexet4, pexet6};
+// Transfinite Line { lexet4 } = lexet4;
+// lexet5 = newl; Line(lexet5) = {pexet5, pexet6};
+// Transfinite Line { lexet5 } = lexet5;
+lexet6 = newl; Line(lexet6) = {pexet6, pexet1};
+// Transfinite Line { lexet6 } = lexet6;
+
+//----------------------------------------------------------
+// Upper electrode boundary - transfinite
+
+// lexett1 = newl; Line(lexett1) = {pexet1, pexet3};
+// Transfinite Line { lexett1 } = lexett1; 
+// lexett2 = newl; Line(lexett2) = {pexet3, pexet4};
+// Transfinite Line { lexett2 } = lexett2;
+// lexett3 = newl; Line(lexett3) = {pexet4, pexet6};
+// Transfinite Line { lexett3 } = lexett3;
+// lexett4 = newl; Line(lexett4) = {pexet6, pexet1};
+// Transfinite Line { lexett4 } = lexett4;
+
+//----------------------------------------------------------
+// Connect the top electrode to the LEM.
+
+lexetc1 = newl; Line(lexetc1) = {pexet1, pc2_1}; // pc4_1
+// Transfinite Line { lexetc1 } = lexetc1;
+// lexetc2 = newl; Line(lexetc2) = {pexet2, ptmc_1};
+// Transfinite Line { lexetc2 } = lexetc2;
+lexetc3 = newl; Line(lexetc3) = {pexet3, pc2_2}; // pc4_2
+// Transfinite Line { lexetc3 } = lexetc3;
+lexetc4 = newl; Line(lexetc4) = {pexet4, pc2_3}; // pc4_3
+// Transfinite Line { lexetc4 } = lexetc4;
+// lexetc5 = newl; Line(lexetc5) = {pexet5, ptmc_3};
+// Transfinite Line { lexetc5 } = lexetc5;
+lexetc6 = newl; Line(lexetc6) = {pexet6, pc2_4}; // pc4_4
+// Transfinite Line { lexetc6 } = lexetc6;
+
+//----------------------------------------------------------
+// Bottom electrode
+
+// pexeb1 = newp; Point(pexeb1) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
+// pexeb2 = newp; Point(pexeb2) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
+// pexeb3 = newp; Point(pexeb3) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
+// pexeb4 = newp; Point(pexeb4) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
+// pexeb5 = newp; Point(pexeb5) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
+// pexeb6 = newp; Point(pexeb6) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
+
+//----------------------------------------------------------
+// Bottom wire level boundary - transfinite
+
+// lexebt1 = newl; Line(lexebt1) = {pexeb1, pexeb3};
+// Transfinite Line { lexebt1 } = lexebt1;
+// lexebt2 = newl; Line(lexebt2) = {pexeb3, pexeb4};
+// Transfinite Line { lexebt2 } = lexebt2;
+// lexebt3 = newl; Line(lexebt3) = {pexeb4, pexeb6};
+// Transfinite Line { lexebt3 } = lexebt3;
+// lexebt4 = newl; Line(lexebt4) = {pexeb6, pexeb1};
+// Transfinite Line { lexebt4 } = lexebt4;
+
+//----------------------------------------------------------
+// Copper plate surfaces
+
+// llcp_up_border1 = newreg; Line Loop(llcp_up_border1) = {lcptlb5a, -lcptib10, -lcptub1a, lcptib9}; // lcptlb5b, -lcptub1b
+// pscp_up_border1 = newreg; Plane Surface(pscp_up_border1) = {llcp_up_border1};
+// Transfinite Surface { pscp_up_border1 };
+// Recombine Surface { pscp_up_border1 };
+
+// llcp_up_border2 = newreg; Line Loop(llcp_up_border2) = {lcptlb6a, -lcptib11, -lcptub2a, lcptib10}; // lcptlb6b, -lcptub2b
+// pscp_up_border2 = newreg; Plane Surface(pscp_up_border2) = {llcp_up_border2};
+// Transfinite Surface { pscp_up_border2 };
+// Recombine Surface { pscp_up_border2 };
+
+// llcp_up_border3 = newreg; Line Loop(llcp_up_border3) = {lcptlb7a, -lcptib12, -lcptub3a, lcptib11}; // lcptlb7b, -lcptub3b
+// pscp_up_border3 = newreg; Plane Surface(pscp_up_border3) = {llcp_up_border3};
+// Transfinite Surface { pscp_up_border3 };
+// Recombine Surface { pscp_up_border3 };
+
+// llcp_up_border4 = newreg; Line Loop(llcp_up_border4) = {lcptlb8a, -lcptib9, -lcptub4a, lcptib12}; // lcptlb8b, -lcptub4b
+// pscp_up_border4 = newreg; Plane Surface(pscp_up_border4) = {llcp_up_border4};
+// Transfinite Surface { pscp_up_border4 };
+// Recombine Surface { pscp_up_border4 };
+
+llcp_low_border1 = newreg; Line Loop(llcp_low_border1) = {lcpblb5a, -lcpbib10, -lcpbub1a, lcpbib9}; // lcpblb5b,  -lcpbub1b
+pscp_low_border1 = newreg; Plane Surface(pscp_low_border1) = {llcp_low_border1};
+// Transfinite Surface { pscp_low_border1 };
+// Recombine Surface { pscp_low_border1 };
+
+llcp_low_border2 = newreg; Line Loop(llcp_low_border2) = {lcpblb6a, -lcpbib11, -lcpbub2a, lcpbib10}; // lcpblb6b, -lcpbub2b  
+pscp_low_border2 = newreg; Plane Surface(pscp_low_border2) = {llcp_low_border2};
+// Transfinite Surface { pscp_low_border2 };
+// Recombine Surface { pscp_low_border2 };
+
+llcp_low_border3 = newreg; Line Loop(llcp_low_border3) = {lcpblb7a, -lcpbib12, -lcpbub3a, lcpbib11}; // lcpblb7b, -lcpbub3b
+pscp_low_border3 = newreg; Plane Surface(pscp_low_border3) = {llcp_low_border3};
+// Transfinite Surface { pscp_low_border3 };
+// Recombine Surface { pscp_low_border3 };
+
+llcp_low_border4 = newreg; Line Loop(llcp_low_border4) = {lcpblb8a, -lcpbib9, -lcpbub4a, lcpbib12}; // lcpblb8b,  -lcpbub4b
+pscp_low_border4 = newreg; Plane Surface(pscp_low_border4) = {llcp_low_border4};
+// Transfinite Surface { pscp_low_border4 };
+// Recombine Surface { pscp_low_border4 };
+
+// llcp_face1 = newreg; Line Loop(llcp_face1) = {lcptub1a, lcptub2a, lcptub3a, lcptub4a}; // lcptub1b, lcptub2b, lcptub3b, lcptub4b 
+// llcp_face3 = newreg; Line Loop(llcp_face3) = {lcpbub1a, lcpbub2a, lcpbub3a, lcpbub4a}; // lcpbub1b, lcpbub2b, lcpbub3b, lcpbub4b
+
+//----------------------------------------------------------
+// Copper plate surfaces
+
+// ll_side_gas1a = newreg; Line Loop(ll_side_gas1a) = {lcptlb5a, -lcorner2, -lcpbub1a, lcorner1}; // lmid1_2,
+// ps_side_gas1a = newreg; Plane Surface(ps_side_gas1a) = {ll_side_gas1a};
+// Transfinite Surface { ps_side_gas1a };
+// Recombine Surface { ps_side_gas1a };
+
+// ll_side_gas2a = newreg; Line Loop(ll_side_gas2a) = {lcptlb6a, -lcorner3, -lcpbub2a, lcorner2}; // lmid2_2,
+// ps_side_gas2a = newreg; Plane Surface(ps_side_gas2a) = {ll_side_gas2a};
+// Transfinite Surface { ps_side_gas2a };
+// Recombine Surface { ps_side_gas2a };
+
+// ll_side_gas3a = newreg; Line Loop(ll_side_gas3a) = {lcptlb7a, -lcorner4, -lcpbub3a, lcorner3}; // lmid3_2,
+// ps_side_gas3a = newreg; Plane Surface(ps_side_gas3a) = {ll_side_gas3a};
+// Transfinite Surface { ps_side_gas3a };
+// Recombine Surface { ps_side_gas3a };
+
+// ll_side_gas4a = newreg; Line Loop(ll_side_gas4a) = {lcptlb8a, -lcorner1, -lcpbub4a, lcorner4}; // lmid4_2,
+// ps_side_gas4a = newreg; Plane Surface(ps_side_gas4a) = {ll_side_gas4a};
+// Transfinite Surface { ps_side_gas4a };
+// Recombine Surface { ps_side_gas4a };
+
+// ll_side_gas1b = newreg; Line Loop(ll_side_gas1b) = {lcptlb5b, lcorner2, -lcpblb5b, lcorner1}; // -lmid1_2
+// ps_side_gas1b = newreg; Plane Surface(ps_side_gas1b) = {ll_side_gas1b};
+// ll_side_gas2b = newreg; Line Loop(ll_side_gas2b) = {lcptlb6b, lcorner3, -lcpblb6b, lcorner2}; // -lmid2_2
+// ps_side_gas2b = newreg; Plane Surface(ps_side_gas2b) = {ll_side_gas2b};
+// ll_side_gas3b = newreg; Line Loop(ll_side_gas3b) = {lcptlb7b, lcorner4, -lcpblb7b, lcorner3}; // -lmid3_2
+// ps_side_gas3b = newreg; Plane Surface(ps_side_gas3b) = {ll_side_gas3b};
+// ll_side_gas4b = newreg; Line Loop(ll_side_gas4b) = {lcptlb8b, lcorner1, -lcpblb8b, lcorner4}; // -lmid4_2
+// ps_side_gas4b = newreg; Plane Surface(ps_side_gas4b) = {ll_side_gas4b};
+
 
 //----------------------------------------------------------
 // Comparative IF Statement
+
 
 For q In {1:2}
   For r In {1:2}
@@ -780,170 +1094,6 @@ For q In {1:2}
  EndFor
 EndFor
 
-*/
-
-/*
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// EXTERNAL ELECTRODES
-
-//----------------------------------------------------------
-// Top electrode
-
-pexet1 = newp; Point(pexet1) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
-// pexet2 = newp; Point(pexet2) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
-pexet3 = newp; Point(pexet3) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
-pexet4 = newp; Point(pexet4) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
-// pexet5 = newp; Point(pexet5) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
-pexet6 = newp; Point(pexet6) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
-
-//----------------------------------------------------------
-// Top electrode lines
-
-lexet1 = newl; Line(lexet1) = {pexet1, pexet3};
-// Transfinite Line { lexet1 } = lexet1;
-// lexet2 = newl; Line(lexet2) = {pexet2, pexet3};
-// Transfinite Line { lexet2 } = lexet2;
-lexet3 = newl; Line(lexet3) = {pexet3, pexet4};
-// Transfinite Line { lexet3 } = lexet3;
-lexet4 = newl; Line(lexet4) = {pexet4, pexet6};
-// Transfinite Line { lexet4 } = lexet4;
-// lexet5 = newl; Line(lexet5) = {pexet5, pexet6};
-// Transfinite Line { lexet5 } = lexet5;
-lexet6 = newl; Line(lexet6) = {pexet6, pexet1};
-// Transfinite Line { lexet6 } = lexet6;
-
-//----------------------------------------------------------
-// Upper electrode boundary - transfinite
-
-// lexett1 = newl; Line(lexett1) = {pexet1, pexet3};
-// Transfinite Line { lexett1 } = lexett1; 
-// lexett2 = newl; Line(lexett2) = {pexet3, pexet4};
-// Transfinite Line { lexett2 } = lexett2;
-// lexett3 = newl; Line(lexett3) = {pexet4, pexet6};
-// Transfinite Line { lexett3 } = lexett3;
-// lexett4 = newl; Line(lexett4) = {pexet6, pexet1};
-// Transfinite Line { lexett4 } = lexett4;
-
-//----------------------------------------------------------
-// Connect the top electrode to the LEM.
-
-lexetc1 = newl; Line(lexetc1) = {pexet1, pc2_1}; // pc4_1
-// Transfinite Line { lexetc1 } = lexetc1;
-// lexetc2 = newl; Line(lexetc2) = {pexet2, ptmc_1};
-// Transfinite Line { lexetc2 } = lexetc2;
-lexetc3 = newl; Line(lexetc3) = {pexet3, pc2_2}; // pc4_2
-// Transfinite Line { lexetc3 } = lexetc3;
-lexetc4 = newl; Line(lexetc4) = {pexet4, pc2_3}; // pc4_3
-// Transfinite Line { lexetc4 } = lexetc4;
-// lexetc5 = newl; Line(lexetc5) = {pexet5, ptmc_3};
-// Transfinite Line { lexetc5 } = lexetc5;
-lexetc6 = newl; Line(lexetc6) = {pexet6, pc2_4}; // pc4_4
-// Transfinite Line { lexetc6 } = lexetc6;
-
-//----------------------------------------------------------
-// Bottom electrode
-
-// pexeb1 = newp; Point(pexeb1) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
-// pexeb2 = newp; Point(pexeb2) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
-// pexeb3 = newp; Point(pexeb3) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
-// pexeb4 = newp; Point(pexeb4) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
-// pexeb5 = newp; Point(pexeb5) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
-// pexeb6 = newp; Point(pexeb6) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
-
-//----------------------------------------------------------
-// Bottom wire level boundary - transfinite
-
-// lexebt1 = newl; Line(lexebt1) = {pexeb1, pexeb3};
-// Transfinite Line { lexebt1 } = lexebt1;
-// lexebt2 = newl; Line(lexebt2) = {pexeb3, pexeb4};
-// Transfinite Line { lexebt2 } = lexebt2;
-// lexebt3 = newl; Line(lexebt3) = {pexeb4, pexeb6};
-// Transfinite Line { lexebt3 } = lexebt3;
-// lexebt4 = newl; Line(lexebt4) = {pexeb6, pexeb1};
-// Transfinite Line { lexebt4 } = lexebt4;
-
-//----------------------------------------------------------
-// Copper plate surfaces
-
-// llcp_up_border1 = newreg; Line Loop(llcp_up_border1) = {lcptlb5a, -lcptib10, -lcptub1a, lcptib9}; // lcptlb5b, -lcptub1b
-// pscp_up_border1 = newreg; Plane Surface(pscp_up_border1) = {llcp_up_border1};
-// Transfinite Surface { pscp_up_border1 };
-// Recombine Surface { pscp_up_border1 };
-
-// llcp_up_border2 = newreg; Line Loop(llcp_up_border2) = {lcptlb6a, -lcptib11, -lcptub2a, lcptib10}; // lcptlb6b, -lcptub2b
-// pscp_up_border2 = newreg; Plane Surface(pscp_up_border2) = {llcp_up_border2};
-// Transfinite Surface { pscp_up_border2 };
-// Recombine Surface { pscp_up_border2 };
-
-// llcp_up_border3 = newreg; Line Loop(llcp_up_border3) = {lcptlb7a, -lcptib12, -lcptub3a, lcptib11}; // lcptlb7b, -lcptub3b
-// pscp_up_border3 = newreg; Plane Surface(pscp_up_border3) = {llcp_up_border3};
-// Transfinite Surface { pscp_up_border3 };
-// Recombine Surface { pscp_up_border3 };
-
-// llcp_up_border4 = newreg; Line Loop(llcp_up_border4) = {lcptlb8a, -lcptib9, -lcptub4a, lcptib12}; // lcptlb8b, -lcptub4b
-// pscp_up_border4 = newreg; Plane Surface(pscp_up_border4) = {llcp_up_border4};
-// Transfinite Surface { pscp_up_border4 };
-// Recombine Surface { pscp_up_border4 };
-
-llcp_low_border1 = newreg; Line Loop(llcp_low_border1) = {lcpblb5a, -lcpbib10, -lcpbub1a, lcpbib9}; // lcpblb5b,  -lcpbub1b
-pscp_low_border1 = newreg; Plane Surface(pscp_low_border1) = {llcp_low_border1};
-// Transfinite Surface { pscp_low_border1 };
-// Recombine Surface { pscp_low_border1 };
-
-llcp_low_border2 = newreg; Line Loop(llcp_low_border2) = {lcpblb6a, -lcpbib11, -lcpbub2a, lcpbib10}; // lcpblb6b, -lcpbub2b  
-pscp_low_border2 = newreg; Plane Surface(pscp_low_border2) = {llcp_low_border2};
-// Transfinite Surface { pscp_low_border2 };
-// Recombine Surface { pscp_low_border2 };
-
-llcp_low_border3 = newreg; Line Loop(llcp_low_border3) = {lcpblb7a, -lcpbib12, -lcpbub3a, lcpbib11}; // lcpblb7b, -lcpbub3b
-pscp_low_border3 = newreg; Plane Surface(pscp_low_border3) = {llcp_low_border3};
-// Transfinite Surface { pscp_low_border3 };
-// Recombine Surface { pscp_low_border3 };
-
-llcp_low_border4 = newreg; Line Loop(llcp_low_border4) = {lcpblb8a, -lcpbib9, -lcpbub4a, lcpbib12}; // lcpblb8b,  -lcpbub4b
-pscp_low_border4 = newreg; Plane Surface(pscp_low_border4) = {llcp_low_border4};
-// Transfinite Surface { pscp_low_border4 };
-// Recombine Surface { pscp_low_border4 };
-
-// llcp_face1 = newreg; Line Loop(llcp_face1) = {lcptub1a, lcptub2a, lcptub3a, lcptub4a}; // lcptub1b, lcptub2b, lcptub3b, lcptub4b 
-// llcp_face3 = newreg; Line Loop(llcp_face3) = {lcpbub1a, lcpbub2a, lcpbub3a, lcpbub4a}; // lcpbub1b, lcpbub2b, lcpbub3b, lcpbub4b
-
-//----------------------------------------------------------
-// Copper plate surfaces
-
-// ll_side_gas1a = newreg; Line Loop(ll_side_gas1a) = {lcptlb5a, -lcorner2, -lcpbub1a, lcorner1}; // lmid1_2,
-// ps_side_gas1a = newreg; Plane Surface(ps_side_gas1a) = {ll_side_gas1a};
-// Transfinite Surface { ps_side_gas1a };
-// Recombine Surface { ps_side_gas1a };
-
-// ll_side_gas2a = newreg; Line Loop(ll_side_gas2a) = {lcptlb6a, -lcorner3, -lcpbub2a, lcorner2}; // lmid2_2,
-// ps_side_gas2a = newreg; Plane Surface(ps_side_gas2a) = {ll_side_gas2a};
-// Transfinite Surface { ps_side_gas2a };
-// Recombine Surface { ps_side_gas2a };
-
-// ll_side_gas3a = newreg; Line Loop(ll_side_gas3a) = {lcptlb7a, -lcorner4, -lcpbub3a, lcorner3}; // lmid3_2,
-// ps_side_gas3a = newreg; Plane Surface(ps_side_gas3a) = {ll_side_gas3a};
-// Transfinite Surface { ps_side_gas3a };
-// Recombine Surface { ps_side_gas3a };
-
-// ll_side_gas4a = newreg; Line Loop(ll_side_gas4a) = {lcptlb8a, -lcorner1, -lcpbub4a, lcorner4}; // lmid4_2,
-// ps_side_gas4a = newreg; Plane Surface(ps_side_gas4a) = {ll_side_gas4a};
-// Transfinite Surface { ps_side_gas4a };
-// Recombine Surface { ps_side_gas4a };
-
-// ll_side_gas1b = newreg; Line Loop(ll_side_gas1b) = {lcptlb5b, lcorner2, -lcpblb5b, lcorner1}; // -lmid1_2
-// ps_side_gas1b = newreg; Plane Surface(ps_side_gas1b) = {ll_side_gas1b};
-// ll_side_gas2b = newreg; Line Loop(ll_side_gas2b) = {lcptlb6b, lcorner3, -lcpblb6b, lcorner2}; // -lmid2_2
-// ps_side_gas2b = newreg; Plane Surface(ps_side_gas2b) = {ll_side_gas2b};
-// ll_side_gas3b = newreg; Line Loop(ll_side_gas3b) = {lcptlb7b, lcorner4, -lcpblb7b, lcorner3}; // -lmid3_2
-// ps_side_gas3b = newreg; Plane Surface(ps_side_gas3b) = {ll_side_gas3b};
-// ll_side_gas4b = newreg; Line Loop(ll_side_gas4b) = {lcptlb8b, lcorner1, -lcpblb8b, lcorner4}; // -lmid4_2
-// ps_side_gas4b = newreg; Plane Surface(ps_side_gas4b) = {ll_side_gas4b};
-
-*/
-
-/*
 
 //----------------------------------------------------------
 // Bounding and intersecting surfaces
@@ -951,7 +1101,7 @@ pscp_low_border4 = newreg; Plane Surface(pscp_low_border4) = {llcp_low_border4};
 //----------------------------------------------------------
 // Face physsurf_bdh_1_1 (Corner 1 - Corner 2)
 
-
+/*
 l1bdh_1_1_bsurft1 = newl; Line(l1bdh_1_1_bsurft1) = {pexet3, pbdhbt_1_1_2[1]};
 l2bdh_1_1_bsurft1 = newl; Line(l2bdh_1_1_bsurft1) = {pexet1, p2b_1_1};
 l1bdh_1_1_bsurfb1 = newl; Line(l1bdh_1_1_bsurfb1) = {pc2_2, pbdhab_1_2_2[1]};
@@ -995,6 +1145,7 @@ llbdh_2_2_bsurf6b = newreg; Line Loop(llbdh_2_2_bsurf6b) = {lcpbub4a, l2bdh_1_1_
 
 psbdh_2_2_bsurf6t = newreg; Plane Surface(psbdh_2_2_bsurf6t) = {llbdh_2_2_bsurf6t};
 psbdh_2_2_bsurf6b = newreg; Plane Surface(psbdh_2_2_bsurf6b) = {llbdh_2_2_bsurf6b};
+*/
 
 //----------------------------------------------------------
 // Bounding surfaces
@@ -1030,6 +1181,7 @@ surf_bottom_cp[] += {ps_bottom_cp2a};
 //------------------------------------------------------------------------------------------
 /// SURFACE LOOPS
 
+/*
 //----------------------------------------------------------
 // Wire Gas Interior Surface Loop - interior wire gas surface loop
 
