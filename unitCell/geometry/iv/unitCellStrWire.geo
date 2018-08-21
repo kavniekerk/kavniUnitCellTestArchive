@@ -1,5 +1,5 @@
-Include "mmgas_component_label.pro";
-Include "mmgas_meshing_options.pro";
+Include "mmgasComponentLabel.pro";
+Include "mmgasMeshingOptions.pro";
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /// MMGAS_STR_WIRE GEOMETRY MODULE
@@ -18,7 +18,7 @@ Include "mmgas_meshing_options.pro";
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /// GENERAL INFORMATION
 //
-// mmegas_square_straight_10c.geo
+// unitCellStrWire.geo
 //
 // Description
 //
@@ -109,8 +109,8 @@ geo_f_y = 1;                                            // geometric_factor
 //----------------------------------------------------------
 // Extrusion Precision
 
-Geometry.ExtrudeSplinePoints = 3;
-Geometry.Points = 0;
+// Geometry.ExtrudeSplinePoints = 3;
+// Geometry.Points = 0;
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /// MESHING PARAMETERS
@@ -124,7 +124,8 @@ lcDielectricpillar = 0.0025;                            // characterization of d
 lcEtchingpillar = 0.0025;                               // characterization of dielectric etching
 lcCopperPlateBdry = 0.0025;                             // characterization of metal surfaces / anode
 lcExtElectrodeBdry = 0.025;                             // characterization of external electrode / cathode
-lcWireMesh = 0.0025;                                    // characterization of wire electrode
+lcWireMesh = 0.001;                                     // characterization of wire electrode
+
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /// GEOMETRY MODULE
@@ -386,6 +387,7 @@ lcpbib12 = newl; Line(lcpbib12) = {pc2_4, pc1_4};
 // lcpult4 = newl; Line(lcpult4) = {pc4_4,pc4_1};
 // Transfinite Line { lcpult4 } = lcpult4;
 
+
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // Wire Mesh
 
@@ -398,9 +400,10 @@ lcpbib12 = newl; Line(lcpbib12) = {pc2_4, pc1_4};
 // Face 1a - half wire (y - z) extrude in x direction - Corner 3 to Corner 4
 // Wire 1a1
 
+/*
 p1_1a = newp; Point(p1_1a) = {0,	0,       -1*r_w+mesh_level, 	lcWireMesh};
 p2_1a = newp; Point(p2_1a) = {0,	0 + r_w,  0*r_w+mesh_level, 	lcWireMesh};
-p3_1a = newp; Point(p3_1a) = {0,	0, 	     +1*r_w+mesh_level,     lcWireMesh};
+p3_1a = newp; Point(p3_1a) = {0,	0, 	     +1*r_w+mesh_level,   lcWireMesh};
 p4_1a = newp; Point(p4_1a) = {0,	0 - r_w,  0*r_w+mesh_level, 	lcWireMesh};
 
 l1_1a = newl; Line(l1_1a) = {p1_1a, p2_1a};  
@@ -411,10 +414,10 @@ l4_1a = newl; Line(l4_1a) = {p4_1a, p1_1a};
 ll1_1a = newll; Line Loop(ll1_1a) = {l1_1a, l2_1a, l3_1a, l4_1a};
 s_1_1a = news;  Plane Surface(s_1_1a) = {ll1_1a};
 
-p1_1b = newp; Point(p1_1b) = {a_x1/2,	0,       -1*r_w+mesh_level, 	lcWireMesh};
-p2_1b = newp; Point(p2_1b) = {a_x1/2,	0 + r_w,  0*r_w+mesh_level, 	lcWireMesh};
-p3_1b = newp; Point(p3_1b) = {a_x1/2,	0, 	     +1*r_w+mesh_level,     lcWireMesh};
-p4_1b = newp; Point(p4_1b) = {a_x1/2,	0 - r_w,  0*r_w+mesh_level, 	lcWireMesh};
+p1_1b = newp; Point(p1_1b) = {a/2,	0,       -1*r_w+mesh_level, 	lcWireMesh};
+p2_1b = newp; Point(p2_1b) = {a/2,	0 + r_w,  0*r_w+mesh_level, 	lcWireMesh};
+p3_1b = newp; Point(p3_1b) = {a/2,	0, 	     +1*r_w+mesh_level,   lcWireMesh};
+p4_1b = newp; Point(p4_1b) = {a/2,	0 - r_w,  0*r_w+mesh_level, 	lcWireMesh};
 
 l1_1b = newl; Line(l1_1b) = {p1_1b, p2_1b};  
 l2_1b = newl; Line(l2_1b) = {p2_1b, p3_1b};  
@@ -438,12 +441,13 @@ s_1_1ab = news;  Plane Surface(s_1_1ab) = {ll1_1ab};
 s_2_1ab = news;  Plane Surface(s_2_1ab) = {ll2_1ab};
 s_3_1ab = news;  Plane Surface(s_3_1ab) = {ll3_1ab};
 s_4_1ab = news;  Plane Surface(s_4_1ab) = {ll4_1ab};
+*/
 
-p0_1a = newp; Point(p0_1a) = {p+p,p+p,-r_w+mesh_level*mm-h_f, lcWireMesh * mm};            // centre circle
-p1a_1_1 = newp; Point(p1a_1_1) = {p+p,p+p,-2*r_w+mesh_level*mm-h_f, lcWireMesh * mm};      // bottom circle
+p0_1a = newp; Point(p0_1a) = {p+p,p+p,-r_w+mesh_level*mm-h_f, lcWireMesh * mm};              // centre circle
+p1a_1_1 = newp; Point(p1a_1_1) = {p+p,p+p,-2*r_w+mesh_level*mm-h_f, lcWireMesh * mm};        // bottom circle
 // p2_1a = newp; Point(p2_1a) = {p+p,p+p+r_w,-r_w+mesh_level*mm-h_f, lcWireMesh * mm};       // right circle
-p1a_3_1 = newp; Point(p1a_3_1) = {p+p,p+p,0+mesh_level*mm-h_f, lcWireMesh * mm};           // top circle
-p4_1a = newp; Point(p4_1a) = {p+p,p+p-r_w,-r_w+mesh_level*mm-h_f, lcWireMesh * mm};        // left circle
+p1a_3_1 = newp; Point(p1a_3_1) = {p+p,p+p,0+mesh_level*mm-h_f, lcWireMesh * mm};             // top circle
+p4_1a = newp; Point(p4_1a) = {p+p,p+p-r_w,-r_w+mesh_level*mm-h_f, lcWireMesh * mm};          // left circle
 
 l2_1as = newl; Line(l2_1as) = {p1a_1_1, p1a_3_1};
 l3_1a = newl; Circle(l3_1a) = {p1a_3_1, p0_1a, p4_1a};
@@ -479,6 +483,7 @@ sl_wire_exterior_surface_1a[] = newreg; Surface Loop(sl_wire_exterior_surface_1a
 vol_1a_wire = newreg; Volume(vol_1a_wire) = sl_wire_exterior_surface_1a[];
 Physical Volume(physvol_1a_wire) = vol_1a_wire;
 Physical Surface(physsurf_1a_wire) = { s_1_1a1[], sa_1_1[], sa_1_2[], s_1_1a2[] };
+
 
 //----------------------------------------------------------
 // Second set of wires
@@ -529,6 +534,7 @@ vol_1b_wire = newreg; Volume(vol_1b_wire) = sl_wire_exterior_surface_1b[];
 Physical Volume(physvol_1b_wire) = vol_1b_wire;
 Physical Surface(physsurf_1b_wire) = { s_1_1b1[], sb_1_1[], sb_1_2[], s_1_1b2[] };
 
+
 //----------------------------------------------------------
 // First set of wires
 
@@ -577,6 +583,7 @@ sl_wire_exterior_surface_2a[] = newreg; Surface Loop(sl_wire_exterior_surface_2a
 vol_2a_wire = newreg; Volume(vol_2a_wire) = sl_wire_exterior_surface_2a[];
 Physical Volume(physvol_2a_wire) = vol_2a_wire;
 Physical Surface(physsurf_2a_wire) = { s_1_2a1[], sa_2_1[], sa_2_2[], s_1_2a2[] };
+
 
 //----------------------------------------------------------
 // Second set of wires
@@ -627,7 +634,7 @@ vol_2b_wire = newreg; Volume(vol_2b_wire) = sl_wire_exterior_surface_2b[];
 Physical Volume(physvol_2b_wire) = vol_2b_wire;
 Physical Surface(physsurf_2b_wire) = { s_1_2b1[], sb_2_1[], sb_2_2[], s_1_2b2[] };
 
-Coherence;
+// Coherence;
 
 //----------------------------------------------------------
 // Comparative IF Statement
@@ -867,6 +874,8 @@ For q In {1:2}
  EndFor
 EndFor
 
+
+/*
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // PILLAR ARCHITECTURE
 
@@ -1094,6 +1103,8 @@ EndFor
 
 // EndFor
 // EndFor
+*/
+
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // EXTERNAL ELECTRODES
@@ -1328,6 +1339,7 @@ surf_bottom_cp[] += {ps_bottom_cp2a};
 // Transfinite Surface { surf_bottom_cp[] };
 // Recombine Surface { surf_bottom_cp[] };
 
+
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //// FINAL DEFINITIONS (SURFACES / VOLUMES)
 
@@ -1369,16 +1381,19 @@ total_sl_wire_gas_total_surface[] += sl_wire_gas_total_surface;
 sl_lower_cp = newreg; Surface Loop(sl_lower_cp) = { surf_top_cp[], pscp_low_border1, pscp_low_border2, pscp_low_border3, pscp_low_border4, surf_bottom_cp[] }; // surf_lower_cp1[], surf_lower_cp2[], surf_lower_cp3[], surf_lower_cp4[],
 total_sl_lower_cp[] += sl_lower_cp;
 
+
 //------------------------------------------------------------------------------------------
 /// CONTAINER VOLUME
 
 // vol_container = newreg; Volume(vol_container) = { total_sl_gas_exterior_surface[0] };
+
 
 //------------------------------------------------------------------------------------------
 /// WIRE VOLUME
 
 // total_vol_wire = newreg; Compound Volume(total_vol_wire) = { vol_x1_wire, vol_x2_wire, vol_y1_wire, vol_y2_wire };
 // total_vol_wire = newreg; Volume(total_vol_wire) = { total_sl_wire_gas_interior_surface[] };
+
 
 //------------------------------------------------------------------------------------------
 /// GAS VOLUME
@@ -1443,6 +1458,7 @@ physsurf_lower_cp = newreg; Physical Surface(physsurf_lower_cp) = { surf_top_cp[
 
 physsurf_upper_el = newreg; Physical Surface(physsurf_upper_el) = { ps_bsurf7 };
 
+
 //------------------------------------------------------------------------------------------
 /// PHYSICAL VOLUMES
 
@@ -1467,6 +1483,7 @@ physvol_gas = newreg; Physical Volume(physvol_gas) = { vol_gas };
 
 // physvol_dielectric = newreg; Physical Volume(physvol_dielectric) = { vol_dielectric };
 physvol_lower_cp = newreg; Physical Volume(physvol_lower_cp) = { vol_lower_cp };
+
 
 //----------------------------------------------------------
 // FEATURE / ELEMENT REMOVAL

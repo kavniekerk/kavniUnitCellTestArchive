@@ -1,3 +1,6 @@
+Include "mmgasComponentLabel.pro";
+Include "mmgasMeshingOptions.pro";
+
 // *********************************************************************************
 // unitCellStrWire_i.geo
 //
@@ -14,8 +17,8 @@
 
 // Extrusion Precision
 
-Geometry.ExtrudeSplinePoints = 3;
-Geometry.Points = 0;
+// Geometry.ExtrudeSplinePoints = 3;
+// Geometry.Points = 0;
 
 // Parameters
 
