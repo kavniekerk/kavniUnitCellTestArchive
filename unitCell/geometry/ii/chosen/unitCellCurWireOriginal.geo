@@ -1,5 +1,5 @@
-Include "unitCellComponentLabel.pro";
-// Include "unitCellMeshingOptions.pro";
+Include "mmgasComponentLabel.pro";
+// Include "mmgasMeshingOptions.pro";
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /// MMGAS_STR_WIRE GEOMETRY MODULE
@@ -56,8 +56,8 @@ lP = 0.1;                                               // distance from lower L
 mwf = 1;                                                // mesh_window_factor
 mm = 1;                                                 // geometrical scaling
 r_w = 0.009 * mm;                                       // radius of Wiremesh, in microns
-p_0 = 0.040;                                            // pitch of the window, in mm
-p = 0.040 * mm - 0 * r_w/mwf * mm;                      // pitch of the window, in microns
+p_0 = 0.020;                                            // pitch of the window, in mm
+p = 0.020 * mm - 0 * r_w/mwf * mm;                      // pitch of the window, in microns
 R = (p * p + r_w * r_w)/(2 * r_w);                      // radius
 alpha = Asin((p/R));                                    // angle in radians
 Total_Grid_size = (a - 0.01)/2;                         // total grid size, in mm, 0.4

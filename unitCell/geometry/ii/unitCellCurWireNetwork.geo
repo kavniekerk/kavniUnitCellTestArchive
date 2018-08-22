@@ -1,5 +1,5 @@
-Include "mmgasComponentLabel.pro";
-// Include "mmgasMeshingOptions.pro";
+Include "unitCellComponentLabel.pro";
+// Include "unitCellMeshingOptions.pro";
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /// MMGAS_STR_WIRE GEOMETRY MODULE

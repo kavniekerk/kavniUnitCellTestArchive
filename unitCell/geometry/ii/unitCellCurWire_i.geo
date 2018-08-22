@@ -36,7 +36,7 @@ ttD = ( mesh_level - 0.005 );                           // top of dielectric pil
 tteD1 = ( ttD - 0.001 );                                // etched pillar level 1
 tteD2 = ( 0.5 * (ttD - tteD1) + tteD1 );                // etched pillar level 2
 
-a = 0.05;                                               // the "pitch", or distance between GEM pillars, in mm
+a = 0.05;                                               // the "pitch", or distance between unitCellCurWire pillars, in mm
 
 //----------------------------------------------------------
 // vertical parameters
@@ -55,7 +55,7 @@ lP = 0.1;                                               // distance from lower L
 
 mwf = 1;                                                // mesh_window_factor
 mm = 1;                                                 // geometrical scaling
-r_w = 0.0025 * mm;                                      // radius of Wiremesh, in microns
+r_w = 0.008 * mm;                                      // radius of Wiremesh, in microns
 p_0 = 0.025;                                            // pitch of the window, in mm
 p = 0.025 * mm - 0 * r_w/mwf * mm;                      // pitch of the window, in microns
 R = (p * p + r_w * r_w)/(2 * r_w);                      // radius
@@ -99,8 +99,8 @@ geo_f_y = 1;                                            // geometric_factor
 //----------------------------------------------------------
 // Extrusion Precision
 
-Geometry.ExtrudeSplinePoints = 3;
-Geometry.Points = 0;
+// Geometry.ExtrudeSplinePoints = 3;
+// Geometry.Points = 0;
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /// MESHING PARAMETERS
@@ -397,11 +397,11 @@ lcpbib12 = newl; Line(lcpbib12) = {pc2_4, pc1_4};
   llf_x1_1a1_0[] = {}; // line loops of bottom Wiremesh intersects
   llf_x1_1a1_1[] = {}; // line loops of top Wiremesh intersects
 
-      p0_x1_1a1~{j}~{i} = newp; Point(p0_x1_1a1~{j}~{i}) = {p+p,p+p,-r_w+mesh_level*mm-h_f, lcWireMesh * mm};				// centre circle
-      p1_x1_1a1~{j}~{i} = newp; Point(p1_x1_1a1~{j}~{i}) = {p+p,p+p,-2*r_w+mesh_level*mm-h_f, lcWireMesh * mm};				// bottom circle
-      p2_x1_1a1~{j}~{i} = newp; Point(p2_x1_1a1~{j}~{i}) = {p+p,p+p+r_w,-r_w+mesh_level*mm-h_f, lcWireMesh * mm};			// right circle
-      p3_x1_1a1~{j}~{i} = newp; Point(p3_x1_1a1~{j}~{i}) = {p+p,p+p,0+mesh_level*mm-h_f, lcWireMesh * mm};					// top circle
-      p4_x1_1a1~{j}~{i} = newp; Point(p4_x1_1a1~{j}~{i}) = {p+p,p+p-r_w,-r_w+mesh_level*mm-h_f, lcWireMesh * mm};			// left circle
+      p0_x1_1a1~{j}~{i} = newp; Point(p0_x1_1a1~{j}~{i}) = {p+p,p+p,-r_w+mesh_level*mm-h_f, lcWireMesh * mm};				    // centre circle
+      p1_x1_1a1~{j}~{i} = newp; Point(p1_x1_1a1~{j}~{i}) = {p+p,p+p,-2*r_w+mesh_level*mm-h_f, lcWireMesh * mm};				  // bottom circle
+      p2_x1_1a1~{j}~{i} = newp; Point(p2_x1_1a1~{j}~{i}) = {p+p,p+p+r_w,-r_w+mesh_level*mm-h_f, lcWireMesh * mm};			  // right circle
+      p3_x1_1a1~{j}~{i} = newp; Point(p3_x1_1a1~{j}~{i}) = {p+p,p+p,0+mesh_level*mm-h_f, lcWireMesh * mm};					    // top circle
+      p4_x1_1a1~{j}~{i} = newp; Point(p4_x1_1a1~{j}~{i}) = {p+p,p+p-r_w,-r_w+mesh_level*mm-h_f, lcWireMesh * mm};			  // left circle
 
       // l1_x1_1a1~{j}~{i} = newl; Circle(l1_x1_1a1~{j}~{i}) = {p1_x1_1a1~{j}~{i}, p0_x1_1a1~{j}~{i}, p2_x1_1a1~{j}~{i}};
       // l2_x1_1a1~{j}~{i} = newl; Circle(l2_x1_1a1~{j}~{i}) = {p2_x1_1a1~{j}~{i}, p0_x1_1a1~{j}~{i}, p3_x1_1a1~{j}~{i}};
@@ -479,7 +479,7 @@ lcpbib12 = newl; Line(lcpbib12) = {pc2_4, pc1_4};
         tmpa_1_2[] = {tmpa_1_1[0]};
           tmpa_1_2[] = Extrude {{0,0,0},{0,-1,0},{-p+p+h_f,-p+p+h_f,-R+r_w+h_f}, alpha} {
   			Surface{ tmpa_1_2[0] }; 
-		  }; 
+		  };
 
           v_x1_1a2[] += tmpa_1_2[1];
           vt_x1_1a2[] += v_x1_1a2[];
@@ -1425,7 +1425,7 @@ total_sl_wire_gas_total_surface[] += sl_wire_gas_total_surface;
 // Wire Volume Surface Loop - wire electrode
 
 // sl_wire = newreg; Surface Loop(sl_wire) = { s_1_2b, sb_1_1[2], sb_1_2[2], tmpa_2_2[0], s_1_1a, sa_2_1[2], sa_2_2[2], tmpb_1_2[0], s_1_2a, st_x1_1a1[2], st_x1_1a2[2], tmpb_2_2[0], s_1_1b, sb_2_1[2], sb_2_2[2], tmpa_1_2[0], st_x1_1a1[0], st_x1_1a1[1], 
-// st_x1_1a2[0], 
+// st_x1_1a2[0],
 // st_x1_1a2[1], sb_1_1[0], sb_1_1[1], sb_1_2[0], sb_1_2[1], sa_2_1[0], sa_2_1[1], sa_2_2[0], sa_2_2[1], sb_2_1[0], sb_2_1[1], sb_2_2[0], sb_2_2[1] };
 // vol_wire = newreg; Volume(vol_wire) = {sl_wire};
 
@@ -1466,9 +1466,9 @@ vol_lower_cp = newreg; Volume(vol_lower_cp) = total_sl_lower_cp[];
 //----------------------------------------------------------
 // Physical Surfaces - periodic boundary conditions
 
-physsurf_bdh_1_1 = newreg; Physical Surface(physsurf_bd1h1) = { psbdh_1_1_bsurf1t, s_1_2b1[], sb_1_1[2], sb_1_2[2], s_1_2a2[], psbdh_1_1_bsurf1b };             	  // ps_side_gas1b, ps_bsurf2, pscp_up_border1, ps_side_gas1a,
-physsurf_bdh_1_2 = newreg; Physical Surface(physsurf_bd1h2) = { psbdh_1_2_bsurf3t, st_s1_x1[], sa_2_1[2], sa_2_2[2], s_1_1b2[], psbdh_1_2_bsurf3b };             	  // ps_side_gas2b, pscp_up_border2, ps_side_gas2a,
-physsurf_bdh_2_1 = newreg; Physical Surface(physsurf_bd2h1) = { psbdh_2_1_bsurf4t, s_1_2a1[], sa_1_1[2], sa_1_2[2], s_1_2b2[], psbdh_2_1_bsurf4b };             // ps_side_gas3b, ps_bsurf5, pscp_up_border3, ps_side_gas3a,
+physsurf_bdh_1_1 = newreg; Physical Surface(physsurf_bd1h1) = { psbdh_1_1_bsurf1t, s_1_2b1[], sb_1_1[2], sb_1_2[2], s_1_2a2[], psbdh_1_1_bsurf1b };             	    // ps_side_gas1b, ps_bsurf2, pscp_up_border1, ps_side_gas1a,
+physsurf_bdh_1_2 = newreg; Physical Surface(physsurf_bd1h2) = { psbdh_1_2_bsurf3t, st_s1_x1[], sa_2_1[2], sa_2_2[2], s_1_1b2[], psbdh_1_2_bsurf3b };             	    // ps_side_gas2b, pscp_up_border2, ps_side_gas2a,
+physsurf_bdh_2_1 = newreg; Physical Surface(physsurf_bd2h1) = { psbdh_2_1_bsurf4t, s_1_2a1[], sa_1_1[2], sa_1_2[2], s_1_2b2[], psbdh_2_1_bsurf4b };                   // ps_side_gas3b, ps_bsurf5, pscp_up_border3, ps_side_gas3a,
 physsurf_bdh_2_2 = newreg; Physical Surface(physsurf_bd2h2) = { psbdh_2_2_bsurf6t, s_1_1b1[], sb_2_1[2], sb_2_2[2], st_tmp_x1[], psbdh_2_2_bsurf6b };             	  // ps_side_gas4b, pscp_up_border4, ps_side_gas4a,
 
 //----------------------------------------------------------
@@ -1541,8 +1541,8 @@ physvol_lower_cp = newreg; Physical Volume(physvol_lower_cp) = { vol_lower_cp };
 
 // Delete { Volume { vol_gas }; }
 
-Coherence;
-Geometry.AutoCoherence = 1;
+// Coherence;
+// Geometry.AutoCoherence = 1;
 
 
 

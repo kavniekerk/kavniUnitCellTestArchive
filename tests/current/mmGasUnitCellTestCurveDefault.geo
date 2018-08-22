@@ -140,11 +140,11 @@ sbd_1_1[] += tmpbd_1_1[{2:4}];
 
 
 // tmpba_1_2[] = {tmpbd_1_1[0]};
-//
+// 
 // tmpbb_1_2[] = Extrude {1.00*x1_sp_wind_fac +0.00*sp_fac_str1,0,0} {
 //   Surface{tmpba_1_2[0]};
 // };
-//
+// 
 // sbb_1_2[] = {};
 // sbb_1_2[] += tmpbb_1_2[{2:4}];
 
