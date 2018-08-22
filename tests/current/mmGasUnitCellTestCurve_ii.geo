@@ -21,6 +21,7 @@ y1_sp_wind_fac = 1.00;
 y2_sp_wind_fac = 1.00;
 
 sp_fac1 = p*0.00;
+sp_fac2 = p*0.00;
 
 x1_sp_wind_fac2 = p*0.00;
 x2_sp_wind_fac2 = p*0.00;
@@ -47,13 +48,14 @@ n = 0;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////// Face 1a - half wire (y - z) extrude in x direction - Corner 3 to Corner 4
+//___________________________________________________________________________________________________________________________________________________
 // Wire 1a1
 
-p0_1a = newp; Point(p0_1a) = {p+2*sp_fac1,p+2*sp_fac1,r_w+mesh_level*mm, LcWiremesh * mm};                              // centre circle
-p1a_1_1 = newp; Point(p1a_1_1) = {p+2*sp_fac1,p+2*sp_fac1,0+mesh_level*mm, LcWiremesh * mm};                            // bottom circle
-// p2_1a = newp; Point(p2_1a) = {p+2*sp_fac1,p+2*sp_fac1+r_w,r_w+mesh_level*mm, LcWiremesh * mm};                       // right circle
-p1a_3_1 = newp; Point(p1a_3_1) = {p+2*sp_fac1,p+2*sp_fac1,2*r_w+mesh_level*mm, LcWiremesh * mm};                        // top circle
-p4_1a = newp; Point(p4_1a) = {p+2*sp_fac1,p+2*sp_fac1-r_w,r_w+mesh_level*mm, LcWiremesh * mm};                          // left circle
+p0_1a = newp; Point(p0_1a) = {p+sp_fac1,p+sp_fac1,r_w+mesh_level*mm, LcWiremesh * mm};                              // centre circle
+p1a_1_1 = newp; Point(p1a_1_1) = {p+sp_fac1,p+sp_fac1,0+mesh_level*mm, LcWiremesh * mm};                            // bottom circle
+// p2_1a = newp; Point(p2_1a) = {p+sp_fac1,p+sp_fac1+r_w,r_w+mesh_level*mm, LcWiremesh * mm};                       // right circle
+p1a_3_1 = newp; Point(p1a_3_1) = {p+sp_fac1,p+sp_fac1,2*r_w+mesh_level*mm, LcWiremesh * mm};                        // top circle
+p4_1a = newp; Point(p4_1a) = {p+sp_fac1,p+sp_fac1-r_w,r_w+mesh_level*mm, LcWiremesh * mm};                          // left circle
 
 l2_1as = newl; Line(l2_1as) = {p1a_1_1, p1a_3_1};
 l3_1a = newl; Circle(l3_1a) = {p1a_3_1, p0_1a, p4_1a};
@@ -114,13 +116,14 @@ physsurf_1a_wire = newreg; Physical Surface(physsurf_1a_wire) = { s_1_1a1, sa_1_
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////// Face 1b - half wire (y - z) extrude in x direction - Corner 1 to Corner 2
+//___________________________________________________________________________________________________________________________________________________
 // Wire 1b1
 
-p0_1b = newp; Point(p0_1b) = {-p,-p,r_w+mesh_level*mm, LcWiremesh * mm};                                                // centre circle
-p1b_1_1 = newp; Point(p1b_1_1) = {-p,-p,0+mesh_level*mm, LcWiremesh * mm};                                              // bottom circle
-p2_1b = newp; Point(p2_1b) = {-p,-p+r_w,r_w+mesh_level*mm, LcWiremesh * mm};                                            // right circle
-p1b_3_1 = newp; Point(p1b_3_1) = {-p,-p,2*r_w+mesh_level*mm, LcWiremesh * mm};                                          // top circle
-// p4_1b = newp; Point(p4_1b) = {-p,-p-r_w,r_w+mesh_level*mm, LcWiremesh * mm};                                         // left circle
+p0_1b = newp; Point(p0_1b) = {-p+sp_fac2,-p+sp_fac2,r_w+mesh_level*mm, LcWiremesh * mm};                                                // centre circle
+p1b_1_1 = newp; Point(p1b_1_1) = {-p+sp_fac2,-p+sp_fac2,0+mesh_level*mm, LcWiremesh * mm};                                              // bottom circle
+p2_1b = newp; Point(p2_1b) = {-p+sp_fac2,-p+sp_fac2+r_w,r_w+mesh_level*mm, LcWiremesh * mm};                                            // right circle
+p1b_3_1 = newp; Point(p1b_3_1) = {-p+sp_fac2,-p+sp_fac2,2*r_w+mesh_level*mm, LcWiremesh * mm};                                          // top circle
+// p4_1b = newp; Point(p4_1b) = {-p+sp_fac2,-p+sp_fac2-r_w,r_w+mesh_level*mm, LcWiremesh * mm};                                         // left circle
 
 l1_1b = newl; Circle(l1_1b) = {p1b_1_1, p0_1b, p2_1b};
 l2_1b = newl; Circle(l2_1b) = {p2_1b, p0_1b, p1b_3_1};
@@ -141,7 +144,7 @@ tmpb_1_1b[] = Extrude {x1_sp_wind_fac,0,0} {
 sb_1_1b[] = tmpb_1_1b[{2:4}];
 */
 
-tmpb_1_1c[] = Extrude {{x1_sp_wind_fac2,0,0},{0,1,0},{-p+1*sp_fac1,-p,-Rtn+r_w}, alpha} {
+tmpb_1_1c[] = Extrude {{x1_sp_wind_fac2,0,0},{0,1,0},{-p+sp_fac2,-p+sp_fac2,-Rtn+r_w}, alpha} {
   Surface{tmpb_1_1a[0]};
 };
 
@@ -154,7 +157,7 @@ sb_1_2[] = {};
 tmpb_1_2a[] = {tmpb_1_1c[0]};
 
 
-tmpb_1_2b[] = Extrude {{x1_sp_wind_fac2,0,0},{0,-1,0},{p+sp_fac1,-p,Rtp-r_w}, alpha} {
+tmpb_1_2b[] = Extrude {{x1_sp_wind_fac2,0,0},{0,-1,0},{p+sp_fac2,-p+sp_fac2,Rtp-r_w}, alpha} {
   Surface{tmpb_1_2a[0]};
 };
 
@@ -181,13 +184,14 @@ physsurf_1b_wire = newreg; Physical Surface(physsurf_1b_wire) = { s_1_1b1[], sb_
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////// Face 2a - half wire (x - z) extrude in y direction - Corner 3 to Corner 2
+//___________________________________________________________________________________________________________________________________________________
 // Wire 2a1
 
-p0_2a = newp; Point(p0_2a) = {p+2*sp_fac1,p+2*sp_fac1,-r_w+mesh_level*mm, LcWiremesh * mm};                             // centre circle
-p2a_1_1 = newp; Point(p2a_1_1) = {p+2*sp_fac1,p+2*sp_fac1,-2*r_w+mesh_level*mm, LcWiremesh * mm};                       // bottom circle
-// p2_2a = newp; Point(p2_2a) = {p+2*sp_fac1+r_w,p+2*sp_fac1,-r_w+mesh_level*mm, LcWiremesh * mm};                      // right circle
-p2a_3_1 = newp; Point(p2a_3_1) = {p+2*sp_fac1,p+2*sp_fac1,0+mesh_level*mm, LcWiremesh * mm};                            // top circle
-p4_2a = newp; Point(p4_2a) = {p+2*sp_fac1-r_w,p+2*sp_fac1,-r_w+mesh_level*mm, LcWiremesh * mm};                         // left circle
+p0_2a = newp; Point(p0_2a) = {p+sp_fac1,p+sp_fac1,-r_w+mesh_level*mm, LcWiremesh * mm};                             // centre circle
+p2a_1_1 = newp; Point(p2a_1_1) = {p+sp_fac1,p+sp_fac1,-2*r_w+mesh_level*mm, LcWiremesh * mm};                       // bottom circle
+// p2_2a = newp; Point(p2_2a) = {p+sp_fac1+r_w,p+sp_fac1,-r_w+mesh_level*mm, LcWiremesh * mm};                      // right circle
+p2a_3_1 = newp; Point(p2a_3_1) = {p+sp_fac1,p+sp_fac1,0+mesh_level*mm, LcWiremesh * mm};                            // top circle
+p4_2a = newp; Point(p4_2a) = {p+sp_fac1-r_w,p+sp_fac1,-r_w+mesh_level*mm, LcWiremesh * mm};                         // left circle
 
 l2_2as = newl; Line(l2_2as) = {p2a_1_1, p2a_3_1};
 l3_2a = newl; Circle(l3_2a) = {p2a_3_1, p0_2a, p4_2a};
@@ -208,7 +212,7 @@ tmpa_2_1b[] = Extrude {0,-y1_sp_wind_fac,0} {
 sa_2_1b[] = tmpa_2_1b[{2:4}];
 */
 
-tmpa_2_1c[] = Extrude {{0,y1_sp_wind_fac2,0},{-1,0,0},{p+1*sp_fac1,p+1*sp_fac1,Rtp-r_w}, alpha} {
+tmpa_2_1c[] = Extrude {{0,y1_sp_wind_fac2,0},{-1,0,0},{p+sp_fac1,p+sp_fac1,Rtp-r_w}, alpha} {
   Surface{tmpa_2_1a[0]};
 };
 
@@ -249,13 +253,14 @@ physsurf_2a_wire = newreg; Physical Surface(physsurf_2a_wire) = { s_1_2a1[], sa_
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////// Face 2b - half wire (x - z) extrude in y direction - Corner 1 to Corner 4
+//___________________________________________________________________________________________________________________________________________________
 // Wire 2b1
 
-p0_2b = newp; Point(p0_2b) = {-p,-p,-r_w+mesh_level*mm, LcWiremesh * mm};                                               // centre circle
-p2b_1_1 = newp; Point(p2b_1_1) = {-p,-p,-2*r_w+mesh_level*mm, LcWiremesh * mm};                                         // bottom circle
-p2_2b = newp; Point(p2_2b) = {-p+r_w,-p,-r_w+mesh_level*mm, LcWiremesh * mm};                                           // right circle
-p2b_3_1 = newp; Point(p2b_3_1) = {-p,-p,0+mesh_level*mm, LcWiremesh * mm};                                              // top circle
-// p4_2b = newp; Point(p4_2b) = {-p-r_w,-p,-r_w+mesh_level*mm, LcWiremesh * mm};                                        // left circle
+p0_2b = newp; Point(p0_2b) = {-p+sp_fac2,-p+sp_fac2,-r_w+mesh_level*mm, LcWiremesh * mm};                                               // centre circle
+p2b_1_1 = newp; Point(p2b_1_1) = {-p+sp_fac2,-p+sp_fac2,-2*r_w+mesh_level*mm, LcWiremesh * mm};                                         // bottom circle
+p2_2b = newp; Point(p2_2b) = {-p+sp_fac2+r_w,-p+sp_fac2,-r_w+mesh_level*mm, LcWiremesh * mm};                                           // right circle
+p2b_3_1 = newp; Point(p2b_3_1) = {-p+sp_fac2,-p+sp_fac2,0+mesh_level*mm, LcWiremesh * mm};                                              // top circle
+// p4_2b = newp; Point(p4_2b) = {-p+sp_fac2-r_w,-p+sp_fac2,-r_w+mesh_level*mm, LcWiremesh * mm};                                        // left circle
 
 l1_2b = newl; Circle(l1_2b) = {p2b_1_1, p0_2b, p2_2b};
 l2_2b = newl; Circle(l2_2b) = {p2_2b, p0_2b, p2b_3_1};
@@ -276,7 +281,7 @@ tmpb_2_1b[] = Extrude {0,y2_sp_wind_fac,0} {
 sb_2_1b[] = tmpb_2_1b[{2:4}];
 */
 
-tmpb_2_1c[] = Extrude {{0,y2_sp_wind_fac2,0},{1,0,0},{-p,-p+1*sp_fac1,Rtp-r_w}, alpha} {
+tmpb_2_1c[] = Extrude {{0,y2_sp_wind_fac2,0},{1,0,0},{-p+sp_fac2,-p+sp_fac2,Rtp-r_w}, alpha} {
   Surface{tmpb_2_1a[0]};
 };
 
@@ -287,7 +292,7 @@ sb_2_1c[] = tmpb_2_1c[{2:4}];
 sb_2_2[] = {};
 tmpb_2_2a[] = {tmpb_2_1c[0]};
 
-tmpb_2_2b[] = Extrude {{0,y2_sp_wind_fac2,0},{-1,0,0},{-p,p+1*sp_fac1,-Rtn+r_w}, alpha} {
+tmpb_2_2b[] = Extrude {{0,y2_sp_wind_fac2,0},{-1,0,0},{-p+sp_fac2,p+sp_fac2,-Rtn+r_w}, alpha} {
   Surface{tmpb_2_2a[0]};
 };
 
