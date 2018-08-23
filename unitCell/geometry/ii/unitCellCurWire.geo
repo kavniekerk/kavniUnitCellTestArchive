@@ -81,8 +81,8 @@ x2_sp_wind_fac2 = p*0.00;
 y1_sp_wind_fac2 = p*0.00;
 y2_sp_wind_fac2 = p*0.00;
 
-sp_fac = p*1.00;
 sp_fac1 = p*1.00;
+sp_fac2 = p*1.00;
 
 Rtp = R - R*0.00;
 Rtn = R + R*0.00;
