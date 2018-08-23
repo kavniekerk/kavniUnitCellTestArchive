@@ -2,7 +2,7 @@ Include "unitCellComponentLabel.pro";
 // Include "unitCellMeshingOptions.pro";
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/// MMGAS_STR_WIRE GEOMETRY MODULE
+/// MMGAS_STrWIRE GEOMETRY MODULE
 //
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -20,19 +20,19 @@ Include "unitCellComponentLabel.pro";
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // CONSTANTS
 
-mesh_level = 0.025;                                     // mesh level, in mm
-mesh_window = 0.05;                                     // mesh window, in mm
+meshLevel = 0.025;                                      // mesh level, in mm
+meshWindow = 0.05;                                      // mesh window, in mm
 
 //----------------------------------------------------------
 // pillar parameters
 
 r0 = 0.005;                                             // the pillar radius, in mm
-pil_f_x = 0;                                            // pillar co-ordinates, multiplication factor in x, 1.25
-pil_f_y = 0;                                            // pillar co-ordinates, multiplication factor in y, 1.25
-pil_c_x = -0.025*0 - 0/4;                               // pillar co-ordinates, constant factor in x, -0.025
-pil_c_y = -0.025*0 - 0/4;                               // pillar co-ordinates, constant factor in y, -0.025
+pilfx = 0;                                              // pillar co-ordinates, multiplication factor in x, 1.25
+pilfy = 0;                                              // pillar co-ordinates, multiplication factor in y, 1.25
+pilcx = -0.025*0 - 0/4;                                 // pillar co-ordinates, constant factor in x, -0.025
+pilcy = -0.025*0 - 0/4;                                 // pillar co-ordinates, constant factor in y, -0.025
 
-ttD = ( mesh_level - 0.005 );                           // top of dielectric pillar
+ttD = ( meshLevel - 0.005 );                            // top of dielectric pillar
 tteD1 = ( ttD - 0.001 );                                // etched pillar level 1
 tteD2 = ( 0.5 * (ttD - tteD1) + tteD1 );                // etched pillar level 2
 
@@ -53,56 +53,56 @@ lP = 0.1;                                               // distance from lower L
 //----------------------------------------------------------
 // mesh window and wire parameters
 
-mwf = 1;                                                // mesh_window_factor
+mwf = 1;                                                // meshWindow_factor
 mm = 1;                                                 // geometrical scaling
-r_w = 0.009 * mm;                                       // radius of Wiremesh, in microns
+rW = 0.009 * mm;                                        // radius of Wiremesh, in microns
 p_0 = 0.040;                                            // pitch of the window, in mm
-p = 0.040 * mm - 0 * r_w/mwf * mm;                      // pitch of the window, in microns
-R = (p * p + r_w * r_w)/(2 * r_w);                      // radius
-alpha = Asin((p/R));                                    // angle in radians
-Total_Grid_size = (a - 0.01)/2;                         // total grid size, in mm, 0.4
+p = 0.040 * mm - 0 * rW/mwf * mm;                       // pitch of the window, in microns
+R = (p * p + rW * rW)/(2 * rW);                         // radius
+alpha = Asin( (p/R) );                                  // angle in radians
+totalGridSize = (a - 0.01)/2;                           // total grid size, in mm, 0.4
 
-h_f = 0*r_w;                                            // heightfactor
+hF = 0*rW;                                              // height factor
 
-Number_Wires = ( (Total_Grid_size) / (p_0) ) / 2;       // number of wires
-Wire_length = ( Total_Grid_size / Number_Wires ) / 2;   // wire length
+numberWires = ( (totalGridSize) / (p_0) ) / 2;          // number of wires
+wireLength = ( totalGridSize / numberWires ) / 2;       // wire length
 
 Number_Units_x = 0;                                     // number of units, 1
 Number_Units_y = 0;                                     // number of units, 1
 
-geo_wc_xr = 2*r_w;                                      // y-direction wire in x radial direction
-geo_wc_yr = 2*r_w;                                      // x-direction wire in y radial direction
+geoWCXr = 2*rW;                                         // y-direction wire in x radial direction
+geoWCYr = 2*rW;                                         // x-direction wire in y radial direction
 
-geo_wc_xd = 2*r_w;                                      // x-direction wire in x-direction
-geo_wc_yd = 2*r_w;                                      // y-direction wire in y-direction
+geoWCXd = 2*rW;                                         // x-direction wire in x-direction
+geoWCYd = 2*rW;                                         // y-direction wire in y-direction
 
-x1_sp_wind_fac2 = p*0.00;
-x2_sp_wind_fac2 = p*0.00;
-y1_sp_wind_fac2 = p*0.00;
-y2_sp_wind_fac2 = p*0.00;
+x1SPWindFac2 = p*0.00;
+x2SPWindFac2 = p*0.00;
+y1SPWindFac2 = p*0.00;
+y2SPWindFac2 = p*0.00;
 
-sp_fac1 = p*1.00;
-sp_fac2 = p*1.00;
+spFac1 = p*1.00;
+spFac2 = p*1.00;
 
 Rtp = R - R*0.00;
 Rtn = R + R*0.00;
 
-n_1 = 0;
-m_1 = 0;
-n_2 = 1;
-m_2 = 1;
+n1 = 0;
+m1 = 0;
+n2 = 1;
+m2 = 1;
 
-i_t_x = Number_Wires;
-j_t_x = Number_Wires + 1;
+itx = numberWires;
+jtx = numberWires + 1;
 
-i_t_y = Number_Wires;
-j_t_y = Number_Wires + 1;
+ity = numberWires;
+jty = numberWires + 1;
 
 //----------------------------------------------------------
 // shell parameters
 
-geo_f_x = 1;                                            // geometric_factor
-geo_f_y = 1;                                            // geometric_factor
+geofx = 1;                                            // geometric_factor
+geofy = 1;                                            // geometric_factor
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 /// GEOMETRY PARAMETERS
@@ -137,34 +137,34 @@ lcWireMesh = 0.00075;                                   // characterization of w
 //----------------------------------------------------------
 // Corner 1
 
-pc1_1 = newp; Point(pc1_1) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tlgC, lcCopperPlateBdry};        // level 1 - bottom lower layer - bottom lower copper electrode
-pc2_1 = newp; Point(pc2_1) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tltC, lcCopperPlateBdry};        // level 2 - bottom upper layer
-pc3_1 = newp; Point(pc3_1) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tubC, lcCopperPlateBdry};        // level 3 - top lower layer
-pc4_1 = newp; Point(pc4_1) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tutC, lcCopperPlateBdry};        // level 4 - top upper layer - top upper copper electrode
+pc1_1 = newp; Point(pc1_1) = {geofx*0+geofx*m1*a, geofy*0+geofy*n1*a, tlgC, lcCopperPlateBdry};        // level 1 - bottom lower layer - bottom lower copper electrode
+pc2_1 = newp; Point(pc2_1) = {geofx*0+geofx*m1*a, geofy*0+geofy*n1*a, tltC, lcCopperPlateBdry};        // level 2 - bottom upper layer
+pc3_1 = newp; Point(pc3_1) = {geofx*0+geofx*m1*a, geofy*0+geofy*n1*a, tubC, lcCopperPlateBdry};        // level 3 - top lower layer
+pc4_1 = newp; Point(pc4_1) = {geofx*0+geofx*m1*a, geofy*0+geofy*n1*a, tutC, lcCopperPlateBdry};        // level 4 - top upper layer - top upper copper electrode
 
 //----------------------------------------------------------
 // Corner 2
 
-pc1_2 = newp; Point(pc1_2) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tlgC, lcCopperPlateBdry};        // level 1 - bottom lower layer - bottom lower copper electrode
-pc2_2 = newp; Point(pc2_2) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tltC, lcCopperPlateBdry};        // level 2 - bottom upper layer
-pc3_2 = newp; Point(pc3_2) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tubC, lcCopperPlateBdry};        // level 3 - top lower layer
-pc4_2 = newp; Point(pc4_2) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tutC, lcCopperPlateBdry};        // level 4 - top upper layer - top upper copper electrode
+pc1_2 = newp; Point(pc1_2) = {geofx*a+geofx*m1*a, geofy*0+geofy*n1*a, tlgC, lcCopperPlateBdry};        // level 1 - bottom lower layer - bottom lower copper electrode
+pc2_2 = newp; Point(pc2_2) = {geofx*a+geofx*m1*a, geofy*0+geofy*n1*a, tltC, lcCopperPlateBdry};        // level 2 - bottom upper layer
+pc3_2 = newp; Point(pc3_2) = {geofx*a+geofx*m1*a, geofy*0+geofy*n1*a, tubC, lcCopperPlateBdry};        // level 3 - top lower layer
+pc4_2 = newp; Point(pc4_2) = {geofx*a+geofx*m1*a, geofy*0+geofy*n1*a, tutC, lcCopperPlateBdry};        // level 4 - top upper layer - top upper copper electrode
 
 //----------------------------------------------------------
 // Corner 3
 
-pc1_3 = newp; Point(pc1_3) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tlgC, lcCopperPlateBdry};        // level 1 - bottom lower layer - bottom lower copper electrode
-pc2_3 = newp; Point(pc2_3) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tltC, lcCopperPlateBdry};        // level 2 - bottom upper layer
-pc3_3 = newp; Point(pc3_3) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tubC, lcCopperPlateBdry};        // level 3 - top lower layer
-pc4_3 = newp; Point(pc4_3) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tutC, lcCopperPlateBdry};        // level 4 - top upper layer - top upper copper electrode
+pc1_3 = newp; Point(pc1_3) = {geofx*a+geofx*m1*a, geofy*a+geofy*n1*a, tlgC, lcCopperPlateBdry};        // level 1 - bottom lower layer - bottom lower copper electrode
+pc2_3 = newp; Point(pc2_3) = {geofx*a+geofx*m1*a, geofy*a+geofy*n1*a, tltC, lcCopperPlateBdry};        // level 2 - bottom upper layer
+pc3_3 = newp; Point(pc3_3) = {geofx*a+geofx*m1*a, geofy*a+geofy*n1*a, tubC, lcCopperPlateBdry};        // level 3 - top lower layer
+pc4_3 = newp; Point(pc4_3) = {geofx*a+geofx*m1*a, geofy*a+geofy*n1*a, tutC, lcCopperPlateBdry};        // level 4 - top upper layer - top upper copper electrode
 
 //----------------------------------------------------------
 // Corner 4
 
-pc1_4 = newp; Point(pc1_4) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tlgC, lcCopperPlateBdry};        // level 1 - bottom lower layer - bottom lower copper electrode
-pc2_4 = newp; Point(pc2_4) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tltC, lcCopperPlateBdry};        // level 2 - bottom upper layer
-pc3_4 = newp; Point(pc3_4) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tubC, lcCopperPlateBdry};        // level 3 - top lower layer
-pc4_4 = newp; Point(pc4_4) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tutC, lcCopperPlateBdry};        // level 4 - top upper layer - top upper copper electrode
+pc1_4 = newp; Point(pc1_4) = {geofx*0+geofx*m1*a, geofy*a+geofy*n1*a, tlgC, lcCopperPlateBdry};        // level 1 - bottom lower layer - bottom lower copper electrode
+pc2_4 = newp; Point(pc2_4) = {geofx*0+geofx*m1*a, geofy*a+geofy*n1*a, tltC, lcCopperPlateBdry};        // level 2 - bottom upper layer
+pc3_4 = newp; Point(pc3_4) = {geofx*0+geofx*m1*a, geofy*a+geofy*n1*a, tubC, lcCopperPlateBdry};        // level 3 - top lower layer
+pc4_4 = newp; Point(pc4_4) = {geofx*0+geofx*m1*a, geofy*a+geofy*n1*a, tutC, lcCopperPlateBdry};        // level 4 - top upper layer - top upper copper electrode
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 // COPPER ELECTRODES
@@ -172,33 +172,33 @@ pc4_4 = newp; Point(pc4_4) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, 
 //----------------------------------------------------------
 // Points between two half pillars on upper LEM
 
-// ptmc_1 = newp; Point(ptmc_1) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tubC, lcCopperPlateBdry};
-// ptmd_1 = newp; Point(ptmd_1) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tlgC, lcCopperPlateBdry};
+// ptmc_1 = newp; Point(ptmc_1) = {geofx*a/2+geofx*m1*a, geofy*0+geofy*n1*a, tubC, lcCopperPlateBdry};
+// ptmd_1 = newp; Point(ptmd_1) = {geofx*a/2+geofx*m1*a, geofy*0+geofy*n1*a, tlgC, lcCopperPlateBdry};
 
-// ptmc_2 = newp; Point(ptmc_2) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*a/2+geo_f_y*n_1*a, tubC, lcCopperPlateBdry};
-// ptmd_2 = newp; Point(ptmd_2) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*a/2+geo_f_y*n_1*a, tlgC, lcCopperPlateBdry};
+// ptmc_2 = newp; Point(ptmc_2) = {geofx*a+geofx*m1*a, geofy*a/2+geofy*n1*a, tubC, lcCopperPlateBdry};
+// ptmd_2 = newp; Point(ptmd_2) = {geofx*a+geofx*m1*a, geofy*a/2+geofy*n1*a, tlgC, lcCopperPlateBdry};
 
-// ptmc_3 = newp; Point(ptmc_3) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tubC, lcCopperPlateBdry};
-// ptmd_3 = newp; Point(ptmd_3) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tlgC, lcCopperPlateBdry};
+// ptmc_3 = newp; Point(ptmc_3) = {geofx*a/2+geofx*m1*a, geofy*a+geofy*n1*a, tubC, lcCopperPlateBdry};
+// ptmd_3 = newp; Point(ptmd_3) = {geofx*a/2+geofx*m1*a, geofy*a+geofy*n1*a, tlgC, lcCopperPlateBdry};
 
-// ptmc_4 = newp; Point(ptmc_4) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*a/2+geo_f_y*n_1*a, tubC, lcCopperPlateBdry};
-// ptmd_4 = newp; Point(ptmd_4) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*a/2+geo_f_y*n_1*a, tlgC, lcCopperPlateBdry};
+// ptmc_4 = newp; Point(ptmc_4) = {geofx*0+geofx*m1*a, geofy*a/2+geofy*n1*a, tubC, lcCopperPlateBdry};
+// ptmd_4 = newp; Point(ptmd_4) = {geofx*0+geofx*m1*a, geofy*a/2+geofy*n1*a, tlgC, lcCopperPlateBdry};
 
 //----------------------------------------------------------
 // Top lower boundary
 
-// pcptl1 = newp; Point(pcptl1) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tltC,lcCopperPlateBdry};
-// pcptl2 = newp; Point(pcptl2) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tltC,lcCopperPlateBdry};
-// pcptl3 = newp; Point(pcptl3) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tltC,lcCopperPlateBdry};
-// pcptl4 = newp; Point(pcptl4) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tltC,lcCopperPlateBdry};
+// pcptl1 = newp; Point(pcptl1) = {geofx*0+geofx*m1*a, geofy*0+geofy*n1*a, tltC,lcCopperPlateBdry};
+// pcptl2 = newp; Point(pcptl2) = {geofx*a+geofx*m1*a, geofy*0+geofy*n1*a, tltC,lcCopperPlateBdry};
+// pcptl3 = newp; Point(pcptl3) = {geofx*a+geofx*m1*a, geofy*a+geofy*n1*a, tltC,lcCopperPlateBdry};
+// pcptl4 = newp; Point(pcptl4) = {geofx*0+geofx*m1*a, geofy*a+geofy*n1*a, tltC,lcCopperPlateBdry};
 
 //----------------------------------------------------------
 // Top upper boundary
 
-// pcptu1 = newp; Point(pcptu1) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tutC,lcCopperPlateBdry};
-// pcptu2 = newp; Point(pcptu2) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tutC,lcCopperPlateBdry};
-// pcptu3 = newp; Point(pcptu3) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tutC,lcCopperPlateBdry};
-// pcptu4 = newp; Point(pcptu4) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tutC,lcCopperPlateBdry};
+// pcptu1 = newp; Point(pcptu1) = {geofx*0+geofx*m1*a, geofy*0+geofy*n1*a, tutC,lcCopperPlateBdry};
+// pcptu2 = newp; Point(pcptu2) = {geofx*a+geofx*m1*a, geofy*0+geofy*n1*a, tutC,lcCopperPlateBdry};
+// pcptu3 = newp; Point(pcptu3) = {geofx*a+geofx*m1*a, geofy*a+geofy*n1*a, tutC,lcCopperPlateBdry};
+// pcptu4 = newp; Point(pcptu4) = {geofx*0+geofx*m1*a, geofy*a+geofy*n1*a, tutC,lcCopperPlateBdry};
 
 //----------------------------------------------------------
 // Border lines
@@ -242,33 +242,33 @@ pc4_4 = newp; Point(pc4_4) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, 
 //----------------------------------------------------------
 // Points between two half pillars on lower LEM
 
-// pbmd_1 = newp; Point(pbmd_1) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tltC, lcCopperPlateBdry};
-// pbmc_1 = newp; Point(pbmc_1) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tutC, lcCopperPlateBdry};
+// pbmd_1 = newp; Point(pbmd_1) = {geofx*a/2+geofx*m1*a, geofy*0+geofy*n1*a, tltC, lcCopperPlateBdry};
+// pbmc_1 = newp; Point(pbmc_1) = {geofx*a/2+geofx*m1*a, geofy*0+geofy*n1*a, tutC, lcCopperPlateBdry};
 
-// pbmd_2 = newp; Point(pbmd_2) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*a/2+geo_f_y*n_1*a, tltC, lcCopperPlateBdry};
-// pbmc_2 = newp; Point(pbmc_2) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*a/2+geo_f_y*n_1*a, tutC, lcCopperPlateBdry};
+// pbmd_2 = newp; Point(pbmd_2) = {geofx*a+geofx*m1*a, geofy*a/2+geofy*n1*a, tltC, lcCopperPlateBdry};
+// pbmc_2 = newp; Point(pbmc_2) = {geofx*a+geofx*m1*a, geofy*a/2+geofy*n1*a, tutC, lcCopperPlateBdry};
 
-// pbmd_3 = newp; Point(pbmd_3) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tltC, lcCopperPlateBdry};
-// pbmc_3 = newp; Point(pbmc_3) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tutC, lcCopperPlateBdry};
+// pbmd_3 = newp; Point(pbmd_3) = {geofx*a/2+geofx*m1*a, geofy*a+geofy*n1*a, tltC, lcCopperPlateBdry};
+// pbmc_3 = newp; Point(pbmc_3) = {geofx*a/2+geofx*m1*a, geofy*a+geofy*n1*a, tutC, lcCopperPlateBdry};
 
-// pbmd_4 = newp; Point(pbmd_4) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*a/2+geo_f_y*n_1*a, tltC, lcCopperPlateBdry};
-// pbmc_4 = newp; Point(pbmc_4) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*a/2+geo_f_y*n_1*a, tutC, lcCopperPlateBdry};
+// pbmd_4 = newp; Point(pbmd_4) = {geofx*0+geofx*m1*a, geofy*a/2+geofy*n1*a, tltC, lcCopperPlateBdry};
+// pbmc_4 = newp; Point(pbmc_4) = {geofx*0+geofx*m1*a, geofy*a/2+geofy*n1*a, tutC, lcCopperPlateBdry};
 
 //----------------------------------------------------------
 // Bottom lower boundary
 
-// pcpbl1 = newp; Point(pcpbl1) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tutC,lcCopperPlateBdry};
-// pcpbl2 = newp; Point(pcpbl2) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tutC,lcCopperPlateBdry};
-// pcpbl3 = newp; Point(pcpbl3) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tutC,lcCopperPlateBdry};
-// pcpbl4 = newp; Point(pcpbl4) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tutC,lcCopperPlateBdry};
+// pcpbl1 = newp; Point(pcpbl1) = {geofx*0+geofx*m1*a, geofy*0+geofy*n1*a, tutC,lcCopperPlateBdry};
+// pcpbl2 = newp; Point(pcpbl2) = {geofx*a+geofx*m1*a, geofy*0+geofy*n1*a, tutC,lcCopperPlateBdry};
+// pcpbl3 = newp; Point(pcpbl3) = {geofx*a+geofx*m1*a, geofy*a+geofy*n1*a, tutC,lcCopperPlateBdry};
+// pcpbl4 = newp; Point(pcpbl4) = {geofx*0+geofx*m1*a, geofy*a+geofy*n1*a, tutC,lcCopperPlateBdry};
 
 //----------------------------------------------------------
 // Bottom upper boundary
 
-// pcpbu1 = newp; Point(pcpbu1) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tltC,lcCopperPlateBdry};
-// pcpbu2 = newp; Point(pcpbu2) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tltC,lcCopperPlateBdry};
-// pcpbu3 = newp; Point(pcpbu3) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tltC,lcCopperPlateBdry};
-// pcpbu4 = newp; Point(pcpbu4) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tltC,lcCopperPlateBdry};
+// pcpbu1 = newp; Point(pcpbu1) = {geofx*0+geofx*m1*a, geofy*0+geofy*n1*a, tltC,lcCopperPlateBdry};
+// pcpbu2 = newp; Point(pcpbu2) = {geofx*a+geofx*m1*a, geofy*0+geofy*n1*a, tltC,lcCopperPlateBdry};
+// pcpbu3 = newp; Point(pcpbu3) = {geofx*a+geofx*m1*a, geofy*a+geofy*n1*a, tltC,lcCopperPlateBdry};
+// pcpbu4 = newp; Point(pcpbu4) = {geofx*0+geofx*m1*a, geofy*a+geofy*n1*a, tltC,lcCopperPlateBdry};
 
 //----------------------------------------------------------
 // Border lines
@@ -413,11 +413,11 @@ lcpbib12 = newl; Line(lcpbib12) = {pc2_4, pc1_4};
 /////// Face 1a - half wire (y - z) extrude in x direction - Corner 3 to Corner 4
 // Wire 1a1
 
-p0_1a = newp; Point(p0_1a)        = {p+sp_fac1,p+sp_fac1,-r_w+mesh_level*mm, lcWireMesh * mm};                                             // centre circle
-p1a_1_1 = newp; Point(p1a_1_1)    = {p+sp_fac1,p+sp_fac1,-2*r_w+mesh_level*mm, lcWireMesh * mm};                                           // bottom circle
-// p2_1a = newp; Point(p2_1a)     = {p+sp_fac1,p+sp_fac1+r_w,-r_w+mesh_level*mm, lcWireMesh * mm};                                         // right circle
-p1a_3_1 = newp; Point(p1a_3_1)    = {p+sp_fac1,p+sp_fac1,0+mesh_level*mm, lcWireMesh * mm};                                                // top circle
-p4_1a = newp; Point(p4_1a)        = {p+sp_fac1,p+sp_fac1-r_w,-r_w+mesh_level*mm, lcWireMesh * mm};                                         // left circle
+p0_1a = newp; Point(p0_1a)        = {p+spFac1,p+spFac1,-rW+meshLevel*mm, lcWireMesh * mm};                                             // centre circle
+p1a_1_1 = newp; Point(p1a_1_1)    = {p+spFac1,p+spFac1,-2*rW+meshLevel*mm, lcWireMesh * mm};                                           // bottom circle
+// p2_1a = newp; Point(p2_1a)     = {p+spFac1,p+spFac1+rW,-rW+meshLevel*mm, lcWireMesh * mm};                                         // right circle
+p1a_3_1 = newp; Point(p1a_3_1)    = {p+spFac1,p+spFac1,0+meshLevel*mm, lcWireMesh * mm};                                                // top circle
+p4_1a = newp; Point(p4_1a)        = {p+spFac1,p+spFac1-rW,-rW+meshLevel*mm, lcWireMesh * mm};                                         // left circle
 
 l2_1as = newl; Line(l2_1as)       = {p1a_1_1, p1a_3_1};
 l3_1a = newc; Circle(l3_1a)       = {p1a_3_1, p0_1a, p4_1a};
@@ -431,14 +431,14 @@ tmpa_1_1[] = {};
 tmpa_1_1[] = {s_1_1a};
 
 /*
-tmpa_1_1b[] = Extrude {-x2_sp_wind_fac,0,0} {
+tmpa_1_1b[] = Extrude {-x2SPWindFac,0,0} {
   Surface{tmpa_1_1a[0]};
 };
 
 sa_1_1[] = tmpa_1_1b[{2:4}];
 */
 
-tmpa_1_1[] = Extrude {{x2_sp_wind_fac2,0,0},{0,1,0},{p+1*sp_fac1,p+1*sp_fac1,Rtn-r_w}, alpha} {
+tmpa_1_1[] = Extrude {{x2SPWindFac2,0,0},{0,1,0},{p+1*spFac1,p+1*spFac1,Rtn-rW}, alpha} {
   Surface{tmpa_1_1[0]};
 };
 
@@ -450,7 +450,7 @@ sa_1_1[] = tmpa_1_1[{2:4}];
 sa_1_2[] = {};
 tmpa_1_2[] = {tmpa_1_1[0]};
 
-tmpa_1_2[] = Extrude {{x2_sp_wind_fac2,0,0},{0,-1,0},{-p+1*sp_fac1,p+1*sp_fac1,-Rtp+r_w}, alpha} {
+tmpa_1_2[] = Extrude {{x2SPWindFac2,0,0},{0,-1,0},{-p+1*spFac1,p+1*spFac1,-Rtp+rW}, alpha} {
   Surface{tmpa_1_2[0]};
 };
 
@@ -458,7 +458,7 @@ sa_1_2[] = {};
 sa_1_2[] = tmpa_1_2[{2:4}];
 
 /*
-tmpa_1_2c[] = Extrude {-x2_sp_wind_fac,0,0} {
+tmpa_1_2c[] = Extrude {-x2SPWindFac,0,0} {
   Surface{tmpa_1_2b[0]};
 };
 
@@ -483,11 +483,11 @@ s_1_1a2[] = tmpa_1_2[0];
 /////// Face 1b - half wire (y - z) extrude in x direction - Corner 1 to Corner 2
 // Wire 1b1
 
-p0_1b = newp; Point(p0_1b)      = {-p+sp_fac1,-p+sp_fac1,-r_w+mesh_level*mm, lcWireMesh * mm};                                             // centre circle
-p1b_1_1 = newp; Point(p1b_1_1)  = {-p+sp_fac1,-p+sp_fac1,-2*r_w+mesh_level*mm, lcWireMesh * mm};                                           // bottom circle
-p2_1b = newp; Point(p2_1b)      = {-p+sp_fac1,-p+sp_fac1+r_w,-r_w+mesh_level*mm, lcWireMesh * mm};                                         // right circle
-p1b_3_1 = newp; Point(p1b_3_1)  = {-p+sp_fac1,-p+sp_fac1,0+mesh_level*mm, lcWireMesh * mm};                                                // top circle
-// p4_1b = newp; Point(p4_1b)   = {-p+sp_fac1,-p+sp_fac1-r_w,-r_w+mesh_level*mm, lcWireMesh * mm};                                         // left circle
+p0_1b = newp; Point(p0_1b)      = {-p+spFac1,-p+spFac1,-rW+meshLevel*mm, lcWireMesh * mm};                                             // centre circle
+p1b_1_1 = newp; Point(p1b_1_1)  = {-p+spFac1,-p+spFac1,-2*rW+meshLevel*mm, lcWireMesh * mm};                                           // bottom circle
+p2_1b = newp; Point(p2_1b)      = {-p+spFac1,-p+spFac1+rW,-rW+meshLevel*mm, lcWireMesh * mm};                                         // right circle
+p1b_3_1 = newp; Point(p1b_3_1)  = {-p+spFac1,-p+spFac1,0+meshLevel*mm, lcWireMesh * mm};                                                // top circle
+// p4_1b = newp; Point(p4_1b)   = {-p+spFac1,-p+spFac1-rW,-rW+meshLevel*mm, lcWireMesh * mm};                                         // left circle
 
 l1_1b = newc; Circle(l1_1b)     = {p1b_1_1, p0_1b, p2_1b};
 l2_1b = newc; Circle(l2_1b)     = {p2_1b, p0_1b, p1b_3_1};
@@ -500,14 +500,14 @@ s_1_1b = news; Plane Surface(s_1_1b) = {ll1_1b};
 tmpb_1_1[] = {s_1_1b};
 
 /*
-tmpb_1_1b[] = Extrude {x1_sp_wind_fac,0,0} {
+tmpb_1_1b[] = Extrude {x1SPWindFac,0,0} {
   Surface{tmpb_1_1a[0]};
 };
 
 sb_1_1[] = tmpb_1_1b[{2:4}];
 */
 
-tmpb_1_1[] = Extrude {{x1_sp_wind_fac2,0,0},{0,-1,0},{-p+1*sp_fac1,-p,Rtn-r_w}, alpha} {
+tmpb_1_1[] = Extrude {{x1SPWindFac2,0,0},{0,-1,0},{-p+1*spFac1,-p,Rtn-rW}, alpha} {
   Surface{tmpb_1_1[0]};
 };
 
@@ -520,7 +520,7 @@ sb_1_2[] = {};
 tmpb_1_2[] = {tmpb_1_1[0]};
 
 
-tmpb_1_2[] = Extrude {{x1_sp_wind_fac2,0,0},{0,1,0},{p+sp_fac1,p,-Rtp+r_w}, alpha} {
+tmpb_1_2[] = Extrude {{x1SPWindFac2,0,0},{0,1,0},{p+spFac1,p,-Rtp+rW}, alpha} {
   Surface{tmpb_1_2[0]};
 };
 
@@ -528,7 +528,7 @@ sb_1_2[] = {};
 sb_1_2[] = tmpb_1_2[{2:4}];
 
 /*
-tmpb_1_2c[] = Extrude {x1_sp_wind_fac,0,0} {
+tmpb_1_2c[] = Extrude {x1SPWindFac,0,0} {
   Surface{tmpb_1_2a[0]};
 };
 
@@ -556,11 +556,11 @@ s_1_1b2[] = tmpb_1_2[0];
 /////// Face 2a - half wire (x - z) extrude in y direction - Corner 3 to Corner 2
 // Wire 2a1
 
-p0_2a = newp; Point(p0_2a)      = {p+sp_fac1,p+sp_fac1,r_w+mesh_level*mm, lcWireMesh * mm};                                                // centre circle
-p2a_1_1 = newp; Point(p2a_1_1)  = {p+sp_fac1,p+sp_fac1,0+mesh_level*mm, lcWireMesh * mm};                                                  // bottom circle
-// p2_2a = newp; Point(p2_2a)   = {p+sp_fac1+r_w,p+sp_fac1,r_w+mesh_level*mm, lcWireMesh * mm};                                            // right circle
-p2a_3_1 = newp; Point(p2a_3_1)  = {p+sp_fac1,p+sp_fac1,2*r_w+mesh_level*mm, lcWireMesh * mm};                                              // top circle
-p4_2a = newp; Point(p4_2a)      = {p+sp_fac1-r_w,p+sp_fac1,r_w+mesh_level*mm, lcWireMesh * mm};                                            // left circle
+p0_2a = newp; Point(p0_2a)      = {p+spFac1,p+spFac1,rW+meshLevel*mm, lcWireMesh * mm};                                                // centre circle
+p2a_1_1 = newp; Point(p2a_1_1)  = {p+spFac1,p+spFac1,0+meshLevel*mm, lcWireMesh * mm};                                                  // bottom circle
+// p2_2a = newp; Point(p2_2a)   = {p+spFac1+rW,p+spFac1,rW+meshLevel*mm, lcWireMesh * mm};                                            // right circle
+p2a_3_1 = newp; Point(p2a_3_1)  = {p+spFac1,p+spFac1,2*rW+meshLevel*mm, lcWireMesh * mm};                                              // top circle
+p4_2a = newp; Point(p4_2a)      = {p+spFac1-rW,p+spFac1,rW+meshLevel*mm, lcWireMesh * mm};                                            // left circle
 
 l2_2as = newl; Line(l2_2as)     = {p2a_1_1, p2a_3_1};
 l3_2a = newc; Circle(l3_2a)     = {p2a_1_1, p0_2a, p4_2a};
@@ -573,14 +573,14 @@ s_1_2a = news; Plane Surface(s_1_2a) = {ll1_2a};
 tmpa_2_1[] = {s_1_2a};
 
 /*
-tmpa_2_1b[] = Extrude {0,-y1_sp_wind_fac,0} {
+tmpa_2_1b[] = Extrude {0,-y1SPWindFac,0} {
   Surface{tmpa_2_1a[0]};
 };
 
 sa_2_1[] = tmpa_2_1b[{2:4}];
 */
 
-tmpa_2_1[] = Extrude {{0,y1_sp_wind_fac2,0},{1,0,0},{p+1*sp_fac1,p+1*sp_fac1,-Rtp+r_w}, alpha} {
+tmpa_2_1[] = Extrude {{0,y1SPWindFac2,0},{1,0,0},{p+1*spFac1,p+1*spFac1,-Rtp+rW}, alpha} {
   Surface{tmpa_2_1[0]};
 };
 
@@ -592,7 +592,7 @@ sa_2_1[] = tmpa_2_1[{2:4}];
 sa_2_2[] = {};
 tmpa_2_2[] = {tmpa_2_1[0]};
 
-tmpa_2_2[] = Extrude {{0,y1_sp_wind_fac2,0},{-1,0,0},{p+sp_fac1,-p+sp_fac1,Rtn-r_w}, alpha} {
+tmpa_2_2[] = Extrude {{0,y1SPWindFac2,0},{-1,0,0},{p+spFac1,-p+spFac1,Rtn-rW}, alpha} {
   Surface{tmpa_2_2[0]};
 };
 
@@ -600,7 +600,7 @@ sa_2_2[] = {};
 sa_2_2[] = tmpa_2_2[{2:4}];
 
 /*
-tmpa_2_2c[] = Extrude {0,-y1_sp_wind_fac,0} {
+tmpa_2_2c[] = Extrude {0,-y1SPWindFac,0} {
   Surface{tmpa_2_2b[0]};
 };
 
@@ -631,11 +631,11 @@ s_1_2a2[] = tmpa_2_2[0];
 /////// Face 2b - half wire (x - z) extrude in y direction - Corner 1 to Corner 4
 // Wire 2b1
 
-p0_2b = newp; Point(p0_2b)      = {-p+sp_fac1,-p+sp_fac1,r_w+mesh_level*mm, lcWireMesh * mm};                                              // centre circle
-p2b_1_1 = newp; Point(p2b_1_1)  = {-p+sp_fac1,-p+sp_fac1,0+mesh_level*mm, lcWireMesh * mm};                                                // bottom circle
-p2_2b = newp; Point(p2_2b)      = {-p+sp_fac1+r_w,-p+sp_fac1,r_w+mesh_level*mm, lcWireMesh * mm};                                          // right circle
-p2b_3_1 = newp; Point(p2b_3_1)  = {-p+sp_fac1,-p+sp_fac1,2*r_w+mesh_level*mm, lcWireMesh * mm};                                            // top circle
-// p4_2b = newp; Point(p4_2b)   = {-p+sp_fac1-r_w,-p+sp_fac1,r_w+mesh_level*mm, lcWireMesh * mm};                                          // left circle
+p0_2b = newp; Point(p0_2b)      = {-p+spFac1,-p+spFac1,rW+meshLevel*mm, lcWireMesh * mm};                                              // centre circle
+p2b_1_1 = newp; Point(p2b_1_1)  = {-p+spFac1,-p+spFac1,0+meshLevel*mm, lcWireMesh * mm};                                                // bottom circle
+p2_2b = newp; Point(p2_2b)      = {-p+spFac1+rW,-p+spFac1,rW+meshLevel*mm, lcWireMesh * mm};                                          // right circle
+p2b_3_1 = newp; Point(p2b_3_1)  = {-p+spFac1,-p+spFac1,2*rW+meshLevel*mm, lcWireMesh * mm};                                            // top circle
+// p4_2b = newp; Point(p4_2b)   = {-p+spFac1-rW,-p+spFac1,rW+meshLevel*mm, lcWireMesh * mm};                                          // left circle
 
 l1_2b = newc; Circle(l1_2b)     = {p2b_1_1, p0_2b, p2_2b};
 l2_2b = newc; Circle(l2_2b)     = {p2_2b, p0_2b, p2b_3_1};
@@ -648,14 +648,14 @@ s_1_2b = news; Plane Surface(s_1_2b) = {ll1_2b};
 tmpb_2_1[] = {s_1_2b};
 
 /*
-tmpb_2_1b[] = Extrude {0,y2_sp_wind_fac,0} {
+tmpb_2_1b[] = Extrude {0,y2SPWindFac,0} {
   Surface{tmpb_2_1a[0]};
 };
 
 sb_2_1[] = tmpb_2_1b[{2:4}];
 */
 
-tmpb_2_1[] = Extrude {{0,y2_sp_wind_fac2,0},{-1,0,0},{-p,-p+1*sp_fac1,-Rtp+r_w}, alpha} {
+tmpb_2_1[] = Extrude {{0,y2SPWindFac2,0},{-1,0,0},{-p,-p+1*spFac1,-Rtp+rW}, alpha} {
   Surface{tmpb_2_1[0]};
 };
 
@@ -667,7 +667,7 @@ sb_2_1[] = tmpb_2_1[{2:4}];
 sb_2_2[] = {};
 tmpb_2_2[] = {tmpb_2_1[0]};
 
-tmpb_2_2[] = Extrude {{0,y2_sp_wind_fac2,0},{1,0,0},{p,p+1*sp_fac1,Rtn-r_w}, alpha} {
+tmpb_2_2[] = Extrude {{0,y2SPWindFac2,0},{1,0,0},{p,p+1*spFac1,Rtn-rW}, alpha} {
   Surface{tmpb_2_2[0]};
 };
 
@@ -675,7 +675,7 @@ sb_2_2[] = {};
 sb_2_2[] = tmpb_2_2[{2:4}];
 
 /*
-tmpb_2_2c[] = Extrude {0,y2_sp_wind_fac,0} {
+tmpb_2_2c[] = Extrude {0,y2SPWindFac,0} {
   Surface{tmpb_2_2b[0]};
 };
 
@@ -704,12 +704,12 @@ s_1_2b2[] = tmpb_2_2[0];
 //----------------------------------------------------------
 // Top electrode
 
-pexet1 = newp; Point(pexet1) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
-// pexet2 = newp; Point(pexet2) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
-pexet3 = newp; Point(pexet3) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
-pexet4 = newp; Point(pexet4) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
-// pexet5 = newp; Point(pexet5) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
-pexet6 = newp; Point(pexet6) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
+pexet1 = newp; Point(pexet1) = {geofx*0+geofx*m1*a, geofy*0+geofy*n1*a, tutC+lE,lcExtElectrodeBdry};
+// pexet2 = newp; Point(pexet2) = {geofx*a/2+geofx*m1*a, geofy*0+geofy*n1*a, tutC+lE,lcExtElectrodeBdry};
+pexet3 = newp; Point(pexet3) = {geofx*a+geofx*m1*a, geofy*0+geofy*n1*a, tutC+lE,lcExtElectrodeBdry};
+pexet4 = newp; Point(pexet4) = {geofx*a+geofx*m1*a, geofy*a+geofy*n1*a, tutC+lE,lcExtElectrodeBdry};
+// pexet5 = newp; Point(pexet5) = {geofx*a/2+geofx*m1*a, geofy*a+geofy*n1*a, tutC+lE,lcExtElectrodeBdry};
+pexet6 = newp; Point(pexet6) = {geofx*0+geofx*m1*a, geofy*a+geofy*n1*a, tutC+lE,lcExtElectrodeBdry};
 
 //----------------------------------------------------------
 // Top electrode lines
@@ -758,12 +758,12 @@ lexet6 = newl; Line(lexet6) = {pexet6, pexet1};
 //----------------------------------------------------------
 // Bottom electrode
 
-// pexeb1 = newp; Point(pexeb1) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
-// pexeb2 = newp; Point(pexeb2) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
-// pexeb3 = newp; Point(pexeb3) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
-// pexeb4 = newp; Point(pexeb4) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
-// pexeb5 = newp; Point(pexeb5) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
-// pexeb6 = newp; Point(pexeb6) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
+// pexeb1 = newp; Point(pexeb1) = {geofx*0+geofx*m1*a, geofy*0+geofy*n1*a, meshLevel * mm,lcExtElectrodeBdry};
+// pexeb2 = newp; Point(pexeb2) = {geofx*a/2+geofx*m1*a, geofy*0+geofy*n1*a, meshLevel * mm,lcExtElectrodeBdry};
+// pexeb3 = newp; Point(pexeb3) = {geofx*a+geofx*m1*a, geofy*0+geofy*n1*a, meshLevel * mm,lcExtElectrodeBdry};
+// pexeb4 = newp; Point(pexeb4) = {geofx*a+geofx*m1*a, geofy*a+geofy*n1*a, meshLevel * mm,lcExtElectrodeBdry};
+// pexeb5 = newp; Point(pexeb5) = {geofx*a/2+geofx*m1*a, geofy*a+geofy*n1*a, meshLevel * mm,lcExtElectrodeBdry};
+// pexeb6 = newp; Point(pexeb6) = {geofx*0+geofx*m1*a, geofy*a+geofy*n1*a, meshLevel * mm,lcExtElectrodeBdry};
 
 //----------------------------------------------------------
 // Bottom wire level boundary - transfinite

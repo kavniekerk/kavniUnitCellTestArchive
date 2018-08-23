@@ -577,6 +577,10 @@ For q In {1:2}
 
       EndIf
 
+    EndFor
+  EndFor
+EndFor
+
 
 For q In {2:2}
   For r In {1:2}
@@ -961,170 +965,12 @@ For q In {2:2}
       EndFor
 
 
+    EndFor
   EndFor
- EndFor
 EndFor
 
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// EXTERNAL ELECTRODES
 
-//----------------------------------------------------------
-// Top electrode
-
-pexet1 = newp; Point(pexet1) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
-// pexet2 = newp; Point(pexet2) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
-pexet3 = newp; Point(pexet3) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
-pexet4 = newp; Point(pexet4) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
-// pexet5 = newp; Point(pexet5) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
-pexet6 = newp; Point(pexet6) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, tutC+lE,lcExtElectrodeBdry};
-
-//----------------------------------------------------------
-// Top electrode lines
-
-lexet1 = newl; Line(lexet1) = {pexet1, pexet3};
-// Transfinite Line { lexet1 } = lexet1;
-// lexet2 = newl; Line(lexet2) = {pexet2, pexet3};
-// Transfinite Line { lexet2 } = lexet2;
-lexet3 = newl; Line(lexet3) = {pexet3, pexet4};
-// Transfinite Line { lexet3 } = lexet3;
-lexet4 = newl; Line(lexet4) = {pexet4, pexet6};
-// Transfinite Line { lexet4 } = lexet4;
-// lexet5 = newl; Line(lexet5) = {pexet5, pexet6};
-// Transfinite Line { lexet5 } = lexet5;
-lexet6 = newl; Line(lexet6) = {pexet6, pexet1};
-// Transfinite Line { lexet6 } = lexet6;
-
-//----------------------------------------------------------
-// Upper electrode boundary - transfinite
-
-// lexett1 = newl; Line(lexett1) = {pexet1, pexet3};
-// Transfinite Line { lexett1 } = lexett1; 
-// lexett2 = newl; Line(lexett2) = {pexet3, pexet4};
-// Transfinite Line { lexett2 } = lexett2;
-// lexett3 = newl; Line(lexett3) = {pexet4, pexet6};
-// Transfinite Line { lexett3 } = lexett3;
-// lexett4 = newl; Line(lexett4) = {pexet6, pexet1};
-// Transfinite Line { lexett4 } = lexett4;
-
-//----------------------------------------------------------
-// Connect the top electrode to the LEM.
-
-// lexetc1 = newl; Line(lexetc1) = {pexet1, pc2_1}; // pc4_1
-// Transfinite Line { lexetc1 } = lexetc1;
-// lexetc2 = newl; Line(lexetc2) = {pexet2, ptmc_1};
-// Transfinite Line { lexetc2 } = lexetc2;
-// lexetc3 = newl; Line(lexetc3) = {pexet3, pc2_2}; // pc4_2
-// Transfinite Line { lexetc3 } = lexetc3;
-// lexetc4 = newl; Line(lexetc4) = {pexet4, pc2_3}; // pc4_3
-// Transfinite Line { lexetc4 } = lexetc4;
-// lexetc5 = newl; Line(lexetc5) = {pexet5, ptmc_3};
-// Transfinite Line { lexetc5 } = lexetc5;
-// lexetc6 = newl; Line(lexetc6) = {pexet6, pc2_4}; // pc4_4
-// Transfinite Line { lexetc6 } = lexetc6;
-
-//----------------------------------------------------------
-// Bottom electrode
-
-// pexeb1 = newp; Point(pexeb1) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
-// pexeb2 = newp; Point(pexeb2) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
-// pexeb3 = newp; Point(pexeb3) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*0+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
-// pexeb4 = newp; Point(pexeb4) = {geo_f_x*a+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
-// pexeb5 = newp; Point(pexeb5) = {geo_f_x*a/2+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
-// pexeb6 = newp; Point(pexeb6) = {geo_f_x*0+geo_f_x*m_1*a, geo_f_y*a+geo_f_y*n_1*a, mesh_level * mm,lcExtElectrodeBdry};
-
-//----------------------------------------------------------
-// Bottom wire level boundary - transfinite
-
-// lexebt1 = newl; Line(lexebt1) = {pexeb1, pexeb3};
-// Transfinite Line { lexebt1 } = lexebt1;
-// lexebt2 = newl; Line(lexebt2) = {pexeb3, pexeb4};
-// Transfinite Line { lexebt2 } = lexebt2;
-// lexebt3 = newl; Line(lexebt3) = {pexeb4, pexeb6};
-// Transfinite Line { lexebt3 } = lexebt3;
-// lexebt4 = newl; Line(lexebt4) = {pexeb6, pexeb1};
-// Transfinite Line { lexebt4 } = lexebt4;
-
-//----------------------------------------------------------
-// Copper plate surfaces
-
-// llcp_up_border1 = newreg; Line Loop(llcp_up_border1) = {lcptlb5a, -lcptib10, -lcptub1a, lcptib9}; // lcptlb5b, -lcptub1b
-// pscp_up_border1 = newreg; Plane Surface(pscp_up_border1) = {llcp_up_border1};
-// Transfinite Surface { pscp_up_border1 };
-// Recombine Surface { pscp_up_border1 };
-
-// llcp_up_border2 = newreg; Line Loop(llcp_up_border2) = {lcptlb6a, -lcptib11, -lcptub2a, lcptib10}; // lcptlb6b, -lcptub2b
-// pscp_up_border2 = newreg; Plane Surface(pscp_up_border2) = {llcp_up_border2};
-// Transfinite Surface { pscp_up_border2 };
-// Recombine Surface { pscp_up_border2 };
-
-// llcp_up_border3 = newreg; Line Loop(llcp_up_border3) = {lcptlb7a, -lcptib12, -lcptub3a, lcptib11}; // lcptlb7b, -lcptub3b
-// pscp_up_border3 = newreg; Plane Surface(pscp_up_border3) = {llcp_up_border3};
-// Transfinite Surface { pscp_up_border3 };
-// Recombine Surface { pscp_up_border3 };
-
-// llcp_up_border4 = newreg; Line Loop(llcp_up_border4) = {lcptlb8a, -lcptib9, -lcptub4a, lcptib12}; // lcptlb8b, -lcptub4b
-// pscp_up_border4 = newreg; Plane Surface(pscp_up_border4) = {llcp_up_border4};
-// Transfinite Surface { pscp_up_border4 };
-// Recombine Surface { pscp_up_border4 };
-
-llcp_low_border1 = newreg; Line Loop(llcp_low_border1) = {lcpblb5a, -lcpbib10, -lcpbub1a, lcpbib9}; // lcpblb5b,  -lcpbub1b
-pscp_low_border1 = newreg; Plane Surface(pscp_low_border1) = {llcp_low_border1};
-// Transfinite Surface { pscp_low_border1 };
-// Recombine Surface { pscp_low_border1 };
-
-llcp_low_border2 = newreg; Line Loop(llcp_low_border2) = {lcpblb6a, -lcpbib11, -lcpbub2a, lcpbib10}; // lcpblb6b, -lcpbub2b  
-pscp_low_border2 = newreg; Plane Surface(pscp_low_border2) = {llcp_low_border2};
-// Transfinite Surface { pscp_low_border2 };
-// Recombine Surface { pscp_low_border2 };
-
-llcp_low_border3 = newreg; Line Loop(llcp_low_border3) = {lcpblb7a, -lcpbib12, -lcpbub3a, lcpbib11}; // lcpblb7b, -lcpbub3b
-pscp_low_border3 = newreg; Plane Surface(pscp_low_border3) = {llcp_low_border3};
-// Transfinite Surface { pscp_low_border3 };
-// Recombine Surface { pscp_low_border3 };
-
-llcp_low_border4 = newreg; Line Loop(llcp_low_border4) = {lcpblb8a, -lcpbib9, -lcpbub4a, lcpbib12}; // lcpblb8b,  -lcpbub4b
-pscp_low_border4 = newreg; Plane Surface(pscp_low_border4) = {llcp_low_border4};
-// Transfinite Surface { pscp_low_border4 };
-// Recombine Surface { pscp_low_border4 };
-
-// llcp_face1 = newreg; Line Loop(llcp_face1) = {lcptub1a, lcptub2a, lcptub3a, lcptub4a}; // lcptub1b, lcptub2b, lcptub3b, lcptub4b 
-// llcp_face3 = newreg; Line Loop(llcp_face3) = {lcpbub1a, lcpbub2a, lcpbub3a, lcpbub4a}; // lcpbub1b, lcpbub2b, lcpbub3b, lcpbub4b
-
-//----------------------------------------------------------
-// Copper plate surfaces
-
-// ll_side_gas1a = newreg; Line Loop(ll_side_gas1a) = {lcptlb5a, -lcorner2, -lcpbub1a, lcorner1}; // lmid1_2,
-// ps_side_gas1a = newreg; Plane Surface(ps_side_gas1a) = {ll_side_gas1a};
-// Transfinite Surface { ps_side_gas1a };
-// Recombine Surface { ps_side_gas1a };
-
-// ll_side_gas2a = newreg; Line Loop(ll_side_gas2a) = {lcptlb6a, -lcorner3, -lcpbub2a, lcorner2}; // lmid2_2,
-// ps_side_gas2a = newreg; Plane Surface(ps_side_gas2a) = {ll_side_gas2a};
-// Transfinite Surface { ps_side_gas2a };
-// Recombine Surface { ps_side_gas2a };
-
-// ll_side_gas3a = newreg; Line Loop(ll_side_gas3a) = {lcptlb7a, -lcorner4, -lcpbub3a, lcorner3}; // lmid3_2,
-// ps_side_gas3a = newreg; Plane Surface(ps_side_gas3a) = {ll_side_gas3a};
-// Transfinite Surface { ps_side_gas3a };
-// Recombine Surface { ps_side_gas3a };
-
-// ll_side_gas4a = newreg; Line Loop(ll_side_gas4a) = {lcptlb8a, -lcorner1, -lcpbub4a, lcorner4}; // lmid4_2,
-// ps_side_gas4a = newreg; Plane Surface(ps_side_gas4a) = {ll_side_gas4a};
-// Transfinite Surface { ps_side_gas4a };
-// Recombine Surface { ps_side_gas4a };
-
-// ll_side_gas1b = newreg; Line Loop(ll_side_gas1b) = {lcptlb5b, lcorner2, -lcpblb5b, lcorner1}; // -lmid1_2
-// ps_side_gas1b = newreg; Plane Surface(ps_side_gas1b) = {ll_side_gas1b};
-// ll_side_gas2b = newreg; Line Loop(ll_side_gas2b) = {lcptlb6b, lcorner3, -lcpblb6b, lcorner2}; // -lmid2_2
-// ps_side_gas2b = newreg; Plane Surface(ps_side_gas2b) = {ll_side_gas2b};
-// ll_side_gas3b = newreg; Line Loop(ll_side_gas3b) = {lcptlb7b, lcorner4, -lcpblb7b, lcorner3}; // -lmid3_2
-// ps_side_gas3b = newreg; Plane Surface(ps_side_gas3b) = {ll_side_gas3b};
-// ll_side_gas4b = newreg; Line Loop(ll_side_gas4b) = {lcptlb8b, lcorner1, -lcpblb8b, lcorner4}; // -lmid4_2
-// ps_side_gas4b = newreg; Plane Surface(ps_side_gas4b) = {ll_side_gas4b};
-
-
-/*
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////// Shell Definition
 
