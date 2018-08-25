@@ -1,0 +1,32 @@
+-----------------------------------------------------------------------------------------------------------------------------------------------
+# 1 - gemcell_wire_14.geo - small description - four half steel wires within square - version requested by r. neveling
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+### Parameters - gemcell_wire_14.geo
+
+# boundary conditions - gemcell_wire_14.geo
+
+# 1 physical surface 700000 - bounded surface - periodic - bdh_1_1
+# 2 physical surface 710000 - bounded surface - periodic - bdh_1_2
+# 3 physical surface 720000 - bounded surface - periodic - bdh_2_1
+# 4 physical surface 730000 - bounded surface - periodic - bdh_2_2
+# 5 physical surface 750000 - mesh stainless steel wire solid phase surface area - physsurf_1a_wire
+# 6 physical surface 760000 - mesh stainless steel wire solid phase surface area - physsurf_1b_wire
+# 7 physical surface 770000 - mesh stainless steel wire solid phase surface area - physsurf_2a_wire
+# 8 physical surface 780000 - mesh stainless steel wire solid phase surface area - physsurf_2b_wire
+# 9 physical surface 850000 - upper electrode solid phase surface area
+# 10 physical surface 870000 - lower conductor/electrode copper plate solid phase surface area
+
+# materials - gemcell_wire_14.geo
+
+# 1 physical volume 900000 - physvol_1a_wire  	// mesh stainless steel wire solid phase volume
+# 2 physical volume 910000 - physvol_1b_wire  	// mesh stainless steel wire solid phase volume
+# 3 physical volume 920000 - physvol_2a_wire  	// mesh stainless steel wire solid phase volume
+# 4 physical volume 930000 - physvol_2b_wire  	// mesh stainless steel wire solid phase volume
+# 5 physical volume 960000 - physvol_gas 	    // gas phase volume
+# 6 physical volume 990000 - physvol_lower_cp 	// lower conductor/electrode copper plate solid phase volume
+
+#### run the simulation by clicking on the run button
+
+## NB numerous errors might result from the meshing, hence adapt the meshing to something that produces 0 errors and 0 warnings
+# NB I was using Frontal algorithm for 2D meshing, and Frontal algorithm for 3D meshing - this produces a mesh with 0 errors and 0 warnings, go to Tools/Options/Mesh/General
